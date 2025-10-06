@@ -1,6 +1,6 @@
 package com.etc.raw_materials_app.controllers;
 
-import com.etc.raw_materials_app.dao.UserDAO;
+import com.etc.raw_materials_app.dao.UserDao;
 import com.etc.raw_materials_app.db.DEF;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.User;
@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import static com.etc.raw_materials_app.services.WindowUtils.*;
@@ -61,7 +60,7 @@ public class AddUserController implements Initializable {
     public void setUserData(int emp_id, boolean update) {
         try {
             this.update = update;
-            User us = UserDAO.getUserByEmpId(emp_id);
+            User us = UserDao.getUserByEmpId(emp_id);
             emp_id_txtF.setText(us.getEmpCode() + "");
             emp_id_txtF.setEditable(false);
             user_name_txtF.setText(us.getUserName());
@@ -151,7 +150,7 @@ public class AddUserController implements Initializable {
             us.setCreationDate(creationDate);
 
             // 6. Save to DB
-            if (!UserDAO.insertUser(us)) {
+            if (!UserDao.insertUser(us)) {
                 WindowUtils.ALERT("Error", "User could not be added", ALERT_INFORMATION);
                 return false ;
             }
@@ -230,7 +229,7 @@ public class AddUserController implements Initializable {
             us.setActive(activeInt);
 
             // 5. Update in DB
-            boolean success = UserDAO.updateUser(us);
+            boolean success = UserDao.updateUser(us);
             if (!success) {
                 WindowUtils.ALERT("Error", "User could not be updated", ALERT_INFORMATION);
             }

@@ -1,8 +1,8 @@
 
 package com.etc.raw_materials_app.controllers;
 
-import com.etc.raw_materials_app.dao.MachineDAO;
-import com.etc.raw_materials_app.dao.SectionDAO;
+import com.etc.raw_materials_app.dao.MachineDao;
+import com.etc.raw_materials_app.dao.SectionDao;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.Machine;
 import com.etc.raw_materials_app.models.Section;
@@ -66,8 +66,8 @@ public class AddPrepareDataController implements Initializable {
 
 
     // DAO instances
-    private final MachineDAO machineDAO = new MachineDAO();
-    private final SectionDAO sectionDAO = new SectionDAO();
+    private final MachineDao machineDAO = new MachineDao();
+    private final SectionDao sectionDAO = new SectionDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -303,7 +303,7 @@ public class AddPrepareDataController implements Initializable {
         Machine machine = new Machine();
         machine.setMachineName(machineName);
 
-        boolean success = MachineDAO.insertMachine(machine);
+        boolean success = MachineDao.insertMachine(machine);
 
         if (success) {
             WindowUtils.ALERT("Success", "Machine added successfully", WindowUtils.ALERT_INFORMATION);

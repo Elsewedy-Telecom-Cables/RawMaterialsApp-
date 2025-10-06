@@ -1,4 +1,4 @@
-module com.elsewedyt.pdsapp {
+module com.etc.raw_materials_app {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml;
@@ -15,7 +15,8 @@ module com.elsewedyt.pdsapp {
     requires org.apache.poi.ooxml;
     requires com.fasterxml.jackson.databind;
     requires org.kordamp.ikonli.javafx;
-  
+    requires javafx.base;
+
 
     opens com.etc.raw_materials_app.controllers to javafx.fxml;
     opens screens to javafx.fxml;

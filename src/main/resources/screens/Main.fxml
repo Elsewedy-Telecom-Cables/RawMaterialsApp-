@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="588.0" prefWidth="900.0" style="-fx-background-color: #0060aa;" stylesheets="@style2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.MainController">
+<AnchorPane prefHeight="588.0" prefWidth="964.0" stylesheets="@styleMain.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.MainController">
    <children>
       <HBox alignment="CENTER" layoutX="2.4" layoutY="6.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="836.0" AnchorPane.leftAnchor="2.4" AnchorPane.rightAnchor="2.3999999999999773">
          <children>
@@ -69,7 +69,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="56.0" prefWidth="150.0">
                <children>
-                  <Button fx:id="users_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openViewUsers" prefHeight="35.0" prefWidth="140.0" styleClass="button-21" text="Users   ">
+                  <Button fx:id="users_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openViewUsers" prefHeight="35.0" prefWidth="120.0" styleClass="button-21" text="Users   ">
                      <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="10" />
                      </graphic>
@@ -82,27 +82,36 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="278.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="295.0">
                <children>
-                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="242.0" styleClass="button-22" text="Adding Material Test + Files" textFill="WHITE">
+                  <Button fx:id="addPdsData_btn" mnemonicParsing="false" onAction="#openAddPdsData" prefHeight="36.0" prefWidth="242.0" styleClass="button-24" text="Adding Material Test + Files" textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="203.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="195.0">
                <children>
-                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="157.0" styleClass="button-24" text="Dashboard" textFill="WHITE">
+                  <Button fx:id="exportPds_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openExportPds" prefHeight="38.0" prefWidth="140.0" styleClass="button-22" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="159.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="244.0">
                <children>
-                  <Button fx:id="prepare_data_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData" prefHeight="35.0" prefWidth="150.0" styleClass="button-23" text="Database  " textFill="WHITE">
+                  <Button fx:id="prepare_data2_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData2" prefHeight="38.0" prefWidth="203.0" styleClass="button-25" text="Adding Materials Data" textFill="WHITE">
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="174.0">
+               <children>
+                  <Button fx:id="prepare_data_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openPrepareData" prefHeight="35.0" prefWidth="140.0" styleClass="button-23" text="Database  " textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>

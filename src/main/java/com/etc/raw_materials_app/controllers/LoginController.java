@@ -1,6 +1,6 @@
 package com.etc.raw_materials_app.controllers;
 
-import com.etc.raw_materials_app.dao.UserDAO;
+import com.etc.raw_materials_app.dao.UserDao;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.User;
 import com.etc.raw_materials_app.models.UserContext;
@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
             return;
         }
 
-        User user = UserDAO.getUserByUsername(username);
+        User user = UserDao.getUserByUsername(username);
 
         if (user == null) {
             WindowUtils.ALERT("ERROR", "Error in user name", WindowUtils.ALERT_WARNING);

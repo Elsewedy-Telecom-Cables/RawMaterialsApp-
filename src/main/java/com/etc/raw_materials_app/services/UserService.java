@@ -1,6 +1,6 @@
 package com.etc.raw_materials_app.services;
 
-import com.etc.raw_materials_app.dao.UserDAO;
+import com.etc.raw_materials_app.dao.UserDao;
 import com.etc.raw_materials_app.models.User;
 import javafx.application.Platform;
 import javafx.geometry.NodeOrientation;
@@ -15,11 +15,11 @@ import static com.etc.raw_materials_app.services.WindowUtils.ALERT_WARNING;
 
 public class UserService {
 
-    private static UserDAO userDao;
+    private static UserDao userDao;
 
     public UserService() {
 
-        this.userDao = new UserDAO();
+        this.userDao = new UserDao();
     }
 
     public Optional<User> loadUserData(int userId) {
@@ -51,7 +51,7 @@ public class UserService {
 
 // in Class UserService
     public static boolean confirmPassword(String currentUsername) {
-        userDao = new UserDAO();
+        userDao = new UserDao();
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Confirm Password");
         dialog.setHeaderText("Please enter password to confirm");

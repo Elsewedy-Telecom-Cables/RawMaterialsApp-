@@ -1,6 +1,6 @@
 package com.etc.raw_materials_app.controllers;
 
-import com.etc.raw_materials_app.dao.UserDAO;
+import com.etc.raw_materials_app.dao.UserDao;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.User;
 import com.etc.raw_materials_app.models.UserContext;
@@ -93,9 +93,9 @@ public class ViewUsersController implements Initializable {
     private void loadData() {
         Platform.runLater(() -> {
             // Fetch data
-            listUsers = UserDAO.getUsers();
+            listUsers = UserDao.getUsers();
             if (listUsers == null) {
-                Logging.logMessage(Logging.WARN, getClass().getName(), "loadData", "UserDAO.getUsers() returned null, using empty list");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "loadData", "UserDao.getUsers() returned null, using empty list");
                 listUsers = FXCollections.observableArrayList();
             }
             users_count_textF.setText(String.valueOf(listUsers.size()));
@@ -240,7 +240,7 @@ public class ViewUsersController implements Initializable {
                             if (response == okButton) {
                                 if (UserService.confirmPassword(currentUser.getUserName())) {
                                     try {
-                                        boolean deleted = UserDAO.deleteUser(user.getEmpCode());
+                                        boolean deleted = UserDao.deleteUser(user.getEmpCode());
                                         if (deleted) {
                                             loadData();
                                             WindowUtils.ALERT("Sucess", "user deleted", WindowUtils.ALERT_INFORMATION);

@@ -13,10 +13,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-public class UserDAO {
+public class UserDao {
     public static User checkConfirmPassword(String username, String pass) {
         User user = null;
         String query = "SELECT " +
@@ -42,7 +41,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "checkConfirmPassword", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "checkConfirmPassword", e, "sql", query);
         }
         return user;
     }
@@ -81,7 +80,7 @@ public class UserDAO {
                 ));
             }
         } catch (Exception ex) {
-            Logging.logException("ERROR", UserDAO.class.getName(), "getUsers", ex);
+            Logging.logException("ERROR", UserDao.class.getName(), "getUsers", ex);
         }
         return list;
     }
@@ -127,7 +126,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception ex) {
-            Logging.logException("ERROR", UserDAO.class.getName(), "getUsersByRoles", ex);
+            Logging.logException("ERROR", UserDao.class.getName(), "getUsersByRoles", ex);
         }
         return list;
     }
@@ -144,7 +143,7 @@ public class UserDAO {
                 userFullNames.add(rs.getString(DEF.USERS_FULLNAME));
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "getAllUsersFullName", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getAllUsersFullName", e, "sql", query);
         }
         return userFullNames;
     }
@@ -183,7 +182,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "loadUserData", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "loadUserData", e, "sql", query);
         }
         return user;
     }
@@ -216,7 +215,7 @@ public class UserDAO {
 
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "insertUser", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "insertUser", e, "sql", query);
         }
         return false;
     }
@@ -253,7 +252,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "getUserByEmpId", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getUserByEmpId", e, "sql", query);
         }
         return us;
     }
@@ -290,7 +289,7 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "getUserByUsername", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getUserByUsername", e, "sql", query);
         }
         return user;
     }
@@ -313,7 +312,7 @@ public class UserDAO {
             ps.setInt(6, us.getEmpCode());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "updateUser", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "updateUser", e, "sql", query);
         }
         return false;
     }
@@ -325,7 +324,7 @@ public class UserDAO {
             ps.setInt(1, emp_id);
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", UserDAO.class.getName(), "deleteUser", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "deleteUser", e, "sql", query);
         }
         return false;
     }

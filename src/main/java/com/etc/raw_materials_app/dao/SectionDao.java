@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-public class SectionDAO {
+public class SectionDao {
 
         // Get all sections
         public static ObservableList<Section> getAllSections() {
@@ -26,7 +26,7 @@ public class SectionDAO {
                 }
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "getAllSections", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", SectionDao.class.getName(), "getAllSections", e, "sql", query);
             }
             return list;
         }
@@ -49,7 +49,7 @@ public class SectionDAO {
                 }
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "getSectionById", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", SectionDao.class.getName(), "getSectionById", e, "sql", query);
             }
             return section;
         }
@@ -74,7 +74,7 @@ public class SectionDAO {
                 }
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "insertSection", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", SectionDao.class.getName(), "insertSection", e, "sql", query);
             }
             return generatedId;
         }
@@ -94,7 +94,7 @@ public class SectionDAO {
                 success = affectedRows > 0;
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "updateSection", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", SectionDao.class.getName(), "updateSection", e, "sql", query);
             }
             return success;
         }
@@ -112,7 +112,7 @@ public class SectionDAO {
                 success = affectedRows > 0;
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", SectionDAO.class.getName(), "deleteSection", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", SectionDao.class.getName(), "deleteSection", e, "sql", query);
             }
             return success;
         }

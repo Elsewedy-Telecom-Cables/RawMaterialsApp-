@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-public class MachineDAO {
+public class MachineDao {
         // Get all machines
         public static ObservableList<Machine> getAllMachines() {
             ObservableList<Machine> list = FXCollections.observableArrayList();
@@ -24,7 +24,7 @@ public class MachineDAO {
                 }
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "getAllMachines", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "getAllMachines", e, "sql", query);
             }
             return list;
         }
@@ -42,7 +42,7 @@ public class MachineDAO {
                     return ps.executeUpdate() > 0;
 
                 } catch (Exception e) {
-                    Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "insertMachine", e, "sql", query);
+                    Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "insertMachine", e, "sql", query);
                 }
                 return false;
             }
@@ -59,7 +59,7 @@ public class MachineDAO {
                     return ps.executeUpdate() > 0;
 
                 } catch (Exception e) {
-                    Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "updateMachine", e, "sql", query);
+                    Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "updateMachine", e, "sql", query);
                 }
                 return false;
             }
@@ -74,7 +74,7 @@ public class MachineDAO {
                     return ps.executeUpdate() > 0;
 
                 } catch (Exception e) {
-                    Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "deleteMachine", e, "sql", query);
+                    Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "deleteMachine", e, "sql", query);
                 }
                 return false;
             }
@@ -94,7 +94,7 @@ public class MachineDAO {
                     }
 
                 } catch (Exception e) {
-                    Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "getMachineById", e, "sql", query);
+                    Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "getMachineById", e, "sql", query);
                 }
                 return null;
             }
@@ -114,7 +114,7 @@ public class MachineDAO {
             }
 
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "getMachineByStageId", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "getMachineByStageId", e, "sql", query);
         }
         return list;
     }
@@ -132,7 +132,7 @@ public class MachineDAO {
                 }
 
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "getMachinesCount", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "getMachinesCount", e, "sql", query);
             }
 
             return count;
@@ -148,7 +148,7 @@ public class MachineDAO {
                     machineNames.add(rs.getString("machine_name"));
                 }
             } catch (Exception e) {
-                Logging.logExpWithMessage("ERROR", MachineDAO.class.getName(), "getAllMachineNames", e, "sql", query);
+                Logging.logExpWithMessage("ERROR", MachineDao.class.getName(), "getAllMachineNames", e, "sql", query);
             }
             return machineNames;
         }

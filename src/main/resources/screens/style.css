@@ -381,19 +381,18 @@
 }
 
 .signIn:pressed {
-    -fx-background-color: #005A9E; /* أزرق غامق عند الضغط */
+    -fx-background-color: #005A9E;
 }
 .main-title {
     -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #004AAD;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Montserrat";
     -fx-padding: 0 0 5 0;
 }
 .app-title {
     -fx-font-size: 16px;
     -fx-text-fill: #304267;
-    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-family: "Montserrat";
     -fx-padding: 0 0 10 0;
 }
 

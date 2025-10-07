@@ -16,6 +16,7 @@ module com.etc.raw_materials_app {
     requires com.fasterxml.jackson.databind;
     requires org.kordamp.ikonli.javafx;
     requires javafx.base;
+    requires javafx.graphics;
 
 
     opens com.etc.raw_materials_app.controllers to javafx.fxml;

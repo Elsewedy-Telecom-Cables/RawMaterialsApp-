@@ -7,37 +7,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="731.0" prefWidth="1489.0" stylesheets="@style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.elsewedyt.trialsapp.controllers.PrepareDataController">
+<AnchorPane prefHeight="731.0" prefWidth="1489.0" stylesheets="@style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.PrepareMaterialsController">
    <children>
-      <HBox alignment="CENTER" layoutX="11.2" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="48.0" prefWidth="1424.0" styleClass="box-samll1" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+      <HBox alignment="CENTER" layoutX="11.2" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="38.0" prefWidth="1473.0" styleClass="box-samll1" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="344.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
-                     <font>
-                        <Font name="Montserrat Bold" size="12.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="8.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="date_lbl" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="288.0">
-                     <font>
-                        <Font name="Montserrat Bold" size="11.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="15.0" left="10.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="department_lbl" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="543.0" text="Quality Control Department">
@@ -48,31 +28,15 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="shift_label" alignment="CENTER" contentDisplay="RIGHT" prefHeight="20.0" prefWidth="551.0" text="Shift : One" textFill="#cc2020" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font name="Montserrat Bold" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Label>
                </children>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="344.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <ImageView fx:id="logo_ImageView" fitHeight="38.0" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1">
-                     <VBox.margin>
-                        <Insets bottom="10.0" right="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-               </children>
-            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="53.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="662.0" prefWidth="1500.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="50.0">
+      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="32.8" nodeOrientation="RIGHT_TO_LEFT" prefHeight="693.0" prefWidth="1473.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="33.0">
          <children>
             <HBox alignment="CENTER" prefHeight="288.0" prefWidth="921.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
@@ -199,7 +163,7 @@
                                        <columns>
                                           <TableColumn fx:id="material_document_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
                                           <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Document Name" />
-                                          <TableColumn fx:id="material_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
+                                          <TableColumn fx:id="material_name_in_document_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
                                           <TableColumn fx:id="material_document_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>
                                        <columnResizePolicy>
@@ -331,12 +295,12 @@
                               </HBox>
                               <HBox prefHeight="200.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView id="table1" fx:id="material_document_table_view1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
+                                    <TableView id="table1" fx:id="material_description_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                                        <columns>
-                                          <TableColumn fx:id="material_document_id_colm1" maxWidth="1200.0" prefWidth="12.0" text="ID" />
-                                          <TableColumn fx:id="material_document_name_colm1" maxWidth="1200.0" prefWidth="50.0" text="Material Description Name" />
-                                          <TableColumn fx:id="material_name_colm1" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
-                                          <TableColumn fx:id="material_document_delete_colm1" maxWidth="1500.0" prefWidth="15.0" text="delete" />
+                                          <TableColumn fx:id="material_description_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
+                                          <TableColumn fx:id="material_description_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Description Name" />
+                                          <TableColumn fx:id="material_name_in_description_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
+                                          <TableColumn fx:id="material_description_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -373,7 +337,7 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="clear_matrial_btn" mnemonicParsing="false" onAction="#clear_matrial" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Clear " HBox.hgrow="ALWAYS">
+                              <Button fx:id="clear_material_btn" mnemonicParsing="false" onAction="#clear_material" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Clear " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -384,7 +348,7 @@
                                     <FontIcon iconLiteral="fas-eraser" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="filter_matrial_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_matrial" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="filter_material_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_matrial" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -396,7 +360,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
                            <children>
-                              <Button fx:id="add_matrial_btn" mnemonicParsing="false" onAction="#add_matrial" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Add   " HBox.hgrow="ALWAYS">
+                              <Button fx:id="add_material_btn" mnemonicParsing="false" onAction="#add_material" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="12.0" />
                                  </font>
@@ -407,7 +371,7 @@
                                     <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="matrial_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add material name " styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="material_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add material name " styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -422,7 +386,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
                            <children>
-                              <Button fx:id="update_matrial_btn" mnemonicParsing="false" onAction="#update_matrial" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Update" HBox.hgrow="ALWAYS">
+                              <Button fx:id="update_material_btn" mnemonicParsing="false" onAction="#update_material" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Update" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="11.0" />
                                  </font>
@@ -433,7 +397,7 @@
                                     <FontIcon iconLiteral="fas-check" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="update_matrial_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update material name" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="update_material_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update material name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="12.0" right="12.0" />
                                  </HBox.margin>
@@ -451,11 +415,11 @@
                         </HBox>
                         <HBox prefHeight="4.0" prefWidth="474.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView id="table1" fx:id="matrial_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="179.0" prefWidth="422.0" HBox.hgrow="ALWAYS">
+                              <TableView id="table1" fx:id="material_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="179.0" prefWidth="422.0" HBox.hgrow="ALWAYS">
                                  <columns>
-                                    <TableColumn fx:id="matrial_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
-                                    <TableColumn fx:id="matrial_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="200.0" text="Material Name" />
-                                    <TableColumn fx:id="matrial_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                    <TableColumn fx:id="material_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
+                                    <TableColumn fx:id="material_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="200.0" text="Material Name" />
+                                    <TableColumn fx:id="material_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

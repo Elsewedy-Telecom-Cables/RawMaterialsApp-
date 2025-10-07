@@ -39,6 +39,7 @@ public class WindowUtils {
             e.printStackTrace();
         }
     }
+
     public static void OPEN_WINDOW_FULL_SCREEN(String fxmlPath, Runnable onCloseAction) {
         try {
             Parent root = FXMLLoader.load(WindowUtils.class.getResource(fxmlPath));
@@ -153,9 +154,9 @@ public class WindowUtils {
     public static final String MAIN_PAGE = "/screens/Main.fxml";
     public static final String VIEW_USER_PAGE = "/screens/ViewUsers.fxml";
     public static final String ADD_USER_PAGE = "/screens/AddUser.fxml";
-    public static final String  ADD_PREPARE_DATA = "/screens/PrepareData.fxml";
-    public static final String  ADD_UPDATE_PDS_DATA = "/screens/AddUpdatePdsData.fxml";
-    public static final String  EXPORT_PDS_DATA = "/screens/ExportPds.fxml";
+    public static final String  PREPARE_DATA = "/screens/PrepareData.fxml";
+    public static final String  PREPARE_MATERIALS = "/screens/PrepareMaterials.fxml";
+
 
 
 
@@ -242,34 +243,26 @@ public class WindowUtils {
     public static void OPEN_PREPARE_DATA_PAGE() {
         try {
             OPEN_WINDOW_FULL_SCREEN(
-                    ADD_PREPARE_DATA,
+                    PREPARE_DATA,
                     () -> OPEN_MAIN_PAGE()
             );
         } catch (Exception ex) {
             logException(ERROR, WindowUtils.class.getName(), "OPEN_PREPARE_DATA_PAGE", ex);
         }
     }
-    public static void OPEN_ADD_UPDATE_PDS_DATA() {
-        try {
-            OPEN_WINDOW_FULL_SCREEN(
-                    ADD_UPDATE_PDS_DATA,
-                    () -> OPEN_MAIN_PAGE()
-            );
-        } catch (Exception ex) {
-            logException(ERROR, WindowUtils.class.getName(), "OPEN_ADD_UPDATE_PDS_DATA", ex);
-        }
-    }
-    public static void OPEN_EXPORT_PDS_DATA() {
-        try {
-            OPEN_WINDOW_FULL_SCREEN(
-                    EXPORT_PDS_DATA,
-                    () -> OPEN_MAIN_PAGE()
-            );
-        } catch (Exception ex) {
-            logException(ERROR, WindowUtils.class.getName(), "OPEN_EXPORT_PDS_DATA", ex);
-        }
-    }
 
+
+
+    public static void OPEN_PREPARE_MATERIALS_PAGE() {
+        try {
+            OPEN_WINDOW_FULL_SCREEN(
+                    PREPARE_MATERIALS,
+                    () -> OPEN_MAIN_PAGE()
+            );
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_PREPARE_MATERIALS_PAGE", ex);
+        }
+    }
 
 
 

@@ -24,40 +24,24 @@ import static com.etc.raw_materials_app.services.WindowUtils.*;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private Label date_lbl;
-
-    @FXML
-    private Label shift_label;
-
-    @FXML
-    private Label welcome_lbl;
-
-    @FXML
-    private Button users_btn;
-    @FXML
-    private ImageView logo_ImageView;
-    @FXML
-    private ImageView icon01_view;
-    @FXML
-    private ImageView icon02_view;
-    @FXML
-    private ImageView icon03_view;
-    @FXML
-    private Button prepare_data_btn;
-    @FXML
-    private Button addPdsData_btn;
-    @FXML
-    private Button exportPds_btn;
-
-
+    @FXML private Label date_lbl;
+    @FXML private Label shift_label;
+    @FXML private Label welcome_lbl;
+    @FXML private Button users_btn;
+    @FXML private ImageView logo_ImageView;
+    @FXML private ImageView icon01_view;
+    @FXML private ImageView icon02_view;
+    @FXML private ImageView icon03_view;
+    @FXML private Button prepare_data_btn;
+    @FXML private Button addMaterialTest_btn;
+    @FXML private Button dashboard_btn;
+    @FXML private Button prepare_materials_btn;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       // Set focus to welcome label
+        // Set focus to welcome label
         Platform.runLater(() -> welcome_lbl.requestFocus());
-
 
         // Load and set company logo
         Image img = new Image(Objects.requireNonNull(MainController.class.getResourceAsStream("/images/company_logo.png")));
@@ -98,33 +82,34 @@ public class MainController implements Initializable {
                 WindowUtils.ALERT("Warning", "You are not authorized to access this page.", WindowUtils.ALERT_WARNING);
                 return;
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Logging.logException("ERROR", this.getClass().getName(), "openPrepareData Permission", ex);
         }
 
     }
 
-        @FXML
-        void openPrepareData(ActionEvent event) {
-                    CLOSE(event);
-                    OPEN_PREPARE_DATA_PAGE();
-        }
     @FXML
-    void openAddPdsData(ActionEvent event) {
+    void openPrepareData(ActionEvent event) {
         CLOSE(event);
-        OPEN_ADD_UPDATE_PDS_DATA();
+        OPEN_PREPARE_DATA_PAGE();
     }
+
     @FXML
-    void openExportPds(ActionEvent event) {
-       WindowUtils.ALERT("Info", "Work Still Progress️", ALERT_INFORMATION);
-         CLOSE(event);
-         OPEN_EXPORT_PDS_DATA();
-
+    void open_prepare_materials(ActionEvent event){
+        CLOSE(event);
+        OPEN_PREPARE_MATERIALS_PAGE();
     }
 
 
+    @FXML
+    void openMaterialTest(ActionEvent event) {
 
+    }
 
+    @FXML
+    void OpenDashboard(ActionEvent event) {
+
+    }
 
 
 }

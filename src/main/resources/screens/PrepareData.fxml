@@ -409,7 +409,7 @@
                            <children>
                               <TableView id="table1" fx:id="supplier_country_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
                                  <columns>
-                                    <TableColumn fx:id="supplier_name_in_sup_coun_colm" maxWidth="1200.0" prefWidth="70.0" text="Supplier" />
+                                    <TableColumn fx:id="supplier_name_in_sup_country_colm" maxWidth="1200.0" prefWidth="70.0" text="Supplier" />
                                     <TableColumn fx:id="supplier_cou_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="70.0" text="Supplier Country" />
                                     <TableColumn fx:id="supplier_cou_delete_colm" maxWidth="1500.0" prefWidth="18.0" text="Delete" />
                                  </columns>

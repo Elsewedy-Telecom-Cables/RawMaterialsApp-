@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="731.0" prefWidth="1433.0" stylesheets="@style3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.PrepareDataController">
    <children>
-      <HBox alignment="CENTER" layoutX="11.2" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1411.0" styleClass="box-samll1" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="5.0">
+      <HBox alignment="CENTER" layoutX="11.2" layoutY="-4.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="1411.0" styleClass="box-samll1" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="4.0">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="400.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
@@ -36,9 +36,9 @@
             <VBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="400.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="-24.8" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="666.0" prefWidth="445.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="43.0">
+      <VBox alignment="TOP_CENTER" layoutX="-24.8" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="666.0" prefWidth="530.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="43.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="500.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="550.0" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefHeight="400.0" prefWidth="500.0" styleClass="box" HBox.hgrow="ALWAYS">
                      <children>
@@ -75,7 +75,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" right="8.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -93,12 +93,20 @@
                                     <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="60.0" promptText="add supplier code" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="140.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="8.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -119,12 +127,20 @@
                                     <FontIcon iconLiteral="fas-check" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="update_supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="60.0" promptText="update supplier code" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="140.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="8.0" />
                                  </HBox.margin>
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="13.0" />
                                  </font>
                               </TextField>
                            </children>
@@ -140,7 +156,8 @@
                               <TableView id="table1" fx:id="supplier_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
                                  <columns>
                                     <TableColumn fx:id="supplier_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
-                                    <TableColumn fx:id="supplier_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Supplier Name" />
+                                    <TableColumn fx:id="supplier_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="150.0" text="Supplier Name" />
+                                    <TableColumn fx:id="supplier_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="60.0" text="Supplier Code" />
                                     <TableColumn fx:id="supplier_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
                                  </columns>
                                  <columnResizePolicy>
@@ -162,14 +179,14 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="500.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="550.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
                <children>
                   <HBox alignment="CENTER" prefHeight="400.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="500.0" styleClass="box">
+                        <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="530.0" styleClass="box">
                            <children>
                               <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="438.0">
                                  <children>
@@ -204,7 +221,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="12.0" right="12.0" />
+                                          <Insets left="12.0" right="8.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
@@ -227,7 +244,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="12.0" right="12.0" />
+                                          <Insets left="12.0" right="8.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
@@ -250,7 +267,7 @@
                                     </Button>
                                     <TextField fx:id="update_country_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update country name" styleClass="input" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
-                                          <Insets left="12.0" right="12.0" />
+                                          <Insets left="12.0" right="8.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font name="System Bold" size="14.0" />
@@ -292,11 +309,11 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="472.0" layoutY="43.2" prefHeight="683.0" prefWidth="951.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="472.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
+      <HBox layoutX="472.0" layoutY="43.2" prefHeight="683.0" prefWidth="870.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="552.1999999999999" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
          <children>
-            <VBox prefHeight="900.0" prefWidth="550.0">
+            <VBox prefHeight="900.0" prefWidth="530.0">
                <children>
-                  <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="862.0" prefWidth="502.0" styleClass="box">
+                  <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="862.0" prefWidth="530.0" styleClass="box">
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="320.0">
                            <children>
@@ -310,45 +327,59 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="385.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <VBox.margin>
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="clear_supplier_cou_btn" mnemonicParsing="false" onAction="#clear_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
+                              <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Button fx:id="clear_supplier_cou_btn" mnemonicParsing="false" onAction="#clear_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="System Bold" size="11.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <FontIcon iconLiteral="fas-eraser" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="370.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="filter_supplier_cou_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_supplier_country" prefHeight="25.0" prefWidth="300.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="8.0" right="8.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="120.0" text="Select Supplier" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
-                                 <graphic>
-                                    <FontIcon iconLiteral="fas-eraser" />
-                                 </graphic>
-                              </Button>
-                              <TextField fx:id="filter_supplier_cou_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_supplier_country" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="18.0" right="12.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="300.0">
-                           <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="139.0" text="Select Supplier" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="supplier_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
+                              <ComboBox fx:id="supplier_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="3.0" right="12.0" />
+                                    <Insets left="8.0" right="8.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -356,16 +387,19 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="139.0" text="Select Country" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="120.0" text="Select Country" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
-                              </Label>
-                              <ComboBox fx:id="country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="3.0" right="12.0" />
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="8.0" right="8.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -373,14 +407,14 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="457.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="350.0">
                            <children>
                               <Button fx:id="add_supplier_country_btn" mnemonicParsing="false" onAction="#add_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" right="30.0" />
+                                    <Insets left="20.0" right="30.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-plus" />
@@ -426,10 +460,10 @@
                   </VBox>
                </children>
                <HBox.margin>
-                  <Insets right="15.0" />
+                  <Insets right="13.0" />
                </HBox.margin>
             </VBox>
-            <VBox prefHeight="338.0" prefWidth="500.0">
+            <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="338.0" prefWidth="470.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="500.0" styleClass="box">
                      <children>
@@ -463,7 +497,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" right="8.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -486,7 +520,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" right="8.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -509,7 +543,7 @@
                               </Button>
                               <TextField fx:id="update_test_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update test name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="12.0" right="12.0" />
+                                    <Insets left="12.0" right="8.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="14.0" />
@@ -528,7 +562,7 @@
                               <TableView id="table1" fx:id="test_names_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="179.0" prefWidth="422.0" HBox.hgrow="ALWAYS">
                                  <columns>
                                     <TableColumn fx:id="test_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
-                                    <TableColumn fx:id="test_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Test Name" />
+                                    <TableColumn fx:id="test_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="180.0" text="Test Name" />
                                     <TableColumn fx:id="test_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
                                  </columns>
                                  <columnResizePolicy>

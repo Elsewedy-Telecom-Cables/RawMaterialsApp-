@@ -162,7 +162,7 @@
                                     <TableView id="table1" fx:id="material_document_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                                        <columns>
                                           <TableColumn fx:id="material_document_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
-                                          <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Document Name" />
+                                          <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Document" />
                                           <TableColumn fx:id="material_name_in_document_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
                                           <TableColumn fx:id="material_document_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>
@@ -185,7 +185,7 @@
                            <children>
                               <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="305.0">
                                  <children>
-                                    <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="336.0" text="Material Description">
+                                    <Label alignment="TOP_CENTER" prefHeight="22.0" prefWidth="336.0" text="Material Descriptions">
                                        <font>
                                           <Font name="Montserrat Bold" size="16.0" />
                                        </font>
@@ -298,7 +298,7 @@
                                     <TableView id="table1" fx:id="material_description_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                                        <columns>
                                           <TableColumn fx:id="material_description_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
-                                          <TableColumn fx:id="material_description_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Description Name" />
+                                          <TableColumn fx:id="material_description_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Description" />
                                           <TableColumn fx:id="material_name_in_description_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
                                           <TableColumn fx:id="material_description_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>

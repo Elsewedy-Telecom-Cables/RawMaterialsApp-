@@ -19,6 +19,7 @@ module com.etc.raw_materials_app {
     requires javafx.graphics;
 
 
+
     opens com.etc.raw_materials_app.controllers to javafx.fxml;
     opens screens to javafx.fxml;
     exports com.etc.raw_materials_app.controllers;

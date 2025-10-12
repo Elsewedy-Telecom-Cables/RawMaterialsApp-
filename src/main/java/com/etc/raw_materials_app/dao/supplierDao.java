@@ -14,14 +14,18 @@ public class supplierDao {
     // Get all suppliers
     public static ObservableList<Supplier> getAllSuppliers() {
         ObservableList<Supplier> list = FXCollections.observableArrayList();
-        String query = "SELECT supplier_id, supplier_name FROM material_testing.dbo.suppliers ORDER BY supplier_id ASC";
+        String query = "SELECT supplier_id, supplier_name , supplier_code FROM material_testing.dbo.suppliers ORDER BY supplier_id ASC";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                list.add(new Supplier(rs.getInt("supplier_id"), rs.getString("supplier_name")));
+                Supplier sup = new Supplier() ;
+                sup.setSupplierId(rs.getInt("supplier_id"));
+                sup.setSupplierName(rs.getString("supplier_name"));
+                sup.setSupplierCode(rs.getString("supplier_code"));
+                list.add(sup);
             }
 
         } catch (Exception e) {
@@ -33,12 +37,13 @@ public class supplierDao {
 
     // Insert supplier
     public static boolean insertSupplier(Supplier supplier) {
-        String query = "INSERT INTO material_testing.dbo.suppliers (supplier_name) VALUES (?)";
+        String query = "INSERT INTO material_testing.dbo.suppliers (supplier_name,supplier_code) VALUES (?,?)";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, supplier.getSupplierName());
+            ps.setString(2, supplier.getSupplierCode());
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
@@ -51,13 +56,14 @@ public class supplierDao {
 
     // Update supplier
     public static boolean updateSupplier(Supplier supplier) {
-        String query = "UPDATE material_testing.dbo.suppliers SET supplier_name = ? WHERE supplier_id = ?";
+        String query = "UPDATE material_testing.dbo.suppliers SET supplier_name = ? , supplier_code = ? WHERE supplier_id = ?";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, supplier.getSupplierName());
-            ps.setInt(2, supplier.getSupplierId());
+            ps.setString(2, supplier.getSupplierCode());
+            ps.setInt(3, supplier.getSupplierId());
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
@@ -67,26 +73,31 @@ public class supplierDao {
         return false;
     }
 
-    // Check if supplier can be safely deleted
     public static boolean canDeleteSupplier(int supplierId) {
-        String query = "SELECT COUNT(*) AS ref_count FROM material_testing.dbo.trials WHERE supplier_id = ?";
+        String[] tablesToCheck = {
+                "material_testing.dbo.material_test",
+                "material_testing.dbo.supplier_country"
+        };
 
-        try (Connection con = DbConnect.getConnect();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setInt(1, supplierId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("ref_count") == 0;
+        try (Connection con = DbConnect.getConnect()) {
+            for (String table : tablesToCheck) {
+                String query = "SELECT COUNT(*) AS ref_count FROM " + table + " WHERE supplier_id = ?";
+                try (PreparedStatement ps = con.prepareStatement(query)) {
+                    ps.setInt(1, supplierId);
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next() && rs.getInt("ref_count") > 0) {
+                            return false; // يوجد مرجع في جدول آخر
+                        }
+                    }
                 }
             }
-
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "canDeleteSupplier", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "canDeleteSupplier", e, "sql", "multi-table check");
         }
 
-        return false;
+        return true;
     }
+
 
     // Delete supplier
     public static boolean deleteSupplier(int supplierId) {
@@ -111,7 +122,7 @@ public class supplierDao {
 
     // Get supplier by ID
     public static Supplier getSupplierById(int supplierId) {
-        String query = "SELECT supplier_id, supplier_name FROM material_testing.dbo.suppliers WHERE supplier_id = ?";
+        String query = "SELECT supplier_id, supplier_name , supplier_code FROM material_testing.dbo.suppliers WHERE supplier_id = ?";
         Supplier supplier = null;
 
         try (Connection con = DbConnect.getConnect();
@@ -119,8 +130,12 @@ public class supplierDao {
 
             ps.setInt(1, supplierId);
             try (ResultSet rs = ps.executeQuery()) {
+                Supplier sup = new Supplier();
                 if (rs.next()) {
-                    supplier = new Supplier(rs.getInt("supplier_id"), rs.getString("supplier_name"));
+                    sup.setSupplierId(rs.getInt("supplier_id"));
+                    sup.setSupplierName(rs.getString("supplier_name"));
+                    sup.setSupplierCode(rs.getString("supplier_code"));
+                    supplier = sup;
                 }
             }
 

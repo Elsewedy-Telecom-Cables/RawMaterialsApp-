@@ -3,18 +3,18 @@ package com.etc.raw_materials_app.models;
 public class Supplier {
     private int supplierId;
     private String supplierName;
+    private String supplierCode;
 
     // Constructors
     public Supplier() {
     }
 
-    public Supplier(String supplierName) {
-        this.supplierName = supplierName;
+    public String getSupplierCode() {
+        return supplierCode;
     }
 
-    public Supplier(int supplierId, String supplierName) {
-        this.supplierId = supplierId;
-        this.supplierName = supplierName;
+    public void setSupplierCode(String supplierCode) {
+        this.supplierCode = supplierCode;
     }
 
     // Getters and Setters

@@ -8,29 +8,24 @@ public class Material {
     public Material() {
     }
 
-    public Material(String materialName) {
-        this.materialName = materialName;
-    }
-
     public Material(int materialId, String materialName) {
         this.materialId = materialId;
         this.materialName = materialName;
     }
 
-    // Getters and Setters
-    public int getmaterialId() {
+    public int getMaterialId() {
         return materialId;
     }
 
-    public void setmaterialId(int materialId) {
+    public void setMaterialId(int materialId) {
         this.materialId = materialId;
     }
 
-    public String getmaterialName() {
+    public String getMaterialName() {
         return materialName;
     }
 
-    public void setmaterialName(String materialName) {
+    public void setMaterialName(String materialName) {
         this.materialName = materialName;
     }
 

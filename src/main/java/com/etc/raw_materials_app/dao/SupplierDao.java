@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class supplierDao {
+public class SupplierDao {
     public static String lastErrorMessage = null;
 
     // Get all suppliers
@@ -29,7 +29,7 @@ public class supplierDao {
             }
 
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "getAllSuppliers", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "getAllSuppliers", e, "sql", query);
         }
 
         return list;
@@ -48,7 +48,7 @@ public class supplierDao {
 
         } catch (Exception e) {
             lastErrorMessage = e.getMessage();
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "insertSupplier", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "insertSupplier", e, "sql", query);
         }
 
         return false;
@@ -67,7 +67,7 @@ public class supplierDao {
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "updateSupplier", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "updateSupplier", e, "sql", query);
         }
 
         return false;
@@ -92,12 +92,11 @@ public class supplierDao {
                 }
             }
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "canDeleteSupplier", e, "sql", "multi-table check");
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "canDeleteSupplier", e, "sql", "multi-table check");
         }
 
         return true;
     }
-
 
     // Delete supplier
     public static boolean deleteSupplier(int supplierId) {
@@ -115,7 +114,7 @@ public class supplierDao {
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "deleteSupplier", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "deleteSupplier", e, "sql", query);
         }
         return false;
     }
@@ -140,7 +139,7 @@ public class supplierDao {
             }
 
         } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", supplierDao.class.getName(), "getSupplierById", e, "sql", query);
+            Logging.logExpWithMessage("ERROR", SupplierDao.class.getName(), "getSupplierById", e, "sql", query);
         }
 
         return supplier;

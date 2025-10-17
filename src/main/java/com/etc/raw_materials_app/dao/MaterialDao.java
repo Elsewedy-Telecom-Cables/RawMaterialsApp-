@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MaterialDao {
     public static String lastErrorMessage = null;
@@ -43,10 +44,11 @@ public class MaterialDao {
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, m.getmaterialName());
+            ps.setString(1, m.getMaterialName());
             return ps.executeUpdate() > 0;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            lastErrorMessage = e.getMessage();
             Logging.logExpWithMessage("ERROR", MaterialDao.class.getName(), "insertMaterial", e, "sql", query);
         }
 
@@ -60,11 +62,12 @@ public class MaterialDao {
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, m.getmaterialName());
-            ps.setInt(2, m.getmaterialId());
+            ps.setString(1, m.getMaterialName());
+            ps.setInt(2, m.getMaterialId());
             return ps.executeUpdate() > 0;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            lastErrorMessage = e.getMessage();
             Logging.logExpWithMessage("ERROR", MaterialDao.class.getName(), "updateMaterial", e, "sql", query);
         }
 
@@ -81,7 +84,7 @@ public class MaterialDao {
             ps.setInt(1, materialId);
             return ps.executeUpdate() > 0;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logging.logExpWithMessage("ERROR", MaterialDao.class.getName(), "deleteMaterial", e, "sql", query);
         }
 
@@ -103,7 +106,7 @@ public class MaterialDao {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logging.logExpWithMessage("ERROR", MaterialDao.class.getName(), "getMaterialById", e, "sql", query);
         }
 

@@ -68,7 +68,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class LoggingSetting {
+public class  LoggingSetting {
 
      //Retrieves the current system user's username (Domain Username).
 

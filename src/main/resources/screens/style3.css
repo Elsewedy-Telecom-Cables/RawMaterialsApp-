@@ -45,6 +45,9 @@
     -fx-border-radius: 20;
     -fx-text-fill: #000000;
 }
+.button:hover {
+    -fx-cursor: hand;
+}
 
 /* Unified input field (TextField/PasswordField/etc.) */
 .input {
@@ -59,5 +62,6 @@
     -fx-font-family: "Noto Color Emoji", "Segoe UI Emoji";
     -fx-font-size: 14px;
 }
+
 
 

@@ -10,21 +10,24 @@ GO
 CREATE  TABLE material_testing.dbo.countries (
                                                  country_id           int    IDENTITY  NOT NULL,
                                                  country_name         nvarchar(100)      NOT NULL,
-                                                 CONSTRAINT pk_countries PRIMARY KEY CLUSTERED ( country_id  asc )
+                                                 CONSTRAINT pk_countries PRIMARY KEY CLUSTERED ( country_id  asc ) ,
+                                                 CONSTRAINT unq_countries UNIQUE ( country_name  asc )
 );
 GO
 
 CREATE  TABLE material_testing.dbo.materials (
                                                  material_id          int    IDENTITY  NOT NULL,
                                                  material_name        nvarchar(150)      NOT NULL,
-                                                 CONSTRAINT pk_materials PRIMARY KEY CLUSTERED ( material_id  asc )
+                                                 CONSTRAINT pk_materials PRIMARY KEY CLUSTERED ( material_id  asc ) ,
+                                                 CONSTRAINT unq_materials UNIQUE ( material_name  asc )
 );
 GO
 
 CREATE  TABLE material_testing.dbo.sections (
                                                 section_id           int    IDENTITY  NOT NULL,
                                                 section_name         varchar(100)      NOT NULL,
-                                                CONSTRAINT pk_sections PRIMARY KEY CLUSTERED ( section_id  asc )
+                                                CONSTRAINT pk_sections PRIMARY KEY CLUSTERED ( section_id  asc ) ,
+                                                CONSTRAINT unq_sections UNIQUE ( section_name  asc )
 );
 GO
 
@@ -32,14 +35,16 @@ CREATE  TABLE material_testing.dbo.suppliers (
                                                  supplier_id          int    IDENTITY  NOT NULL,
                                                  supplier_name        varchar(120)      NOT NULL,
                                                  supplier_code        varchar(100)      NULL,
-                                                 CONSTRAINT pk_suppliers PRIMARY KEY CLUSTERED ( supplier_id  asc )
+                                                 CONSTRAINT pk_suppliers PRIMARY KEY CLUSTERED ( supplier_id  asc ) ,
+                                                 CONSTRAINT unq_suppliers UNIQUE ( supplier_name  asc )
 );
 GO
 
 CREATE  TABLE material_testing.dbo.test_names (
                                                   test_name_id         int    IDENTITY  NOT NULL,
                                                   test_name            nvarchar(150)      NOT NULL,
-                                                  CONSTRAINT pk_test_names PRIMARY KEY CLUSTERED ( test_name_id  asc )
+                                                  CONSTRAINT pk_test_names PRIMARY KEY CLUSTERED ( test_name_id  asc ) ,
+                                                  CONSTRAINT unq_test_names UNIQUE ( test_name  asc )
 );
 GO
 
@@ -57,19 +62,19 @@ CREATE  TABLE material_testing.dbo.users (
 );
 GO
 
-CREATE  TABLE material_testing.dbo.material_description (
-                                                            mat_desc_id          int    IDENTITY  NOT NULL,
-                                                            mat_desc_name        nvarchar(150)      NOT NULL,
-                                                            material_id          int      NOT NULL,
-                                                            CONSTRAINT pk_material_description PRIMARY KEY CLUSTERED ( mat_desc_id  asc )
+CREATE  TABLE material_testing.dbo.material_descriptions (
+                                                             material_des_id      int    IDENTITY  NOT NULL,
+                                                             material_des_name    nvarchar(150)      NOT NULL,
+                                                             material_id          int      NOT NULL,
+                                                             CONSTRAINT pk_material_description PRIMARY KEY CLUSTERED ( material_des_id  asc )
 );
 GO
 
-CREATE  TABLE material_testing.dbo.material_document (
-                                                         material_doc_id      int    IDENTITY  NOT NULL,
-                                                         material_doc_name    nvarchar(150)      NOT NULL,
-                                                         material_id          int      NOT NULL,
-                                                         CONSTRAINT pk_material_document PRIMARY KEY CLUSTERED ( material_doc_id  asc )
+CREATE  TABLE material_testing.dbo.material_documents (
+                                                          material_doc_id      int    IDENTITY  NOT NULL,
+                                                          material_doc_name    nvarchar(150)      NOT NULL,
+                                                          material_id          int      NOT NULL,
+                                                          CONSTRAINT pk_material_document PRIMARY KEY CLUSTERED ( material_doc_id  asc )
 );
 GO
 
@@ -128,7 +133,7 @@ CREATE  TABLE material_testing.dbo.files (
 );
 GO
 
-ALTER TABLE material_testing.dbo.files ADD CONSTRAINT fk_files_material_document FOREIGN KEY ( material_doc_id ) REFERENCES material_testing.dbo.material_document( material_doc_id );
+ALTER TABLE material_testing.dbo.files ADD CONSTRAINT fk_files_material_document FOREIGN KEY ( material_doc_id ) REFERENCES material_testing.dbo.material_documents( material_doc_id );
 GO
 
 ALTER TABLE material_testing.dbo.files ADD CONSTRAINT fk_files_material_test FOREIGN KEY ( material_test_id ) REFERENCES material_testing.dbo.material_test( material_test_id );
@@ -137,13 +142,13 @@ GO
 ALTER TABLE material_testing.dbo.files ADD CONSTRAINT fk_files_users FOREIGN KEY ( user_id ) REFERENCES material_testing.dbo.users( user_id );
 GO
 
-ALTER TABLE material_testing.dbo.material_description ADD CONSTRAINT fk_material_description_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
+ALTER TABLE material_testing.dbo.material_descriptions ADD CONSTRAINT fk_material_description_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
 GO
 
-ALTER TABLE material_testing.dbo.material_document ADD CONSTRAINT fk_material_document_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
+ALTER TABLE material_testing.dbo.material_documents ADD CONSTRAINT fk_material_document_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
 GO
 
-ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_material_description FOREIGN KEY ( mat_desc_id ) REFERENCES material_testing.dbo.material_description( mat_desc_id );
+ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_material_description FOREIGN KEY ( mat_desc_id ) REFERENCES material_testing.dbo.material_descriptions( material_des_id );
 GO
 
 ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
@@ -158,13 +163,13 @@ GO
 ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_users FOREIGN KEY ( user_id ) REFERENCES material_testing.dbo.users( user_id );
 GO
 
+ALTER TABLE material_testing.dbo.material_test_results ADD CONSTRAINT fk_material_test_report_results_material_test FOREIGN KEY ( material_test_id ) REFERENCES material_testing.dbo.material_test( material_test_id );
+GO
+
 ALTER TABLE material_testing.dbo.material_test_results ADD CONSTRAINT fk_material_test_report_results_test_names FOREIGN KEY ( test_name_id ) REFERENCES material_testing.dbo.test_names( test_name_id );
 GO
 
 ALTER TABLE material_testing.dbo.material_test_results ADD CONSTRAINT fk_material_test_report_results_users FOREIGN KEY ( user_id ) REFERENCES material_testing.dbo.users( user_id );
-GO
-
-ALTER TABLE material_testing.dbo.material_test_results ADD CONSTRAINT fk_material_test_report_results_material_test FOREIGN KEY ( material_test_id ) REFERENCES material_testing.dbo.material_test( material_test_id );
 GO
 
 ALTER TABLE material_testing.dbo.supplier_country ADD CONSTRAINT fk_supplier_country_countries FOREIGN KEY ( country_id ) REFERENCES material_testing.dbo.countries( country_id );

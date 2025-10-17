@@ -65,16 +65,15 @@ public class TestNameDao {
              PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, testName.getTestName());
-            int affectedRows = ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();   // Store affected rows that already inserted into DB usually = 1
 
             if (affectedRows > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
                     if (rs.next()) {
-                        generatedId = rs.getInt(1);
+                        generatedId = rs.getInt(1);   // mean return first colum from result set
                     }
                 }
             }
-
 
         } catch (SQLException e) {
             lastErrorMessage = e.getMessage();

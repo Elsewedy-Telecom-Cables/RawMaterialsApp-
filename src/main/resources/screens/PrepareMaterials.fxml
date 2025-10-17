@@ -72,7 +72,7 @@
                                           <FontIcon iconLiteral="fas-eraser" />
                                        </graphic>
                                     </Button>
-                                    <TextField fx:id="filter_material_document_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_file_type" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="filter_material_document_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_material_document" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -92,7 +92,7 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <ComboBox fx:id="material_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
+                                    <ComboBox fx:id="material_comb_doc" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets right="12.0" />
                                        </HBox.margin>
@@ -163,7 +163,7 @@
                                        <columns>
                                           <TableColumn fx:id="material_document_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
                                           <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Document" />
-                                          <TableColumn fx:id="material_name_in_document_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
+                                          <TableColumn fx:id="material_name_in_document_tbl" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
                                           <TableColumn fx:id="material_document_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>
                                        <columnResizePolicy>
@@ -208,7 +208,7 @@
                                           <FontIcon iconLiteral="fas-eraser" />
                                        </graphic>
                                     </Button>
-                                    <TextField fx:id="filter_material_description_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_file_type" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="filter_material_description_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_material_description" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -228,7 +228,7 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <ComboBox fx:id="material_comb_tbl_description" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
+                                    <ComboBox fx:id="material_comb_des" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="380.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                           <Insets right="12.0" />
                                        </HBox.margin>
@@ -299,7 +299,7 @@
                                        <columns>
                                           <TableColumn fx:id="material_description_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
                                           <TableColumn fx:id="material_description_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Material Description" />
-                                          <TableColumn fx:id="material_name_in_description_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
+                                          <TableColumn fx:id="material_name_in_description_tbl" maxWidth="7000.0" minWidth="30.0" prefWidth="50.0" text="Material Name" />
                                           <TableColumn fx:id="material_description_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
                                        </columns>
                                        <columnResizePolicy>
@@ -348,7 +348,7 @@
                                     <FontIcon iconLiteral="fas-eraser" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="filter_material_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_matrial" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="filter_material_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#filter_material" prefHeight="25.0" prefWidth="200.0" promptText="search" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>

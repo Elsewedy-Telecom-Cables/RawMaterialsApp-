@@ -407,7 +407,7 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="350.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="350.0">
                            <children>
                               <Button fx:id="add_supplier_country_btn" mnemonicParsing="false" onAction="#add_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
@@ -481,7 +481,7 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="clear_test_btn" mnemonicParsing="false" onAction="#clear_test" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Clear " HBox.hgrow="ALWAYS">
+                              <Button fx:id="clear_test_btn" mnemonicParsing="false" onAction="#clear_test" prefHeight="28.0" prefWidth="78.0" text="Clear " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -504,7 +504,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
                            <children>
-                              <Button fx:id="add_test_btn" mnemonicParsing="false" onAction="#add_test" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Add   " HBox.hgrow="ALWAYS">
+                              <Button fx:id="add_test_btn" mnemonicParsing="false" onAction="#add_test" prefHeight="28.0" prefWidth="78.0" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="12.0" />
                                  </font>

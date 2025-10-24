@@ -1,8 +1,8 @@
 package com.etc.raw_materials_app.services;
 
-import com.etc.raw_materials_app.controllers.AddUserController;
-import com.etc.raw_materials_app.controllers.LoginController;
+import com.etc.raw_materials_app.controllers.*;
 import com.etc.raw_materials_app.db.DEF;
+import com.etc.raw_materials_app.logging.Logging;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,8 +12,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 import static com.etc.raw_materials_app.logging.Logging.ERROR;
@@ -21,14 +24,147 @@ import static com.etc.raw_materials_app.logging.Logging.logException;
 
 public class WindowUtils {
 
+    public static String iconImagePath = "/images/raw_materials.png";
+    public static int ALERT_WARNING = 1;
+    public static int ALERT_ERROR = 2;
+    public static int ALERT_CONFIRMATION = 3;
+    public static int ALERT_INFORMATION = 4;
+
+    // Calibration App  Screens
+    public static final String LOGIN_PAGE = "/screens/Login.fxml";
+    public static final String MAIN_PAGE = "/screens/Main.fxml";
+    public static final String VIEW_USER_PAGE = "/screens/ViewUsers.fxml";
+    public static final String ADD_USER_PAGE = "/screens/AddUser.fxml";
+    public static final String  PREPARE_DATA = "/screens/PrepareData.fxml";
+    public static final String  PREPARE_MATERIALS = "/screens/PrepareMaterials.fxml";
+    public static final String VIEW_MATERIAL_TESTS_PAGE = "/screens/ViewMaterialTests.fxml";
+    public static final String ADD_MATERIAL_TESTS_PAGE = "/screens/AddMaterialTest.fxml";
+
+    public static void OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_FILE(String fxmlPath, Consumer<AddFileController> controllerHandler) {
+        try {
+            //   System.out.println("Loading FXML: " + fxmlPath);
+            FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
+            if (loader.getLocation() == null) {
+                throw new IllegalStateException("FXML file not found: " + fxmlPath);
+            }
+            Parent root = loader.load();
+            AddFileController controller = loader.getController();
+            //     System.out.println("Controller loaded: " + (controller != null ? controller.getClass().getName() : "null"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(true);
+            stage.setMaximized(true);
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
+
+            if (controller != null) {
+                //  System.out.println("Setting stage for controller");
+                controller.setStage(stage);
+                if (controllerHandler != null) {
+                    //   System.out.println("Calling controllerHandler");
+                    controllerHandler.accept(controller);
+                }
+            } else {
+                Logging.logException("ERROR", WindowUtils.class.getName(), "OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_FILE", new IllegalStateException("Controller is null for FXML: " + fxmlPath));
+            }
+
+            // Disable close button (X)
+//            stage.setOnCloseRequest(event -> {
+//                event.consume();
+//                //    System.out.println("Close request via X ignored. Use Close button instead.");
+//                ALERT("Info", "Please use the Red Close Button to Exit ➡  X ", ALERT_INFORMATION);
+//            });
+
+            // System.out.println("Showing stage");
+            stage.show();
+        } catch (Exception e) {
+            Logging.logException("ERROR", WindowUtils.class.getName(), "OPEN_WINDOW_NOT_RESIZABLE_3", e);
+            //  System.out.println("Failed to open window: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT(String fxmlPath, Consumer<AddResultController> controllerHandler) {
+        try {
+            //   System.out.println("Loading FXML: " + fxmlPath);
+            FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
+            if (loader.getLocation() == null) {
+                throw new IllegalStateException("FXML file not found: " + fxmlPath);
+            }
+            Parent root = loader.load();
+            AddResultController controller = loader.getController();
+            //     System.out.println("Controller loaded: " + (controller != null ? controller.getClass().getName() : "null"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(true);
+            stage.setMaximized(true);
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
+
+            if (controller != null) {
+                //  System.out.println("Setting stage for controller");
+                controller.setStage(stage);
+                if (controllerHandler != null) {
+                    //   System.out.println("Calling controllerHandler");
+                    controllerHandler.accept(controller);
+                }
+            } else {
+                Logging.logException("ERROR", WindowUtils.class.getName(), "OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT", new IllegalStateException("Controller is null for FXML: " + fxmlPath));
+            }
+
+            // Disable close button (X)
+//            stage.setOnCloseRequest(event -> {
+//                event.consume();
+//                //    System.out.println("Close request via X ignored. Use Close button instead.");
+//                ALERT("Info", "Please use the Red Close Button to Exit ➡  X ", ALERT_INFORMATION);
+//            });
+
+            // System.out.println("Showing stage");
+            stage.show();
+        } catch (Exception e) {
+            Logging.logException("ERROR", WindowUtils.class.getName(), "OPEN_WINDOW_NOT_RESIZABLE_3", e);
+            //  System.out.println("Failed to open window: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void OPEN_EDIT_MATERIAL_TEST_PAGE(int materialTestId, Runnable onClose) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/AddMaterialTest.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            AddMaterialTestController controller = fxmlLoader.getController();
+            controller.setMaterialTestData(materialTestId, true);
+            controller.setSaveButton();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Update Material Test");
+            stage.initModality(Modality.NONE);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setResizable(false);
+
+            if (onClose != null) {
+                stage.setOnHiding(event -> onClose.run());
+            }
+
+            stage.show();
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_EDIT_MATERIAL_TEST_PAGE", ex);
+        }
+    }
+
     public static void OPEN_WINDOW(String fxmlPath, Runnable onCloseAction) {
         try {
-            Parent root = FXMLLoader.load(WindowUtils.class.getResource(fxmlPath));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(WindowUtils.class.getResource(fxmlPath)));
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
 
             if (onCloseAction != null)
                 // Handle window close event
@@ -40,13 +176,14 @@ public class WindowUtils {
         }
     }
 
+
     public static void OPEN_WINDOW_FULL_SCREEN(String fxmlPath, Runnable onCloseAction) {
         try {
-            Parent root = FXMLLoader.load(WindowUtils.class.getResource(fxmlPath));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(WindowUtils.class.getResource(fxmlPath)));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
 
             if (onCloseAction != null) {
                 stage.setOnCloseRequest(event -> onCloseAction.run());
@@ -63,12 +200,12 @@ public class WindowUtils {
 
     public static void OPEN_WINDOW_NOT_RESIZABLE(String fxmlPath, Runnable onCloseAction) {
         try {
-            Parent root = FXMLLoader.load(WindowUtils.class.getResource(fxmlPath));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(WindowUtils.class.getResource(fxmlPath)));
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
             if (onCloseAction != null)
                 // Handle window close event
                 stage.setOnCloseRequest(event -> onCloseAction.run());
@@ -82,23 +219,61 @@ public class WindowUtils {
 
     public interface StageAware {
         void setStage(Stage stage);
+        // Open a non-resizable window and return the Stage
+        public static Stage OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction, Object controllerData) {
+            try {
+                FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
+                Parent root = loader.load(); // Load the FXML page
+
+                Scene scene = new Scene(root);
+                scene.setFill(Color.TRANSPARENT);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
+
+                // Set the controller's stage if it implements StageAware
+                Object controller = loader.getController();
+                if (controller instanceof StageAware) {
+                    ((StageAware) controller).setStage(stage);
+                }
+
+                // Set the provided controller as userData
+                stage.setUserData(controllerData);
+
+                if (onCloseAction != null) {
+                    stage.setOnCloseRequest(event -> onCloseAction.run());
+                }
+
+                stage.show();
+                stage.setResizable(false);
+                return stage; // Return the created Stage
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null; // Return null in case of an error
+            }
+        }
+
     }
-    public static void OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction) {
+    // Open a non-resizable window and return the Stage
+    public static Stage OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction, Object controllerData) {
         try {
             FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
-            Parent root = loader.load(); // تحميل الصفحة مع الحفاظ على المرجع
+            Parent root = loader.load(); // Load the FXML page
 
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
+            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
 
-            //  إذا كان الكنترولر يحتاج معرفة الـ Stage
+            // Set the controller's stage if it implements StageAware
             Object controller = loader.getController();
             if (controller instanceof StageAware) {
                 ((StageAware) controller).setStage(stage);
             }
+
+            // Set the provided controller as userData
+            stage.setUserData(controllerData);
 
             if (onCloseAction != null) {
                 stage.setOnCloseRequest(event -> onCloseAction.run());
@@ -106,10 +281,41 @@ public class WindowUtils {
 
             stage.show();
             stage.setResizable(false);
+            return stage; // Return the created Stage
         } catch (Exception e) {
             e.printStackTrace();
+            return null; // Return null in case of an error
         }
     }
+
+
+//    public static void OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
+//            Parent root = loader.load(); // تحميل الصفحة مع الحفاظ على المرجع
+//
+//            Scene scene = new Scene(root);
+//            scene.setFill(Color.TRANSPARENT);
+//            Stage stage = new Stage();
+//            stage.setScene(scene);
+//            stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
+//
+//            //  إذا كان الكنترولر يحتاج معرفة الـ Stage
+//            Object controller = loader.getController();
+//            if (controller instanceof StageAware) {
+//                ((StageAware) controller).setStage(stage);
+//            }
+//
+//            if (onCloseAction != null) {
+//                stage.setOnCloseRequest(event -> onCloseAction.run());
+//            }
+//
+//            stage.show();
+//            stage.setResizable(false);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static void OPEN_WINDOW_NOT_RESIZABLE_3(String fxmlPath, Consumer<Object> controllerHandler) {
         try {
@@ -143,23 +349,6 @@ public class WindowUtils {
         stage.close();
     }
 
-    public static String iconImagePath = "/images/raw_materials.png";
-    public static int ALERT_WARNING = 1;
-    public static int ALERT_ERROR = 2;
-    public static int ALERT_CONFIRMATION = 3;
-    public static int ALERT_INFORMATION = 4;
-
-    // Calibration App  Screens
-    public static final String LOGIN_PAGE = "/screens/Login.fxml";
-    public static final String MAIN_PAGE = "/screens/Main.fxml";
-    public static final String VIEW_USER_PAGE = "/screens/ViewUsers.fxml";
-    public static final String ADD_USER_PAGE = "/screens/AddUser.fxml";
-    public static final String  PREPARE_DATA = "/screens/PrepareData.fxml";
-    public static final String  PREPARE_MATERIALS = "/screens/PrepareMaterials.fxml";
-
-
-
-
 
 
     // Alert
@@ -179,6 +368,7 @@ public class WindowUtils {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     public static void OPEN_LOGIN_PAGE() {
         try {
             OPEN_WINDOW_NOT_RESIZABLE(
@@ -189,6 +379,7 @@ public class WindowUtils {
             logException(ERROR, WindowUtils.class.getName(), "OPEN_LOGIN_PAGE", ex);
         }
     }
+
     public static void OPEN_MAIN_PAGE() {
         try {
             OPEN_WINDOW_NOT_RESIZABLE(
@@ -199,6 +390,7 @@ public class WindowUtils {
             logException(ERROR, WindowUtils.class.getName(), "OPEN_MAIN_PAGE", ex);
         }
     }
+
     public static void OPEN_VIEW_USERS_PAGE() {
         try {
             OPEN_WINDOW_FULL_SCREEN(
@@ -251,8 +443,6 @@ public class WindowUtils {
         }
     }
 
-
-
     public static void OPEN_PREPARE_MATERIALS_PAGE() {
         try {
             OPEN_WINDOW_FULL_SCREEN(
@@ -264,8 +454,37 @@ public class WindowUtils {
         }
     }
 
+    public static void OPEN_VIEW_MATERIAL_TESTS_PAGE() {
+        try {
+            OPEN_WINDOW_FULL_SCREEN(
+                    VIEW_MATERIAL_TESTS_PAGE,
+                    () -> OPEN_MAIN_PAGE()
+            );
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_VIEW_MATERIAL_TESTS_PAGE", ex);
+        }
+    }
 
+    public static void OPEN_ADD_MATERIAL_TESTS_PAGEYYYY() {
+        try {
+            OPEN_WINDOW_FULL_SCREEN(
+                    ADD_MATERIAL_TESTS_PAGE,
+                    () -> OPEN_VIEW_MATERIAL_TESTS_PAGE()
+            );
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_ADD_MATERIAL_TESTS_PAGE", ex);
+        }
+    }
 
+    public static void OPEN_ADD_MATERIAL_TESTS_PAGE(boolean reopenDashboardOnClose, ViewMaterialTestsController viewMaterialTestsController) {
+        try {
+            Runnable onClose = reopenDashboardOnClose ? WindowUtils::OPEN_VIEW_MATERIAL_TESTS_PAGE : null;
+            // Pass the TrialsController as controllerData
+            OPEN_WINDOW_NOT_RESIZABLE_2(ADD_MATERIAL_TESTS_PAGE, onClose, viewMaterialTestsController);
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_ADD_MATERIAL_TESTS_PAGE", ex);
+        }
+    }
 
     public static int getUserRoleInt(String role) {
        if (DEF.USER_ROLE_USER_STRING.equals(role)) {

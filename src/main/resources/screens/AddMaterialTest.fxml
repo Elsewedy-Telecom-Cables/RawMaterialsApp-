@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="677.0" prefWidth="1222.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.AddMaterialTestController">
+   <children>
+      <VBox layoutX="20.0" layoutY="51.8" prefHeight="540.0" prefWidth="560.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Section">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <ComboBox fx:id="section_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Supplier ">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <ComboBox fx:id="supplier_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Supplier Country">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <ComboBox fx:id="country_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Material">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <ComboBox fx:id="material_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Material Description">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <ComboBox fx:id="material_description_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Notes">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="notes_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="651.4000000000001" layoutY="60.0" prefHeight="266.0" prefWidth="255.0" AnchorPane.leftAnchor="651.5999999999999" AnchorPane.rightAnchor="315.39999999999986" AnchorPane.topAnchor="60.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Total Quantity">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="total_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Accepted Quantity">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="accepted_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Rejected Quantity">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="rejected_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button fx:id="save_btn" contentDisplay="RIGHT" layoutX="917.0" layoutY="593.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#saveMaterialTest" prefHeight="38.0" prefWidth="126.0" style="-fx-background-radius: 10;" styleClass="save_btn" text="Save   " AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="clear_btn" layoutX="20.0" layoutY="594.0" mnemonicParsing="false" onAction="#clear" prefHeight="38.0" prefWidth="80.0" style="-fx-background-radius: 10;" styleClass="button-6" text="Clear" AnchorPane.bottomAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <FontIcon fill="WHITE" iconLiteral="fas-check" iconSize="12" layoutX="1170.0" layoutY="648.0" />
+      <HBox alignment="CENTER" layoutX="466.0" prefHeight="38.0" prefWidth="276.0" styleClass="title-box" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <Label fx:id="header_lbl" alignment="CENTER" prefHeight="28.0" prefWidth="220.0" styleClass="title-label" text="Material Test">
+               <font>
+                  <Font name="Montserrat Regular" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox layoutX="897.1999999999999" layoutY="60.0" prefHeight="270.0" prefWidth="255.0" AnchorPane.leftAnchor="946.8" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="306.0">
+               <children>
+                  <Label text="Item Code">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="item_code_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="306.0">
+               <children>
+                  <Label text="SPQR">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="spqr_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="306.0">
+               <children>
+                  <Label text="Po No">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="po_no_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="652.0" layoutY="328.0" prefHeight="282.0" prefWidth="560.0" AnchorPane.leftAnchor="652.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="596.0">
+               <children>
+                  <Label text="Oracle Sampel">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="oracle_sample_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Receipt">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="receipt_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="596.0">
+               <children>
+                  <Label text="Comment">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="comment_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

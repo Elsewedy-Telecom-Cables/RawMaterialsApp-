@@ -97,10 +97,10 @@
 /* Unified VBox or container box styling */
 .box {
     -fx-background-color: #d6d8db;
-    -fx-background-radius: 20;
+    -fx-background-radius: 15;
     -fx-border-color: #9fb0b2;
-    -fx-border-radius: 20;
-    -fx-padding: 10;
+    -fx-border-radius: 15;
+    -fx-padding: 1;
 }
 
 /* checkbox */
@@ -277,17 +277,18 @@
 
 .title-box {
     -fx-background-color: linear-gradient(to right, #d6d8db, #9fb0b2);
-    -fx-padding: 7 10 7 10;
+    -fx-padding: 3 6 3 6;
     -fx-background-radius: 10;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0.2, 0, 2);
-    -fx-border-color: #00727d;
+    -fx-border-color: #001553;   /*#00727d*/
     -fx-border-width: 0 0 2 0;
     -fx-border-radius: 10;
 }
 
 .title-label {
-    -fx-font-size: 22px;
-    -fx-text-fill: #00727d;
+    -fx-font-size: 18px;
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: #001553;   /*#00727d*/
     -fx-font-weight: bold;
 }
 
@@ -395,6 +396,11 @@
     -fx-font-family: "Montserrat";
     -fx-padding: 0 0 10 0;
 }
+.button:hover{
+    -fx-cursor: hand;
+}
+
+
 
 
 

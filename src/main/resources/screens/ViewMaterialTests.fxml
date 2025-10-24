@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="686.0" prefWidth="1476.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.ViewMaterialTestsController">
+   <children>
+      <HBox alignment="CENTER" layoutX="10.4" layoutY="-7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="1466.0" styleClass="box-samll1" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="260.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="date_lbl" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="288.0">
+                     <font>
+                        <Font name="Montserrat Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="502.0" text="Qulity Control Department">
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="48.0" prefWidth="273.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="logo_image_view" fitHeight="48.0" fitWidth="234.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets right="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView fx:id="material_tests_table_view" layoutX="7.2" layoutY="180.0" prefHeight="448.0" prefWidth="1288.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="155.0">
+        <columns>
+            <TableColumn fx:id="no_column" maxWidth="1.7976931348623157E308" minWidth="35.0" prefWidth="35.0" text="No" />
+            <TableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="35.0" prefWidth="35.0" text="ID" />
+          <TableColumn fx:id="section_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Section" />
+            <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Supplier" />
+            <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" text="Sup-Country" />
+            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="120.0" text="Material" />
+            <TableColumn fx:id="material_description_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="110.0" text="M Description" />
+            <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="120.0" text="Creation Date" />
+            <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="PO" />
+            <TableColumn fx:id="receipt_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Receipt" />
+            <TableColumn fx:id="total_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="T Quantity" />
+            <TableColumn fx:id="accepted_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="A Quantity" />
+            <TableColumn fx:id="rejected_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="R Quantity" />
+            <TableColumn fx:id="oracle_sample_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="Sample" />
+            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="70.0" text="Item Code" />
+            <TableColumn fx:id="spqr_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="SPQR" />
+            <TableColumn fx:id="files_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Files" />
+            <TableColumn fx:id="results_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Results" />
+            <TableColumn fx:id="edit_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="U - D" />
+            <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Notes" />
+            <TableColumn fx:id="comment_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="100.0" text="Comment" />
+        </columns>
+      </TableView>
+      <VBox alignment="TOP_CENTER" layoutX="7.2" layoutY="52.0" prefHeight="101.0" prefWidth="1288.0" AnchorPane.leftAnchor="7.2" AnchorPane.rightAnchor="7.2000000000000455">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="1288.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="1288.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="148.0" HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="TOP_CENTER" prefHeight="28.0" prefWidth="450.0" text="Incoming Materials Recod" textFill="#001553">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="23.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="178.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <children>
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#update" prefHeight="27.0" prefWidth="94.0" styleClass="input-04" text="Update">
+                                 <font>
+                                    <Font name="Montserrat Bold" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontIcon iconColor="#001553" iconLiteral="fas-sync" iconSize="10" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="70.0" prefWidth="1288.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="80.0">
+                     <children>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clearSearch" prefHeight="35.0" prefWidth="80.0" styleClass="input-04" text="Clear">
+                           <font>
+                              <Font name="Montserrat Bold" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#searchWithFilter" prefHeight="35.0" prefWidth="100.0" styleClass="input-04" text="Search">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontIcon iconColor="#01545b" iconLiteral="fas-search" iconSize="12" wrappingWidth="10.400023460388184" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="330.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="84.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="150.0" text="To" textFill="#001553">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="150.0" text="From" textFill="#001553">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="340.0" styleClass="box">
+                           <children>
+                              <DatePicker fx:id="to_creation_date" prefHeight="27.0" prefWidth="150.0" style="-fx-font-size: 14; -fx-font-weight: bold;">
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
+                              </DatePicker>
+                              <DatePicker fx:id="from_creation_date" prefHeight="30.0" prefWidth="150.0" style="-fx-font-size: 14; -fx-font-weight: bold;">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </DatePicker>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="120.0">
+                     <children>
+                        <TextField fx:id="filter_material_test_id_textF" alignment="CENTER" onKeyPressed="#filterMaterialTestId" prefHeight="35.0" prefWidth="110.0" promptText="ID" styleClass="input-04">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="92.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Supplier Country" textFill="#001553">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="supplier_country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="250.0" promptText="Supplier Country" style="-fx-font-size: 13; -fx-font-weight: bold;" styleClass="input-04" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="92.0" prefWidth="210.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Suppliers" textFill="#001553">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="supplier_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="300.0" promptText="Suppliers" style="-fx-font-size: 13; -fx-font-weight: bold;" styleClass="input-04" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="77.0" prefWidth="230.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Materials" textFill="#001553">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="material_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="350.0" promptText="Materials" style="-fx-font-size: 13; -fx-font-weight: bold;" styleClass="input-04" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></ComboBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="69.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Sections" textFill="#001553">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="4.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="section_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="34.0" prefWidth="300.0" promptText="Sections" style="-fx-font-size: 13; -fx-font-weight: bold;" styleClass="input-04" VBox.vgrow="ALWAYS" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="2.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_RIGHT" layoutX="1010.0" layoutY="616.0" prefHeight="46.0" prefWidth="962.0" styleClass="box2" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="310.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="197.0" text="Total Material Tests Count">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="total_material_tests_count_textF" alignment="CENTER" prefHeight="27.0" prefWidth="67.0" styleClass="input-01">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Copper">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="copper_material_tests_count_textF" alignment="CENTER" prefHeight="27.0" prefWidth="67.0" styleClass="input-01">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Fiber">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="fo_material_tests_count_textF" alignment="CENTER" prefHeight="27.0" prefWidth="67.0" styleClass="input-01">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Accessories">
+                     <font>
+                        <Font name="Montserrat Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="accessories_material_tests_count_textF" alignment="CENTER" prefHeight="27.0" prefWidth="67.0" styleClass="input-01">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="93.0" layoutY="601.0" prefHeight="46.0" prefWidth="424.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="224.0">
+               <children>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openAddMaterialTest" prefHeight="34.0" prefWidth="188.0" style="-fx-background-radius: 10;" styleClass="button-1" text="Add Material Test">
+                     <font>
+                        <Font name="Montserrat Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-plus" iconSize="11" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

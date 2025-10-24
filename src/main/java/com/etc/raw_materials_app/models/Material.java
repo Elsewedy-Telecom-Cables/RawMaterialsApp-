@@ -4,7 +4,6 @@ public class Material {
     private int materialId;
     private String materialName;
 
-    // Constructors
     public Material() {
     }
 

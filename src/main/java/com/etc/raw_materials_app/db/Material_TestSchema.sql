@@ -88,10 +88,10 @@ GO
 CREATE  TABLE material_testing.dbo.material_test (
                                                      material_test_id     int    IDENTITY  NOT NULL,
                                                      section_id           int      NOT NULL,
-                                                     supplier_id          int      NULL,
-                                                     country_id           int      NULL,
+                                                     supplier_id          int      NOT NULL,
+                                                     country_id           int      NOT NULL,
                                                      material_id          int      NOT NULL,
-                                                     mat_desc_id          int      NOT NULL,
+                                                     material_des_id      int      NOT NULL,
                                                      user_id              int      NOT NULL,
                                                      po_no                nvarchar(150)      NULL,
                                                      receipt              nvarchar(150)      NULL,
@@ -148,7 +148,7 @@ GO
 ALTER TABLE material_testing.dbo.material_documents ADD CONSTRAINT fk_material_document_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
 GO
 
-ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_material_description FOREIGN KEY ( mat_desc_id ) REFERENCES material_testing.dbo.material_descriptions( material_des_id );
+ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_material_description FOREIGN KEY ( material_des_id ) REFERENCES material_testing.dbo.material_descriptions( material_des_id );
 GO
 
 ALTER TABLE material_testing.dbo.material_test ADD CONSTRAINT fk_material_test_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );

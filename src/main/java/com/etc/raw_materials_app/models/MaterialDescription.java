@@ -34,6 +34,6 @@ public class MaterialDescription {
 
     @Override
     public String toString() {
-        return materialDescriptionName + " (" + (material != null ? material.getMaterialName() : "") + ")";
+        return materialDescriptionName ;
     }
 }

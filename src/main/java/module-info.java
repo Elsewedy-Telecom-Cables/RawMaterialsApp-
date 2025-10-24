@@ -17,7 +17,7 @@ module com.etc.raw_materials_app {
     requires org.kordamp.ikonli.javafx;
     requires javafx.base;
     requires javafx.graphics;
-
+    requires org.fxmisc.richtext;
 
 
     opens com.etc.raw_materials_app.controllers to javafx.fxml;

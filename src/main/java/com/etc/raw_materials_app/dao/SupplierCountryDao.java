@@ -12,6 +12,37 @@ import java.sql.*;
 
 public class SupplierCountryDao {
     public static String lastErrorMessage = null;
+    // Get supplier-country by supplier ID and country ID
+    public static SupplierCountry getSupplierCountryById(int supplierId, int countryId) {
+        String query = "SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name " +
+                "FROM material_testing.dbo.supplier_country sc " +
+                "JOIN material_testing.dbo.suppliers s ON sc.supplier_id = s.supplier_id " +
+                "JOIN material_testing.dbo.countries c ON sc.country_id = c.country_id " +
+                "WHERE sc.supplier_id = ? AND sc.country_id = ?";
+        SupplierCountry supplierCountry = null;
+
+        try (Connection con = DbConnect.getConnect();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, supplierId);
+            ps.setInt(2, countryId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    SupplierCountry sc = new SupplierCountry();
+                    sc.setSupplierId(rs.getInt("supplier_id"));
+                    sc.setSupplierName(rs.getString("supplier_name"));
+                    sc.setCountryId(rs.getInt("country_id"));
+                    sc.setCountryName(rs.getString("country_name"));
+                    supplierCountry = sc;
+                }
+            }
+
+        } catch (Exception e) {
+            Logging.logExpWithMessage("ERROR", SupplierCountryDao.class.getName(), "getSupplierCountryById", e, "sql", query);
+        }
+
+        return supplierCountry;
+    }
 
     // Get all supplier-country mappings
     public static ObservableList<SupplierCountry> getAllSupplierCountries() {
@@ -79,36 +110,6 @@ public class SupplierCountryDao {
         return false;
     }
 
-    // Get supplier-country by supplier ID and country ID
-    public static SupplierCountry getSupplierCountryById(int supplierId, int countryId) {
-        String query = "SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name " +
-                "FROM material_testing.dbo.supplier_country sc " +
-                "JOIN material_testing.dbo.suppliers s ON sc.supplier_id = s.supplier_id " +
-                "JOIN material_testing.dbo.countries c ON sc.country_id = c.country_id " +
-                "WHERE sc.supplier_id = ? AND sc.country_id = ?";
-        SupplierCountry supplierCountry = null;
 
-        try (Connection con = DbConnect.getConnect();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setInt(1, supplierId);
-            ps.setInt(2, countryId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    SupplierCountry sc = new SupplierCountry();
-                    sc.setSupplierId(rs.getInt("supplier_id"));
-                    sc.setSupplierName(rs.getString("supplier_name"));
-                    sc.setCountryId(rs.getInt("country_id"));
-                    sc.setCountryName(rs.getString("country_name"));
-                    supplierCountry = sc;
-                }
-            }
-
-        } catch (Exception e) {
-            Logging.logExpWithMessage("ERROR", SupplierCountryDao.class.getName(), "getSupplierCountryById", e, "sql", query);
-        }
-
-        return supplierCountry;
-    }
 }
 

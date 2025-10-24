@@ -41,4 +41,5 @@ public class SupplierCountry {
     public void setSupplierName(String supplierName) {
         this.supplierName = supplierName;
     }
+
 }

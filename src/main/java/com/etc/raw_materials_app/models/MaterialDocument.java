@@ -34,6 +34,6 @@ public class MaterialDocument {
 
     @Override
     public String toString() {
-        return materialDocumentName + " (" + (material != null ? material.getMaterialName() : "") + ")";
+        return materialDocumentName ;
     }
 }

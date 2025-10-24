@@ -117,5 +117,38 @@ public class MaterialDescriptionDao {
         return list;
     }
 
+    // Get All Material Description BY ID
+    public static MaterialDescription  getMaterialDescriptionById(int materialDescId) {
+        MaterialDescription md = null;
+        String sql = """
+            SELECT md.material_des_id, md.material_des_name, 
+                   m.material_id, m.material_name
+            FROM material_testing.dbo.material_descriptions md
+            JOIN material_testing.dbo.materials m 
+              ON md.material_id = m.material_id
+            WHERE md.material_des_id = ?
+            """;
+        try (Connection con = DbConnect.getConnect();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, materialDescId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    md = new MaterialDescription();
+                    md.setMaterialDescriptionId(rs.getInt("material_des_id"));
+                    md.setMaterialDescriptionName(rs.getString("material_des_name"));
 
+                    Material m = new Material();
+                    m.setMaterialId(rs.getInt("material_id"));
+                    m.setMaterialName(rs.getString("material_name"));
+
+                    md.setMaterial(m);
+                }
+            }
+        } catch (SQLException e) {
+            lastErrorMessage = e.getMessage();
+            Logging.logExpWithMessage("ERROR", MaterialDescriptionDao.class.getName(),
+                    "getMaterialDescriptionById", e, "sql", sql);
+        }
+        return md;
+    }
 }

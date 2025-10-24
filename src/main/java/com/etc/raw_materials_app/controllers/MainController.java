@@ -103,7 +103,8 @@ public class MainController implements Initializable {
 
     @FXML
     void openMaterialTest(ActionEvent event) {
-
+        CLOSE(event);
+        OPEN_VIEW_MATERIAL_TESTS_PAGE();
     }
 
     @FXML

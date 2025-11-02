@@ -402,7 +402,60 @@
 
 
 
+/* تكبير حجم الـ checkbox box نفسه */
+.check-box .box {
+    -fx-min-width: 16px;
+    -fx-min-height: 16px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
 
+/* عندما يكون Pass */
+.pass-checkbox:selected .box {
+    -fx-background-color: #66FF66; /* أخضر واضح */
+    -fx-border-color: green;
+}
 
+/* عندما يكون Fail */
+.fail-checkbox:selected .box {
+    -fx-background-color: #FF6666; /* أحمر واضح */
+    -fx-border-color: darkred;
+}
 
+/* عندما لا يكون محدد */
+.pass-checkbox .box,
+.fail-checkbox .box {
+    -fx-background-color: transparent;
+    -fx-border-color: #808080;
+}
 
+/* تكبير النص داخل checkbox */
+.pass-checkbox .text,
+.fail-checkbox .text {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* لون الصف عند التحديد */
+.table-row-cell:selected {
+    -fx-background-color: #B0E0E6; /* Light cyan */
+}
+
+/* الحفاظ على اللون عند تحديد الصف */
+.table-row-cell:selected .table-cell.test-situation-cell {
+    -fx-background-color: -fx-cell-background;
+}
+
+/* لون النص عند تحديد الصف */
+.table-row-cell:selected .check-box .text {
+    -fx-fill: #8B4513; /* Brown */
+}
+.check-box .box {
+    -fx-min-width: 18px;      /* العرض */
+    -fx-min-height: 18px;     /* الارتفاع */
+    -fx-max-width: 18px;
+    -fx-max-height: 18px;
+    -fx-padding: 3px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}

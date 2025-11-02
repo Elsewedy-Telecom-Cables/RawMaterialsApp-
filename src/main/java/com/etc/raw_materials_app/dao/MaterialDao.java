@@ -16,7 +16,7 @@ public class MaterialDao {
     // Get all Materials
     public static ObservableList<Material> getAllMaterials() {
         ObservableList<Material> list = FXCollections.observableArrayList();
-        String query = "SELECT Material_id, Material_name FROM material_testing.dbo.Materials ORDER BY Material_id ASC";
+        String query = "SELECT Material_id, Material_name, item_code FROM material_testing.dbo.Materials ORDER BY Material_id ASC";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);
@@ -25,7 +25,8 @@ public class MaterialDao {
             while (rs.next()) {
                 list.add(new Material(
                         rs.getInt("Material_id"),
-                        rs.getString("Material_name")
+                        rs.getString("Material_name"),
+                        rs.getString("item_code")
                 ));
             }
 
@@ -39,12 +40,13 @@ public class MaterialDao {
 
     // Insert
     public static boolean insertMaterial(Material m) {
-        String query = "INSERT INTO material_testing.dbo.Materials (Material_name) VALUES (?)";
+        String query = "INSERT INTO material_testing.dbo.Materials (Material_name,item_code) VALUES (?,?)";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, m.getMaterialName());
+            ps.setString(2, m.getItemCode());
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -57,13 +59,14 @@ public class MaterialDao {
 
     // Update
     public static boolean updateMaterial(Material m) {
-        String query = "UPDATE material_testing.dbo.Materials SET Material_name = ? WHERE Material_id = ?";
+        String query = "UPDATE material_testing.dbo.Materials SET Material_name = ?, item_code = ? WHERE Material_id = ?";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, m.getMaterialName());
-            ps.setInt(2, m.getMaterialId());
+            ps.setString(2, m.getItemCode());
+            ps.setInt(3, m.getMaterialId());
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -93,7 +96,7 @@ public class MaterialDao {
 
     // Get by ID
     public static Material getMaterialById(int id) {
-        String query = "SELECT Material_id, Material_name FROM material_testing.dbo.Materials WHERE Material_id = ?";
+        String query = "SELECT Material_id, Material_name, item_code FROM material_testing.dbo.Materials WHERE Material_id = ?";
         Material m = null;
 
         try (Connection con = DbConnect.getConnect();
@@ -102,7 +105,9 @@ public class MaterialDao {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    m = new Material(rs.getInt("Material_id"), rs.getString("Material_name"));
+                    m = new Material(rs.getInt("Material_id"),
+                            rs.getString("Material_name"),
+                            rs.getString("item_code"));
                 }
             }
 

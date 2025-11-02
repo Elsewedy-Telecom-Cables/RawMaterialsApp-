@@ -3,7 +3,6 @@ package com.etc.raw_materials_app.models;
 public class MaterialDocument {
     private int materialDocumentId;
     private String materialDocumentName;
-    private Material material;
 
     public MaterialDocument() {
     }
@@ -22,14 +21,6 @@ public class MaterialDocument {
 
     public void setMaterialDocumentName(String materialDocumentName) {
         this.materialDocumentName = materialDocumentName;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
     }
 
     @Override

@@ -6,7 +6,7 @@ module com.etc.raw_materials_app {
     requires itextpdf;
     requires java.naming;
     requires java.desktop;
-    requires controlsfx;
+    requires org.controlsfx.controls;
     requires mail;
     requires activation;
     requires jbcrypt;
@@ -18,6 +18,7 @@ module com.etc.raw_materials_app {
     requires javafx.base;
     requires javafx.graphics;
     requires org.fxmisc.richtext;
+
 
 
     opens com.etc.raw_materials_app.controllers to javafx.fxml;

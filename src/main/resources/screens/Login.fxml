@@ -15,33 +15,33 @@
    <children>
       <Pane prefHeight="527.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" layoutX="146.0" layoutY="10.0" prefHeight="37.0" prefWidth="323.0" styleClass="main-title" text="Quality Control Department">
+            <Label alignment="CENTER" layoutX="146.0" layoutY="10.0" prefHeight="37.0" prefWidth="323.0" text="Quality Control Department">
                <font>
-                  <Font name="Montserrat Regular" size="19.0" />
+                  <Font name="Montserrat Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="app_name_lable" alignment="CENTER" layoutX="167.0" layoutY="54.0" prefHeight="37.0" prefWidth="285.0" styleClass="app-title" text="Raw Materials Application">
+            <Label fx:id="app_name_lable" alignment="CENTER" layoutX="167.0" layoutY="54.0" prefHeight="37.0" prefWidth="285.0" text="Raw Materials Application">
                <font>
-                  <Font name="Montserrat Regular" size="18.0" />
+                  <Font name="Montserrat Bold" size="16.0" />
                </font>
             </Label>
             <ImageView fx:id="logo_image_view" fitHeight="60.0" fitWidth="129.0" layoutX="15.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1" />
-            <Label alignment="CENTER" layoutX="54.0" layoutY="200.0" prefHeight="43.0" prefWidth="99.0" text="username">
+            <Label alignment="CENTER" layoutX="54.0" layoutY="200.0" prefHeight="43.0" prefWidth="99.0" text="Username">
                <font>
                   <Font name="Montserrat Bold" size="16.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="53.0" layoutY="270.0" prefHeight="43.0" prefWidth="99.0" text="password">
+            <Label alignment="CENTER" layoutX="53.0" layoutY="270.0" prefHeight="43.0" prefWidth="99.0" text="Password">
                <font>
                   <Font name="Montserrat Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="user_name_txtF" alignment="CENTER" layoutX="160.0" layoutY="199.0" prefHeight="43.0" prefWidth="310.0" promptText="user name" styleClass="input-01">
+            <TextField fx:id="user_name_txtF" alignment="CENTER" layoutX="160.0" layoutY="199.0" prefHeight="43.0" prefWidth="310.0" promptText="Username" styleClass="input-01">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password_passF" alignment="CENTER" layoutX="161.0" layoutY="267.0" onAction="#enterLogin" prefHeight="43.0" prefWidth="310.0" promptText="password" styleClass="input-01">
+            <PasswordField fx:id="password_passF" alignment="CENTER" layoutX="161.0" layoutY="267.0" onAction="#enterLogin" prefHeight="43.0" prefWidth="310.0" promptText="Password" styleClass="input-01">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

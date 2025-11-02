@@ -16,13 +16,10 @@ public class MaterialDocumentDao {
    public static String lastErrorMessage = null;
     // INSERT
     public static boolean insertMaterialDocument(MaterialDocument materialDocument) {
-        String sql = "INSERT INTO material_testing.dbo.material_documents (material_doc_name, material_id) VALUES (?,?)";
+        String sql = "INSERT INTO material_testing.dbo.material_documents (material_doc_name) VALUES (?)";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, materialDocument.getMaterialDocumentName());
-            if (materialDocument.getMaterial() == null)
-                throw new IllegalArgumentException("Material cannot be null");
-            ps.setInt(2, materialDocument.getMaterial().getMaterialId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             lastErrorMessage = e.getMessage();
@@ -33,14 +30,11 @@ public class MaterialDocumentDao {
 
     // UPDATE
     public static boolean updateMaterialDocument(MaterialDocument materialDocument) {
-     String sql = "UPDATE material_testing.dbo.material_documents SET material_doc_name = ?, material_id = ? WHERE material_doc_id = ?";
+     String sql = "UPDATE material_testing.dbo.material_documents SET material_doc_name = ? WHERE material_doc_id = ?";
      try (Connection con = DbConnect.getConnect();
      PreparedStatement ps = con.prepareStatement(sql)){
          ps.setString(1, materialDocument.getMaterialDocumentName());
-         if (materialDocument.getMaterial() == null)
-             throw new IllegalArgumentException("Material cannot be null");
-         ps.setInt(2, materialDocument.getMaterial().getMaterialId());
-         ps.setInt(3, materialDocument.getMaterialDocumentId());
+         ps.setInt(2, materialDocument.getMaterialDocumentId());
          return ps.executeUpdate() > 0;
      } catch (SQLException e) {
          lastErrorMessage = e.getMessage();
@@ -67,9 +61,7 @@ public class MaterialDocumentDao {
     public static ObservableList<MaterialDocument> getAllMaterialDocuments() {
         ObservableList<MaterialDocument> list = FXCollections.observableArrayList();
         String sql = """
-                SELECT md.material_doc_id, md.material_doc_name, m.material_id, m.material_name
-                FROM material_testing.dbo.material_documents md
-                JOIN material_testing.dbo.materials m ON md.material_id = m.material_id
+                SELECT md.material_doc_id, md.material_doc_name FROM material_testing.dbo.material_documents md
                 """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -78,10 +70,6 @@ public class MaterialDocumentDao {
                  MaterialDocument md = new MaterialDocument();
                  md.setMaterialDocumentId(rs.getInt("material_doc_id"));
                  md.setMaterialDocumentName(rs.getString("material_doc_name"));
-                 Material m = new Material();
-                 m.setMaterialId(rs.getInt("material_id"));
-                 m.setMaterialName(rs.getString("material_name"));
-                 md.setMaterial(m);
                  list.add(md);
              }
         } catch (SQLException e) {

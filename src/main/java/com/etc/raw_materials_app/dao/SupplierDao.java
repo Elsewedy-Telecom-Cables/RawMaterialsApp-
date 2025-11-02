@@ -75,7 +75,7 @@ public class SupplierDao {
 
     public static boolean canDeleteSupplier(int supplierId) {
         String[] tablesToCheck = {
-                "material_testing.dbo.material_test",
+                "material_testing.dbo.material_tests",
                 "material_testing.dbo.supplier_country"
         };
 

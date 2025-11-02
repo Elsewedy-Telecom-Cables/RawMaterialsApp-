@@ -1,188 +1,3 @@
-//package com.etc.raw_materials_app.controllers;
-//
-//import com.etc.raw_materials_app.dao.MaterialTestDao;
-//import com.etc.raw_materials_app.models.Material;
-//import com.etc.raw_materials_app.models.MaterialTest;
-//import com.etc.raw_materials_app.models.*;
-//import com.etc.raw_materials_app.models.UserContext;
-//import javafx.application.Platform;
-//import javafx.collections.ObservableList;
-//import javafx.fxml.Initializable;
-//
-//import java.net.URL;
-//import java.text.SimpleDateFormat;
-//import java.time.LocalDateTime;
-//import java.time.format.DateTimeFormatter;
-//import java.util.Objects;
-//import java.util.ResourceBundle;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.*;
-//import javafx.scene.image.Image;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.input.KeyEvent;
-//import static com.etc.raw_materials_app.services.WindowUtils.*;
-//
-//public class ViewMaterialTestsController implements Initializable {
-//
-//    @FXML private TableColumn<MaterialTest, String> accepted_quantity_column;
-//
-//    @FXML private TextField accessories_material_tests_count_textF;
-//
-//    @FXML private TableColumn<MaterialTest, String> comment_column;
-//
-//    @FXML private TextField copper_material_tests_count_textF;
-//
-//    @FXML private DatePicker to_creation_date;
-//
-//    @FXML private DatePicker from_creation_date;
-//
-//    @FXML private TableColumn<MaterialTest, LocalDateTime> creation_date_column;
-//
-//    @FXML private Label date_lbl;
-//
-//    @FXML private TableColumn<MaterialTest, String> edit_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> files_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> results_column;
-//
-//    @FXML private TextField filter_creation_date_textF;
-//
-//    @FXML private TextField filter_material_test_id_textF;
-//
-//    @FXML private TextField fo_material_tests_count_textF;
-//
-//    @FXML private TableColumn<MaterialTest, String> id_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> item_code_column;
-//
-//    @FXML private ImageView logo_image_view;
-//
-//    @FXML private TableColumn<MaterialTest, String> material_column;
-//
-//    @FXML private ComboBox<Material> material_comb;
-//
-//    @FXML private TableColumn<MaterialTest, String> material_description_column;
-//
-//    @FXML private TableView<MaterialTest> material_tests_table_view;
-//
-//    @FXML private TableColumn<MaterialTest, String> no_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> notes_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> oracle_sample_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> po_no_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> receipt_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> rejected_quantity_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> section_column;
-//
-//    @FXML private ComboBox<Section> section_comb;
-//
-//    @FXML private TableColumn<MaterialTest, String> spqr_column;
-//
-//    @FXML private TableColumn<MaterialTest, String> supplier_column;
-//
-//    @FXML private ComboBox<Supplier> supplier_comb;
-//
-//    @FXML private ComboBox<Country> supplier_country_comb;
-//
-//    @FXML private TableColumn<MaterialTest, String> supplier_country_column;
-//
-//    @FXML private TextField total_material_tests_count_textF;
-//
-//    @FXML private TableColumn<MaterialTest, String> total_quantity_column;
-//
-//    @FXML private Label welcome_lbl;
-//
-//    private ObservableList<MaterialTest> materialTestsList;
-//    private MaterialTest materialTestObj = null;
-//    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
-//    private static ViewMaterialTestsController instance;
-//
-//    public static ViewMaterialTestsController getInstance() {
-//        return instance;
-//    }
-//
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        instance = this;
-//        // Set focus to welcome label
-//        Platform.runLater(() -> welcome_lbl.requestFocus());
-//        // Set the current date and time
-//        java.util.Date date = new java.util.Date();
-//        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yyyy  hh:mm a");
-//        date_lbl.setText(dateFormat2.format(date) + " ");
-//        // Set welcome message with current user's full name
-//        String msg = ("Welcome : " + UserContext.getCurrentUser().getFullName());
-//        welcome_lbl.setText(msg);
-//        // Load and set the company logo
-//        Image img = new Image(Objects.requireNonNull(MainController.class.getResourceAsStream("/images/company_logo.png")));
-//        logo_image_view.setImage(img);
-//    }
-//
-//    void loadData(){
-//
-//    }
-//    void clearHelp(){
-//
-//    }
-//    @FXML
-//    void clearSearch(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void filterCreationDate(KeyEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void filterMaterialTestId(KeyEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void searchWithFilter(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void update(ActionEvent event) {
-//
-//    }
-//    void updateMaterialTestCount(){
-//        int materialTestCount = MaterialTestDao.getMaterialTestCount();
-//        int foMaterials = MaterialTestDao.getMaterialTestCountBySection(1);// Fiber materialTest Counts
-//        int coMaterials = MaterialTestDao.getMaterialTestCountBySection(2);  // Copper materialTest Counts
-//        int accMaterials = MaterialTestDao.getMaterialTestCountBySection(2);  // Accessories materialTest Counts
-//        total_material_tests_count_textF.setText(materialTestCount + "");
-//        fo_material_tests_count_textF.setText(foMaterials + "");
-//        copper_material_tests_count_textF.setText(coMaterials + "");
-//        accessories_material_tests_count_textF.setText(accMaterials + "");
-//    }
-//
-//    // Refresh the table view and related data In ViewMaterialTestsController
-//    public void refreshTable() {
-//        Platform.runLater(() -> {
-//            clearHelp();
-//            loadData();
-//            material_tests_table_view.refresh();
-//            updateMaterialTestCount();
-//        });
-//    }
-//
-//    @FXML
-//    void openAddMaterialTest(ActionEvent event) {
-//        OPEN_ADD_MATERIAL_TESTS_PAGE(false, this); // Pass this ViewMaterialTestsController instance
-//    }
-//
-//}
-
 
 package com.etc.raw_materials_app.controllers;
 
@@ -264,6 +79,10 @@ public class ViewMaterialTestsController implements Initializable {
     @FXML private TextField fo_material_tests_count_textF;
     @FXML private TextField copper_material_tests_count_textF;
     @FXML private TextField accessories_material_tests_count_textF;
+    @FXML private TextField filter_item_code_textF;
+    @FXML private TableColumn<MaterialTest, String> supplier_code_column;
+
+
 
     @FXML private Label welcome_lbl;
     @FXML private Label date_lbl;
@@ -321,6 +140,7 @@ public class ViewMaterialTestsController implements Initializable {
 
     private void addFilterListeners() {
         filter_material_test_id_textF.textProperty().addListener((obs, oldV, newV) -> filterMaterialTests());
+        filter_item_code_textF.textProperty().addListener((obs, oldV, newV) -> filterMaterialTests());
         section_comb.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> filterMaterialTests());
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> filterMaterialTests());
         supplier_country_comb.getSelectionModel().selectedItemProperty().addListener((obs, o, n) -> filterMaterialTests());
@@ -329,6 +149,7 @@ public class ViewMaterialTestsController implements Initializable {
 
     private void filterMaterialTests() {
         Integer materialTestId = null;
+
         try {
             if (!filter_material_test_id_textF.getText().trim().isEmpty()) {
                 materialTestId = Integer.parseInt(filter_material_test_id_textF.getText().trim());
@@ -337,6 +158,13 @@ public class ViewMaterialTestsController implements Initializable {
             ALERT("Error", "Please enter a valid Material Test ID (numeric value)", ALERT_ERROR);
             filter_material_test_id_textF.clear();
             return;
+        }
+
+        String itemCode;
+        if (filter_item_code_textF.getText() != null && !filter_item_code_textF.getText().trim().isEmpty()) {
+            itemCode = filter_item_code_textF.getText().trim();
+        } else {
+            itemCode = null;
         }
 
         Integer sectionId = section_comb.getSelectionModel().getSelectedItem() != null
@@ -348,32 +176,57 @@ public class ViewMaterialTestsController implements Initializable {
         Integer materialId = material_comb.getSelectionModel().getSelectedItem() != null
                 ? material_comb.getSelectionModel().getSelectedItem().getMaterialId() : null;
 
+
         LocalDate fromDate = from_creation_date.getValue();
         LocalDate toDate = to_creation_date.getValue();
 
-        List<MaterialTest> allTests = MaterialTestDao.getAllMaterialTest();
+        if (fromDate != null && toDate != null && fromDate.isAfter(toDate)) {
+            LocalDate temp = fromDate;
+            fromDate = toDate;
+            toDate = temp;
+        }
+
+        //  final variables for lambda
         final Integer finalTestId = materialTestId;
+        final String finalItemCode = itemCode;
+        final Integer finalSectionId = sectionId;
+        final Integer finalSupplierId = supplierId;
+        final Integer finalCountryId = countryId;
+        final Integer finalMaterialId = materialId;
+        final LocalDate start = fromDate;
+        final LocalDate end = toDate;
+
+        List<MaterialTest> allTests = MaterialTestDao.getAllMaterialTest();
 
         List<MaterialTest> filtered = allTests.stream()
                 .filter(t -> finalTestId == null || t.getMaterialTestId() == finalTestId)
-                .filter(t -> sectionId == null || t.getSectionId() == sectionId)
-                .filter(t -> supplierId == null || t.getSupplierId() == supplierId)
-                .filter(t -> countryId == null || t.getCountryId() == countryId)
-                .filter(t -> materialId == null || t.getMaterialId() == materialId)
+                .filter(t -> finalItemCode == null || t.getItemCode().equals(finalItemCode))
+                .filter(t -> finalSectionId == null || t.getSectionId() == finalSectionId)
+                .filter(t -> finalSupplierId == null || t.getSupplierId() == finalSupplierId)
+                .filter(t -> finalCountryId == null || t.getCountryId() == finalCountryId)
+                .filter(t -> finalMaterialId == null || t.getMaterialId() == finalMaterialId)
                 .filter(t -> {
-                    if (fromDate == null && toDate == null) return true;
+
+                    if (start == null && end == null) return true; // if user don't select date range
                     if (t.getCreationDate() == null) return false;
 
                     LocalDate creationDate = t.getCreationDate().toLocalDate();
-                    if (fromDate != null && creationDate.isBefore(fromDate)) return false;
-                    if (toDate != null && creationDate.isAfter(toDate)) return false;
-                    return true;
+
+                    // لو "من" محدد وتاريخ الإنشاء قبله ⇒ استبعد
+                    if (start != null && creationDate.isBefore(start)) return false;
+
+                    // لو "إلى" محدد وتاريخ الإنشاء بعده ⇒ استبعد
+                    if (end != null && creationDate.isAfter(end)) return false;
+
+                    return true; //  accepted all other status
                 })
                 .collect(Collectors.toList());
 
         materialTestsList.setAll(filtered);
         updateMaterialTestCount();
     }
+
+
 
     private void updateSupplierCountries(Supplier supplier) {
         ObservableList<Country> filteredCountries = FXCollections.observableArrayList();
@@ -414,6 +267,7 @@ public class ViewMaterialTestsController implements Initializable {
             id_column.setCellValueFactory(new PropertyValueFactory<>("materialTestId"));
             section_column.setCellValueFactory(new PropertyValueFactory<>("sectionName"));
             supplier_column.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
+            supplier_code_column.setCellValueFactory(new PropertyValueFactory<>("supplierCode"));
             supplier_country_column.setCellValueFactory(new PropertyValueFactory<>("countryName"));
             material_column.setCellValueFactory(new PropertyValueFactory<>("materialName"));
             material_description_column.setCellValueFactory(new PropertyValueFactory<>("materialDesName"));
@@ -476,7 +330,7 @@ public class ViewMaterialTestsController implements Initializable {
                 private final HBox container = new HBox(flaskIcon, plusIcon);
 
                 {
-                    flaskIcon.setIconSize(18);
+                    flaskIcon.setIconSize(15);
                     flaskIcon.setFill(Color.web("#2c7be5"));
                     plusIcon.setIconSize(10);
                     plusIcon.setFill(Color.web("#3b3b3b"));
@@ -487,7 +341,7 @@ public class ViewMaterialTestsController implements Initializable {
                     container.setOnMouseClicked((MouseEvent event) -> {
                         MaterialTest selected = getTableView().getItems().get(getIndex());
                         if (selected != null) {
-                            WindowUtils.OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT("/screens/AddResult.fxml", controller -> {
+                            WindowUtils.OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT("/screens/TestResults.fxml", controller -> {
                                 controller.initData(
                                         selected.getMaterialTestId(),
                                         selected.getSupplierName(),
@@ -495,7 +349,8 @@ public class ViewMaterialTestsController implements Initializable {
                                         selected.getMaterialDesName(),
                                         selected.getPoNo(),
                                         selected.getOracleSample(),
-                                        selected.getItemCode()
+                                        selected.getItemCode(),
+                                        selected.getComment()
                                 );
                             });
                         }
@@ -598,11 +453,12 @@ public class ViewMaterialTestsController implements Initializable {
 
             // Apply consistent styling to columns
             String columnStyle = "-fx-alignment: CENTER; -fx-font-size: 11px; -fx-font-weight: bold;";
+            String columnStyle2 = "-fx-alignment: CENTER; -fx-font-size: 10px; -fx-font-weight: bold;";
             id_column.setStyle(columnStyle);
             section_column.setStyle(columnStyle);
             material_column.setStyle(columnStyle);
             files_column.setStyle(columnStyle);
-            creation_date_column.setStyle(columnStyle);
+            creation_date_column.setStyle(columnStyle2);
             oracle_sample_column.setStyle(columnStyle);
             po_no_column.setStyle(columnStyle);
             spqr_column.setStyle(columnStyle);
@@ -616,6 +472,7 @@ public class ViewMaterialTestsController implements Initializable {
             item_code_column.setStyle(columnStyle);
             no_column.setStyle(columnStyle);
             supplier_column.setStyle(columnStyle);
+            supplier_code_column.setStyle(columnStyle);
             supplier_country_column.setStyle(columnStyle);
             notes_column.setStyle(columnStyle);
 
@@ -650,6 +507,7 @@ public class ViewMaterialTestsController implements Initializable {
                     details.append("Material Test ID: ").append(selectedRow.getMaterialTestId()).append("\n");
                     details.append("Section: ").append(selectedRow.getSectionName() != null ? selectedRow.getSectionName() : "-").append("\n");
                     details.append("Supplier: ").append(selectedRow.getSupplierName() != null ? selectedRow.getSupplierName() : "-").append("\n");
+                    details.append("Supplier Code: ").append(selectedRow.getSupplierCode() != null ? selectedRow.getSupplierCode() : "-").append("\n");
                     details.append("Country: ").append(selectedRow.getCountryName() != null ? selectedRow.getCountryName() : "-").append("\n");
                     details.append("Material: ").append(selectedRow.getMaterialName() != null ? selectedRow.getMaterialName() : "-").append("\n");
                     details.append("Material Description: ").append(selectedRow.getMaterialDesName() != null ? selectedRow.getMaterialDesName() : "-").append("\n");
@@ -763,6 +621,7 @@ public class ViewMaterialTestsController implements Initializable {
 
     void clearHelp() {
         filter_material_test_id_textF.clear();
+        filter_item_code_textF.clear();
         from_creation_date.setValue(null);
         to_creation_date.setValue(null);
         section_comb.getSelectionModel().clearSelection();

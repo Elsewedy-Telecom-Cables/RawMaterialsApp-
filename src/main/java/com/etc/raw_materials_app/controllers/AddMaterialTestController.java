@@ -1,87 +1,3 @@
-//package com.etc.raw_materials_app.controllers;
-//import com.etc.raw_materials_app.dao.*;
-//import com.etc.raw_materials_app.models.*;
-//import javafx.fxml.Initializable;
-//
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.ComboBox;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.TextField;
-//import javafx.stage.Stage;
-//
-//public class AddMaterialTestController implements Initializable {
-//    @FXML private TextField accepted_quantity_textF;
-//
-//    @FXML private Button clear_btn;
-//
-//    @FXML private TextField comment_textF;
-//
-//    @FXML private Label header_lbl;
-//
-//    @FXML private TextField item_code_textF;
-//
-//    @FXML private ComboBox<Section> section_comb;
-//
-//    @FXML private ComboBox<Supplier> supplier_comb;
-//
-//    @FXML private ComboBox<Country> country_comb;
-//
-//    @FXML private ComboBox<Material> material_comb;
-//
-//    @FXML private ComboBox<MaterialDescription> material_description_comb;
-//
-//    @FXML private TextField notes_textF;
-//
-//    @FXML private TextField oracle_sample_textF;
-//
-//    @FXML private TextField po_no_textF;
-//
-//    @FXML private TextField receipt_textF;
-//
-//    @FXML private TextField rejected_quantity_textF;
-//
-//    @FXML private Button save_btn;
-//
-//    @FXML private TextField spqr_textF;
-//
-//    @FXML private TextField total_quantity_textF;
-//
-//    private Stage stage;
-//    private int CURRENT_MATERIAL_TEST_ID = 0;
-//    private boolean update = false;
-//
-//
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//
-//        // Populate ComboBoxes with data
-//        section_comb.setItems(SectionDao.getAllSections());
-//        material_comb.setItems(MaterialDao.getAllMaterials());
-//        supplier_comb.setItems(SupplierDao.getAllSuppliers());
-//        country_comb.setItems(CountryDao.getAllCountries());
-//        material_description_comb.setItems(MaterialDescriptionDao.getAllMaterialDescriptions());
-//
-//    }
-//    @FXML
-//    void clear(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void saveMaterialTest(ActionEvent event) {
-//
-//    }
-//    // Set the save button text to "Update" for edit mode
-//    public void setSaveButton() {
-//        save_btn.setText("Update");
-//    }
-//
-//}
-
 
 package com.etc.raw_materials_app.controllers;
 
@@ -112,7 +28,6 @@ public class AddMaterialTestController implements Initializable {
     @FXML private Button clear_btn;
     @FXML private TextField comment_textF;
     @FXML private Label header_lbl;
-    @FXML private TextField item_code_textF;
     @FXML private ComboBox<Section> section_comb;
     @FXML private ComboBox<Supplier> supplier_comb;
     @FXML private ComboBox<Country> country_comb;
@@ -185,7 +100,6 @@ public class AddMaterialTestController implements Initializable {
         accepted_quantity_textF.clear();
         rejected_quantity_textF.clear();
         oracle_sample_textF.clear();
-        item_code_textF.clear();
         spqr_textF.clear();
         notes_textF.clear();
         comment_textF.clear();
@@ -211,7 +125,6 @@ public class AddMaterialTestController implements Initializable {
             accepted_quantity_textF.setText(mt.getQuantityAccepted());
             rejected_quantity_textF.setText(mt.getQuantityRejected());
             oracle_sample_textF.setText(mt.getOracleSample());
-            item_code_textF.setText(mt.getItemCode());
             spqr_textF.setText(mt.getSpqr());
             notes_textF.setText(mt.getNotes());
             comment_textF.setText(mt.getComment());
@@ -241,7 +154,6 @@ public class AddMaterialTestController implements Initializable {
             String acceptedQty = accepted_quantity_textF.getText();
             String rejectedQty = rejected_quantity_textF.getText();
             String oracleSample = oracle_sample_textF.getText();
-            String itemCode = item_code_textF.getText();
             String spqr = spqr_textF.getText();
             String notes = notes_textF.getText();
             String comment = comment_textF.getText();
@@ -279,7 +191,6 @@ public class AddMaterialTestController implements Initializable {
             mt.setQuantityAccepted(acceptedQty);
             mt.setQuantityRejected(rejectedQty);
             mt.setOracleSample(oracleSample);
-            mt.setItemCode(itemCode);
             mt.setSpqr(spqr);
             mt.setNotes(notes);
             mt.setComment(comment);
@@ -325,7 +236,6 @@ public class AddMaterialTestController implements Initializable {
             mt.setQuantityAccepted(accepted_quantity_textF.getText());
             mt.setQuantityRejected(rejected_quantity_textF.getText());
             mt.setOracleSample(oracle_sample_textF.getText());
-            mt.setItemCode(item_code_textF.getText());
             mt.setSpqr(spqr_textF.getText());
             mt.setNotes(notes_textF.getText());
             mt.setComment(comment_textF.getText());

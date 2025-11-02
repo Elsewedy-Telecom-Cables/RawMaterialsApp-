@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/CountryDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/FileDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/MaterialDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/MaterialDescriptionDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/MaterialDocumentDao.java" dialect="GenericSQL" />
@@ -9,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/SectionDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/SupplierCountryDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/SupplierDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/TestResultDao.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/etc/raw_materials_app/dao/UserDao.java" dialect="GenericSQL" />
   </component>
 </project>

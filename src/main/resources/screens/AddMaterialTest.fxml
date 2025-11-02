@@ -104,7 +104,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="651.4000000000001" layoutY="60.0" prefHeight="266.0" prefWidth="255.0" AnchorPane.leftAnchor="651.5999999999999" AnchorPane.rightAnchor="315.39999999999986" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="651.2" layoutY="60.0" prefHeight="185.0" prefWidth="256.0" AnchorPane.leftAnchor="651.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="60.0">
          <children>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
@@ -142,24 +142,6 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
-               <children>
-                  <Label text="Rejected Quantity">
-                     <font>
-                        <Font name="Montserrat Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
-               <children>
-                  <TextField fx:id="rejected_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
          </children>
       </VBox>
       <Button fx:id="save_btn" contentDisplay="RIGHT" layoutX="917.0" layoutY="593.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#saveMaterialTest" prefHeight="38.0" prefWidth="126.0" style="-fx-background-radius: 10;" styleClass="save_btn" text="Save   " AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
@@ -182,11 +164,11 @@
             </Label>
          </children>
       </HBox>
-      <VBox layoutX="897.1999999999999" layoutY="60.0" prefHeight="270.0" prefWidth="255.0" AnchorPane.leftAnchor="946.8" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="947.2" layoutY="60.0" prefHeight="186.0" prefWidth="255.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="306.0">
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
-                  <Label text="Item Code">
+                  <Label text="Rejected Quantity">
                      <font>
                         <Font name="Montserrat Bold" size="16.0" />
                      </font>
@@ -195,7 +177,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
                <children>
-                  <TextField fx:id="item_code_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                  <TextField fx:id="rejected_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -220,27 +202,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="306.0">
-               <children>
-                  <Label text="Po No">
-                     <font>
-                        <Font name="Montserrat Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
-               <children>
-                  <TextField fx:id="po_no_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
          </children>
       </VBox>
-      <VBox layoutX="652.0" layoutY="328.0" prefHeight="282.0" prefWidth="560.0" AnchorPane.leftAnchor="652.0" AnchorPane.rightAnchor="20.0">
+      <VBox layoutX="652.0" layoutY="237.0" prefHeight="374.0" prefWidth="550.0" AnchorPane.leftAnchor="652.0" AnchorPane.rightAnchor="20.0">
          <children>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="596.0">
                <children>
@@ -274,6 +238,24 @@
                   <TextField fx:id="receipt_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="306.0">
+               <children>
+                  <Label text="Po No">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="po_no_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </TextField>
                </children>

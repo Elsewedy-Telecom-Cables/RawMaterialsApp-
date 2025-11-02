@@ -69,13 +69,6 @@ public class WindowUtils {
                 Logging.logException("ERROR", WindowUtils.class.getName(), "OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_FILE", new IllegalStateException("Controller is null for FXML: " + fxmlPath));
             }
 
-            // Disable close button (X)
-//            stage.setOnCloseRequest(event -> {
-//                event.consume();
-//                //    System.out.println("Close request via X ignored. Use Close button instead.");
-//                ALERT("Info", "Please use the Red Close Button to Exit ➡  X ", ALERT_INFORMATION);
-//            });
-
             // System.out.println("Showing stage");
             stage.show();
         } catch (Exception e) {
@@ -85,7 +78,7 @@ public class WindowUtils {
         }
     }
 
-    public static void OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT(String fxmlPath, Consumer<AddResultController> controllerHandler) {
+    public static void OPEN_WINDOW_WITH_CONTROLLER_AND_STAGE_RESULT(String fxmlPath, Consumer<TestResultsController> controllerHandler) {
         try {
             //   System.out.println("Loading FXML: " + fxmlPath);
             FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
@@ -93,7 +86,7 @@ public class WindowUtils {
                 throw new IllegalStateException("FXML file not found: " + fxmlPath);
             }
             Parent root = loader.load();
-            AddResultController controller = loader.getController();
+            TestResultsController controller = loader.getController();
             //     System.out.println("Controller loaded: " + (controller != null ? controller.getClass().getName() : "null"));
 
             Scene scene = new Scene(root);

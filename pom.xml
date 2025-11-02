@@ -95,13 +95,6 @@
             <version>3.0.0-alpha3</version>
         </dependency>
 
-        <!-- ControlsFX for additional JavaFX controls -->
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>8.20.8</version>
-        </dependency>
-
         <!-- JavaMail for email functionality -->
         <dependency>
             <groupId>javax.mail</groupId>
@@ -159,6 +152,12 @@
             <artifactId>richtextfx</artifactId>
             <version>0.11.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+
 
 
         <!-- FontAwesomeFX for icons -->

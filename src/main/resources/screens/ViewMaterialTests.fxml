@@ -54,7 +54,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="48.0" prefWidth="273.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_RIGHT" prefHeight="48.0" prefWidth="255.0" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fx:id="logo_image_view" fitHeight="48.0" fitWidth="234.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1" VBox.vgrow="ALWAYS">
                      <VBox.margin>
@@ -67,25 +67,26 @@
       </HBox>
       <TableView fx:id="material_tests_table_view" layoutX="7.2" layoutY="180.0" prefHeight="448.0" prefWidth="1288.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="155.0">
         <columns>
-            <TableColumn fx:id="no_column" maxWidth="1.7976931348623157E308" minWidth="35.0" prefWidth="35.0" text="No" />
-            <TableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="35.0" prefWidth="35.0" text="ID" />
-          <TableColumn fx:id="section_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Section" />
+            <TableColumn fx:id="no_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="No" />
+            <TableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="ID" />
+          <TableColumn fx:id="section_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Section" />
             <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Supplier" />
+            <TableColumn fx:id="supplier_code_column" maxWidth="1.7976931348623157E308" minWidth="65.0" prefWidth="65.0" text="Sup Code" />
             <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" text="Sup-Country" />
             <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="120.0" text="Material" />
-            <TableColumn fx:id="material_description_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="110.0" text="M Description" />
-            <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="120.0" text="Creation Date" />
-            <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="PO" />
+            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="70.0" text="Item Code" />
+            <TableColumn fx:id="material_description_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="M Description" />
+            <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="110.0" text="Creation Date" />
+            <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="PO" />
             <TableColumn fx:id="receipt_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Receipt" />
             <TableColumn fx:id="total_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="T Quantity" />
             <TableColumn fx:id="accepted_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="A Quantity" />
             <TableColumn fx:id="rejected_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="R Quantity" />
             <TableColumn fx:id="oracle_sample_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="Sample" />
-            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="70.0" text="Item Code" />
-            <TableColumn fx:id="spqr_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="SPQR" />
-            <TableColumn fx:id="files_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Files" />
+            <TableColumn fx:id="spqr_column" maxWidth="1.7976931348623157E308" minWidth="55.0" prefWidth="55.0" text="SPQR" />
+            <TableColumn fx:id="files_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="45.0" text="Files" />
             <TableColumn fx:id="results_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Results" />
-            <TableColumn fx:id="edit_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="U - D" />
+            <TableColumn fx:id="edit_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="45.0" text="U - D" />
             <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Notes" />
             <TableColumn fx:id="comment_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="100.0" text="Comment" />
         </columns>
@@ -104,12 +105,12 @@
                                     <Font name="Montserrat Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="23.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="178.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -169,7 +170,7 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="330.0">
+                  <VBox prefHeight="200.0" prefWidth="340.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="84.0">
                            <children>
@@ -203,7 +204,22 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="120.0">
                      <children>
-                        <TextField fx:id="filter_material_test_id_textF" alignment="CENTER" onKeyPressed="#filterMaterialTestId" prefHeight="35.0" prefWidth="110.0" promptText="ID" styleClass="input-04">
+                        <TextField fx:id="filter_item_code_textF" alignment="CENTER" onKeyPressed="#filterMaterialTestId" prefHeight="35.0" prefWidth="110.0" promptText="Item Code" styleClass="input-04">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="80.0" prefWidth="80.0">
+                     <children>
+                        <TextField fx:id="filter_material_test_id_textF" alignment="CENTER" onKeyPressed="#filterMaterialTestId" prefHeight="35.0" prefWidth="80.0" promptText="ID" styleClass="input-04">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

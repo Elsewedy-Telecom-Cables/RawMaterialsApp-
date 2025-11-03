@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -86,5 +87,20 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER" layoutX="1384.0" layoutY="55.0" prefHeight="52.0" prefWidth="175.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Button fx:id="export_excel_btn" mnemonicParsing="false" onAction="#exportToExcel" prefHeight="34.0" prefWidth="161.0" style="-fx-background-radius: 5;" styleClass="export-button" text="Export Excel " textFill="#08743b">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Montserrat Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="excel_image_view" fitHeight="24.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

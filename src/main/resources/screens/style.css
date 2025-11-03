@@ -459,3 +459,19 @@
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
 }
+
+.button.export-button {
+    -fx-background-color: #5BC0DE;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(52, 47, 47, 0.75), 4, 0, 0, 1);
+}
+
+.button.export-button:hover {
+    -fx-background-color: #f1f4f6;
+    -fx-text-fill: #0b304e;
+}
+
+.button.export-button:pressed {
+    -fx-background-color: #0090bb;
+    -fx-text-fill: white;
+}

@@ -24,21 +24,36 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import org.apache.poi.ss.usermodel.Cell;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.scene.input.MouseEvent;
@@ -82,6 +97,8 @@ public class TestResultsController implements Initializable {
     @FXML private Label selected_test_results_lbl;
     @FXML Button select_tests_btn ;
     @FXML private TableColumn<TestResult, String> user_full_name_column;
+    @FXML private ImageView excel_image_view;
+    @FXML private Button   export_excel_btn ;
 
 
 
@@ -92,6 +109,10 @@ public class TestResultsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Image img2 = new Image(Objects.requireNonNull(TestResultsController.class.getResourceAsStream("/images/excel.png")));
+        excel_image_view.setImage(img2);
+
         // Set cursor for clear icon
         clear_selected_results_icon.setCursor(Cursor.HAND);
 
@@ -142,6 +163,7 @@ public class TestResultsController implements Initializable {
         setupTableColumns();
         addTest_btn.setCursor(Cursor.HAND);
     }
+
 
     public void initData(int materialTestId, String supplierName, String materialName,
                          String materialDesName, String poNo, String oracleSample, String itemCode ,String comment) {
@@ -424,6 +446,260 @@ public class TestResultsController implements Initializable {
         } else {
             if (!TestResultDao.updateTestResult(tr)) {
                 WindowUtils.ALERT("Error", "Failed to update: " + TestResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
+            }
+        }
+    }
+
+    @FXML
+    void exportToExcel(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Excel File");
+        fileChooser.setInitialFileName("Material_Testing_Report_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date()) + ".xlsx");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+        java.io.File file = fileChooser.showSaveDialog(table_view.getScene().getWindow());
+
+        if (file != null) {
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("Material Testing Report");
+
+                // === STYLES ===
+                CellStyle centerStyle = workbook.createCellStyle();
+                centerStyle.setAlignment(HorizontalAlignment.CENTER);
+                centerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+                centerStyle.setWrapText(true);
+                Font boldFont = workbook.createFont();
+                boldFont.setBold(true);
+                centerStyle.setFont(boldFont);
+
+                CellStyle leftStyle = workbook.createCellStyle();
+                leftStyle.cloneStyleFrom(centerStyle);
+                leftStyle.setAlignment(HorizontalAlignment.LEFT);
+
+                CellStyle titleStyle = workbook.createCellStyle();
+                Font titleFont = workbook.createFont();
+                titleFont.setFontName("Calibri");
+                titleFont.setFontHeightInPoints((short) 18);
+                titleFont.setBold(true);
+                titleFont.setColor(IndexedColors.BLACK.getIndex());
+                titleFont.setUnderline(Font.U_SINGLE);
+                titleStyle.setFont(titleFont);
+                titleStyle.setAlignment(HorizontalAlignment.CENTER);
+                titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+                // Info style: Blue + borders + left align
+                CellStyle infoStyle = workbook.createCellStyle();
+                infoStyle.cloneStyleFrom(leftStyle);
+                infoStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(141, 180, 226), null));
+                infoStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                infoStyle.setBorderTop(BorderStyle.THIN);
+                infoStyle.setBorderBottom(BorderStyle.THIN);
+                infoStyle.setBorderLeft(BorderStyle.THIN);
+                infoStyle.setBorderRight(BorderStyle.THIN);
+
+                CellStyle tableHeaderStyle = workbook.createCellStyle();
+                tableHeaderStyle.cloneStyleFrom(centerStyle);
+                tableHeaderStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+                tableHeaderStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                tableHeaderStyle.setBorderTop(BorderStyle.THIN);
+                tableHeaderStyle.setBorderBottom(BorderStyle.THIN);
+                tableHeaderStyle.setBorderLeft(BorderStyle.THIN);
+                tableHeaderStyle.setBorderRight(BorderStyle.THIN);
+
+                CellStyle borderedCenter = workbook.createCellStyle();
+                borderedCenter.cloneStyleFrom(centerStyle);
+                borderedCenter.setBorderTop(BorderStyle.THIN);
+                borderedCenter.setBorderBottom(BorderStyle.THIN);
+                borderedCenter.setBorderLeft(BorderStyle.THIN);
+                borderedCenter.setBorderRight(BorderStyle.THIN);
+
+                CellStyle passStyle = workbook.createCellStyle();
+                passStyle.cloneStyleFrom(borderedCenter);
+                passStyle.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
+                passStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+                CellStyle failStyle = workbook.createCellStyle();
+                failStyle.cloneStyleFrom(borderedCenter);
+                failStyle.setFillForegroundColor(IndexedColors.RED.getIndex());
+                failStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+                // === LOGO ===
+                Row logoRow = sheet.createRow(0);
+                logoRow.setHeight((short) (60 * 20));
+                sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 1));
+                InputStream logoStream = TestResultsController.class.getResourceAsStream("/images/logo_excel.png");
+                if (logoStream != null) {
+                    byte[] bytes = logoStream.readAllBytes();
+                    int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+                    XSSFDrawing drawing = (XSSFDrawing) sheet.createDrawingPatriarch();
+                    XSSFClientAnchor anchor = new XSSFClientAnchor(100 * 1000, 100 * 1000, -100 * 1000, -100 * 1000, (short) 0, 0, (short) 2, 1);
+                    drawing.createPicture(anchor, pictureIdx);
+                    logoStream.close();
+                }
+
+                // === DEPARTMENT ===
+                Row deptRow = sheet.createRow(1);
+                deptRow.setHeight((short) (30 * 20));
+                Cell deptCell = deptRow.createCell(0);
+                deptCell.setCellValue("Quality Control Department");
+                deptCell.setCellStyle(centerStyle);
+                sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 1));
+
+                // === TITLE ===
+                Row titleRow = sheet.createRow(3);
+                titleRow.setHeight((short) (titleRow.getHeight() * 2));
+                Cell titleCell = titleRow.createCell(0);
+                titleCell.setCellValue("Material Testing Report");
+                titleCell.setCellStyle(titleStyle);
+                sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 6));
+                // === INFO TABLE: 2 COLUMNS (Label | Value) - NO EMPTY COLUMN ===
+                // AI: Label in column 0 (merged 0-1), Value in column 2
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String[] infoLabels = {
+                        "Issue date:",
+                        "Receiving Notice Number (P.O. No.):",
+                        "Inspection Notice Number (Oracle sample N.O):",
+                        "Supplier Name:"
+                };
+                String[] infoValues = {
+                        dateFormat.format(new java.util.Date()),
+                        poNo != null ? poNo : "",
+                        oracleSample != null ? oracleSample : "",
+                        supplierName != null ? supplierName : ""
+                };
+
+                int infoStartRow = 4;
+                for (int i = 0; i < infoLabels.length; i++) {
+                    Row row = sheet.createRow(infoStartRow + i);
+                    row.setHeight((short) (25 * 20)); // Fixed height
+
+                    // Label (merged across columns 0 and 1)
+                    Cell labelCell = row.createCell(0);
+                    labelCell.setCellValue(infoLabels[i]);
+                    labelCell.setCellStyle(infoStyle);
+
+                    // Dummy cell for merge
+                    Cell dummyCell = row.createCell(1);
+                    dummyCell.setCellStyle(infoStyle);
+
+                    // Merge label across 0-1
+                    sheet.addMergedRegion(new CellRangeAddress(infoStartRow + i, infoStartRow + i, 0, 1));
+
+                    // Value in column 2
+                    Cell valueCell = row.createCell(2);
+                    valueCell.setCellValue(infoValues[i]);
+                    valueCell.setCellStyle(infoStyle);
+                }
+
+
+                // === EMPTY ROW ===
+                sheet.createRow(infoStartRow + infoLabels.length);
+
+                // === MAIN TABLE HEADER ===
+                int headerRowNum = infoStartRow + infoLabels.length + 1;
+                Row headerRow = sheet.createRow(headerRowNum);
+                headerRow.setHeight((short) (headerRow.getHeight() * 2));
+                String[] headers = {
+                        "انواع الاختبارات", "Material Description", "Material Code", "Sample no.", "Requirement", "Actual", "Result (Pass/Fail)"
+                };
+                for (int i = 0; i < headers.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(headers[i]);
+                    cell.setCellStyle(tableHeaderStyle);
+                }
+
+                // === MAIN TABLE DATA ===
+                int firstDataRow = headerRowNum + 1;
+                int rowNum = firstDataRow;
+                List<TestResult> results = new ArrayList<>(table_view.getItems());
+                boolean isFirst = true;
+
+                for (TestResult result : results) {
+                    Row row = sheet.createRow(rowNum++);
+                    Cell testNameCell = row.createCell(0);
+                    testNameCell.setCellValue(result.getTestName());
+                    testNameCell.setCellStyle(borderedCenter);
+
+                    if (isFirst) {
+                        Cell descCell = row.createCell(1);
+                        descCell.setCellValue(materialDesName);
+                        descCell.setCellStyle(borderedCenter);
+
+                        Cell codeCell = row.createCell(2);
+                        codeCell.setCellValue(itemCode);
+                        codeCell.setCellStyle(borderedCenter);
+
+                        Cell sampleCell = row.createCell(3);
+                        sampleCell.setCellValue(oracleSample);
+                        sampleCell.setCellStyle(borderedCenter);
+                        isFirst = false;
+                    }
+
+                    Cell reqCell = row.createCell(4);
+                    reqCell.setCellValue(result.getRequirement() != null ? result.getRequirement() : "");
+                    reqCell.setCellStyle(borderedCenter);
+
+                    Cell actualCell = row.createCell(5);
+                    actualCell.setCellValue(result.getActual() != null ? result.getActual() : "");
+                    actualCell.setCellStyle(borderedCenter);
+
+                    Cell resultCell = row.createCell(6);
+                    String resultText = "";
+                    CellStyle resultStyle = borderedCenter;
+                    if (result.getTestSituation() != null) {
+                        resultText = result.getTestSituation() == 1 ? "Pass" : "Fail";
+                        resultStyle = result.getTestSituation() == 1 ? passStyle : failStyle;
+                    }
+                    resultCell.setCellValue(resultText);
+                    resultCell.setCellStyle(resultStyle);
+                }
+
+                int lastDataRow = rowNum - 1;
+                if (!results.isEmpty()) {
+                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 1, 1));
+                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 2, 2));
+                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 3, 3));
+                }
+
+                // === COMMENTS: FULL WIDTH, LEFT-ALIGNED, NO BORDERS ===
+                Row commentsRow = sheet.createRow(rowNum++);
+                commentsRow.setHeight((short) (40 * 20)); // Tall row for long text
+                Cell commentsCell = commentsRow.createCell(0);
+                commentsCell.setCellValue("Comments: " + (comment != null ? comment : ""));
+                commentsCell.setCellStyle(leftStyle);
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 0, 6)); // Full width
+
+                // === EMPTY ROWS ===
+                sheet.createRow(rowNum++);
+                sheet.createRow(rowNum++);
+
+                // === FOOTER ===
+                Row footerRow = sheet.createRow(rowNum++);
+                Cell testedCell = footerRow.createCell(0);
+                testedCell.setCellValue("Tested by: m.abdelmgged");
+                testedCell.setCellStyle(leftStyle);
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 0, 2));
+
+                Cell revisedCell = footerRow.createCell(4);
+                revisedCell.setCellValue("Revised by:");
+                revisedCell.setCellStyle(leftStyle);
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 4, 6));
+
+                // === AUTO-SIZE COLUMNS ===
+                for (int i = 0; i < headers.length; i++) {
+                    sheet.autoSizeColumn(i);
+                    int width = sheet.getColumnWidth(i) / 256;
+                    if (width < 12) sheet.setColumnWidth(i, 12 * 256);
+                    if (width > 50) sheet.setColumnWidth(i, 40 * 256);
+                }
+
+                // === WRITE FILE ===
+                try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                    workbook.write(fileOut);
+                    WindowUtils.ALERT("Success", "Excel file exported successfully to " + file.getAbsolutePath(), WindowUtils.ALERT_INFORMATION);
+                }
+            } catch (IOException e) {
+                Logging.logException("ERROR", TestResultsController.class.getName(), "exportToExcel", e);
+                WindowUtils.ALERT("Error", "Failed to export Excel file", WindowUtils.ALERT_ERROR);
             }
         }
     }

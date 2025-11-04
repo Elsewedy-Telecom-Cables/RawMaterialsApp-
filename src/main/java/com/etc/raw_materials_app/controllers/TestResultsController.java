@@ -3,13 +3,11 @@
 package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.MaterialTestDao;
+import com.etc.raw_materials_app.dao.SampleDao;
 import com.etc.raw_materials_app.dao.TestNameDao;
 import com.etc.raw_materials_app.dao.TestResultDao;
 import com.etc.raw_materials_app.logging.Logging;
-import com.etc.raw_materials_app.models.MaterialTest;
-import com.etc.raw_materials_app.models.TestName;
-import com.etc.raw_materials_app.models.TestResult;
-import com.etc.raw_materials_app.models.UserContext;
+import com.etc.raw_materials_app.models.*;
 import com.etc.raw_materials_app.services.UserService;
 import com.etc.raw_materials_app.services.WindowUtils;
 import javafx.application.Platform;
@@ -60,29 +58,15 @@ import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.CheckComboBox;
 
 public class TestResultsController implements Initializable {
-    private int materialTestId;
-    private String supplierName;
-    private String materialName;
-    private String materialDesName;
-    private String poNo;
-    private String oracleSample;
-    private String itemCode;
-    private String comment ;
-    private Stage stage;
 
-    private final ObservableList<TestResult> testResultsList = FXCollections.observableArrayList();
-    private final List<String> selectedTestNames = new ArrayList<>();
-    private final List<Integer> selectedTestNameIds = new ArrayList<>();
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
-    private FilteredList<TestName> filteredTestNames;
-
+    @FXML private ComboBox<Sample> sample_comb;
     @FXML private TableColumn<TestResult, String> actual_column;
+    @FXML private TableColumn<TestResult, String> sample_no_column;
     @FXML private Button addTest_btn;
     @FXML private FontIcon clear_selected_results_icon;
     @FXML private TableColumn<TestResult, LocalDateTime> creation_date_column;
     @FXML private TableColumn<TestResult, String> delete_column;
     @FXML private TableColumn<TestResult, String> item_code_column;
-    @FXML private TableColumn<TestResult, String> material_document_name_column;
     @FXML private TableColumn<TestResult, String> material_name_column;
     @FXML private TableColumn<TestResult, String> material_test_id_column;
     @FXML private TableColumn<TestResult, String> oracle_sample_column;
@@ -101,6 +85,21 @@ public class TestResultsController implements Initializable {
     @FXML private Button   export_excel_btn ;
 
 
+    private int materialTestId;
+    private String supplierName;
+    private String materialName;
+    private String materialDesName;
+    private String poNo;
+    private String oracleSample;
+    private String itemCode;
+    private String comment ;
+    private Stage stage;
+
+    private final ObservableList<TestResult> testResultsList = FXCollections.observableArrayList();
+    private final List<String> selectedTestNames = new ArrayList<>();
+    private final List<Integer> selectedTestNameIds = new ArrayList<>();
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
+    private FilteredList<TestName> filteredTestNames;
 
 
     public void setStage(Stage stage) {
@@ -115,6 +114,8 @@ public class TestResultsController implements Initializable {
 
         // Set cursor for clear icon
         clear_selected_results_icon.setCursor(Cursor.HAND);
+
+        sample_comb.setItems(SampleDao.getAllSamples());
 
 
 
@@ -166,11 +167,10 @@ public class TestResultsController implements Initializable {
 
 
     public void initData(int materialTestId, String supplierName, String materialName,
-                         String materialDesName, String poNo, String oracleSample, String itemCode ,String comment) {
+                         String poNo, String oracleSample, String itemCode ,String comment) {
         this.materialTestId = materialTestId;
         this.supplierName = supplierName;
         this.materialName = materialName;
-        this.materialDesName = materialDesName;
         this.poNo = poNo;
         this.oracleSample = oracleSample;
         this.itemCode = itemCode;
@@ -197,6 +197,11 @@ public class TestResultsController implements Initializable {
 
     @FXML
     void addRow(ActionEvent event) {
+        Sample sample  = sample_comb.getValue();
+        if (sample == null) {
+            WindowUtils.ALERT("Warning", "Please select a sample first.", WindowUtils.ALERT_WARNING);
+            return;
+        }
         if (selectedTestNameIds.isEmpty()) {
             WindowUtils.ALERT("Warning", "Please select at least one test from the list.", WindowUtils.ALERT_WARNING);
             return;
@@ -206,6 +211,8 @@ public class TestResultsController implements Initializable {
             TestResult newResult = new TestResult();
             newResult.setTestResultId(0); // Temp ID
             newResult.setMaterialTestId(materialTestId);
+            newResult.setSampleId(sample.getSampleId());
+            newResult.setSampleName(sample.getSampleName());
             newResult.setTestNameId(selectedTestNameIds.get(i));
             newResult.setTestName(selectedTestNames.get(i));
             newResult.setUserId(UserContext.getCurrentUser().getUserId());
@@ -216,7 +223,6 @@ public class TestResultsController implements Initializable {
             mt.setMaterialTestId(materialTestId); // Fix: Set ID in MaterialTest
             mt.setSupplierName(supplierName);
             mt.setMaterialName(materialName);
-            mt.setMaterialDesName(materialDesName);
             mt.setPoNo(poNo);
             mt.setOracleSample(oracleSample);
             mt.setItemCode(itemCode);
@@ -240,7 +246,7 @@ public class TestResultsController implements Initializable {
         selectedTestNames.clear();
         selectedTestNameIds.clear();
         updateSelectedLabel();
-        //test_names_comb.getSelectionModel().clearSelection();
+        sample_comb.getSelectionModel().clearSelection();
     }
 
     private void setupTableColumns() {
@@ -248,7 +254,8 @@ public class TestResultsController implements Initializable {
         material_test_id_column.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(cell.getValue().getMaterialTestId())));
         supplier_name_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getSupplierName()));
         material_name_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getMaterialName()));
-        material_document_name_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getMaterialDesName()));
+        sample_no_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getSampleName()));
+
         po_no_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getPoNo()));
         oracle_sample_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getOracleSample()));
         item_code_column.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getMaterialTest().getItemCode()));
@@ -422,7 +429,7 @@ public class TestResultsController implements Initializable {
         String style = "-fx-alignment: CENTER; -fx-font-size: 12px; -fx-font-weight: bold;";
         String style2 = "-fx-alignment: CENTER; -fx-font-size: 11px; -fx-font-weight: bold;";
         table_view.setFixedCellSize(32);
-        List.of(material_test_id_column, supplier_name_column, material_name_column, material_document_name_column,
+        List.of(material_test_id_column,sample_no_column, supplier_name_column, material_name_column,
                 po_no_column, oracle_sample_column, item_code_column, test_id_column, test_name_column,
                 requirement_column ,actual_column).forEach(c -> c.setStyle(style));
         List.of(creation_date_column, test_situation_column, delete_column, user_full_name_column )
@@ -629,7 +636,7 @@ public class TestResultsController implements Initializable {
                         codeCell.setCellStyle(borderedCenter);
 
                         Cell sampleCell = row.createCell(3);
-                        sampleCell.setCellValue(oracleSample);
+                        sampleCell.setCellValue(result.getSampleName() != null ? result.getSampleName() : "");
                         sampleCell.setCellStyle(borderedCenter);
                         isFirst = false;
                     }

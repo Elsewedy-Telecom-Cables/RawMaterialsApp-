@@ -32,7 +32,6 @@ public class AddMaterialTestController implements Initializable {
     @FXML private ComboBox<Supplier> supplier_comb;
     @FXML private ComboBox<Country> country_comb;
     @FXML private ComboBox<Material> material_comb;
-    @FXML private ComboBox<MaterialDescription> material_description_comb;
     @FXML private TextField notes_textF;
     @FXML private TextField oracle_sample_textF;
     @FXML private TextField po_no_textF;
@@ -58,7 +57,7 @@ public class AddMaterialTestController implements Initializable {
         material_comb.setItems(MaterialDao.getAllMaterials());
         supplier_comb.setItems(SupplierDao.getAllSuppliers());
         country_comb.setItems(FXCollections.observableArrayList());
-        material_description_comb.setItems(MaterialDescriptionDao.getAllMaterialDescriptions());
+
 
 
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -108,7 +107,7 @@ public class AddMaterialTestController implements Initializable {
         supplier_comb.getSelectionModel().clearSelection();
         country_comb.getSelectionModel().clearSelection();
         material_comb.getSelectionModel().clearSelection();
-        material_description_comb.getSelectionModel().clearSelection();
+
     }
 
 
@@ -131,7 +130,6 @@ public class AddMaterialTestController implements Initializable {
 
             section_comb.getSelectionModel().select(SectionDao.getSectionById(mt.getSectionId()));
             material_comb.getSelectionModel().select(MaterialDao.getMaterialById(mt.getMaterialId()));
-            material_description_comb.getSelectionModel().select(MaterialDescriptionDao.getMaterialDescriptionById(mt.getMaterialDescId()));
 
             Supplier supplier = SupplierDao.getSupplierById(mt.getSupplierId());
             supplier_comb.getSelectionModel().select(supplier);
@@ -162,7 +160,6 @@ public class AddMaterialTestController implements Initializable {
             Supplier supplier = supplier_comb.getValue();
             Country country = country_comb.getValue();
             Material material = material_comb.getValue();
-            MaterialDescription materialDesc = material_description_comb.getValue();
 
             List<String> validationErrors = new ArrayList<>();
 
@@ -170,7 +167,6 @@ public class AddMaterialTestController implements Initializable {
             if (supplier == null) validationErrors.add("Select a supplier.");
             if (country == null) validationErrors.add("Select a country.");
             if (material == null) validationErrors.add("Select a material.");
-            if (materialDesc == null) validationErrors.add("Select a material description.");
 
             if (!validationErrors.isEmpty()) {
                 WindowUtils.ALERT("Validation Error", String.join("\n", validationErrors), WindowUtils.ALERT_WARNING);
@@ -182,7 +178,6 @@ public class AddMaterialTestController implements Initializable {
             mt.setSupplierId(supplier.getSupplierId());
             mt.setCountryId(country.getCountryId());
             mt.setMaterialId(material.getMaterialId());
-            mt.setMaterialDescId(materialDesc.getMaterialDescriptionId());
             mt.setUserId(UserContext.getCurrentUser().getUserId());
             mt.setCreationDate(LocalDateTime.now());
             mt.setPoNo(poNo);
@@ -226,7 +221,6 @@ public class AddMaterialTestController implements Initializable {
             mt.setSupplierId(supplier_comb.getValue().getSupplierId());
             mt.setCountryId(country_comb.getValue().getCountryId());
             mt.setMaterialId(material_comb.getValue().getMaterialId());
-            mt.setMaterialDescId(material_description_comb.getValue().getMaterialDescriptionId());
             mt.setUserId(UserContext.getCurrentUser().getUserId());
             mt.setCreationDate(LocalDateTime.now());
 

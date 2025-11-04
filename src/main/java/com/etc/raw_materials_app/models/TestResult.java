@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class TestResult {
   private int testResultId;
   private int materialTestId;
+  private int sampleId;
   private int testNameId ;
   private int userId ;
   private String requirement;
@@ -14,6 +15,7 @@ public class TestResult {
   // Other Tables
   private MaterialTest materialTest ;
   private String testName ;
+  private String sampleName ;
   private String userFullName ;
 
     public TestResult() {
@@ -33,6 +35,14 @@ public class TestResult {
 
     public void setMaterialTestId(int materialTestId) {
         this.materialTestId = materialTestId;
+    }
+
+    public int getSampleId() {
+        return sampleId;
+    }
+
+    public void setSampleId(int sampleId) {
+        this.sampleId = sampleId;
     }
 
     public int getTestNameId() {
@@ -97,6 +107,14 @@ public class TestResult {
 
     public void setTestName(String testName) {
         this.testName = testName;
+    }
+
+    public String getSampleName() {
+        return sampleName;
+    }
+
+    public void setSampleName(String sampleName) {
+        this.sampleName = sampleName;
     }
 
     public String getUserFullName() {

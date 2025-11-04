@@ -70,25 +70,23 @@
             <TableColumn fx:id="no_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="No" />
             <TableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="ID" />
           <TableColumn fx:id="section_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Section" />
-            <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="Supplier" />
-            <TableColumn fx:id="supplier_code_column" maxWidth="1.7976931348623157E308" minWidth="65.0" prefWidth="65.0" text="Sup Code" />
-            <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" text="Sup-Country" />
-            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="120.0" text="Material" />
-            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="70.0" text="Item Code" />
-            <TableColumn fx:id="material_description_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" text="M Description" />
+            <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="150.0" text="Supplier" />
+            <TableColumn fx:id="supplier_code_column" maxWidth="1.7976931348623157E308" minWidth="65.0" text="Sup Code" />
+            <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="90.0" text="Sup-Country" />
+            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="180.0" text="Material Description" />
+            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Item Code" />
             <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="110.0" text="Creation Date" />
-            <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="PO" />
+            <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="PO" />
             <TableColumn fx:id="receipt_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Receipt" />
             <TableColumn fx:id="total_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="T Quantity" />
             <TableColumn fx:id="accepted_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="A Quantity" />
             <TableColumn fx:id="rejected_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="R Quantity" />
-            <TableColumn fx:id="oracle_sample_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="Sample" />
+            <TableColumn fx:id="oracle_sample_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="95.0" text="Oracle Sample" />
             <TableColumn fx:id="spqr_column" maxWidth="1.7976931348623157E308" minWidth="55.0" prefWidth="55.0" text="SPQR" />
             <TableColumn fx:id="files_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="45.0" text="Files" />
             <TableColumn fx:id="results_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Results" />
             <TableColumn fx:id="edit_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="45.0" text="U - D" />
-            <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Notes" />
-            <TableColumn fx:id="comment_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="100.0" text="Comment" />
+            <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="95.0" text="Notes" />
         </columns>
       </TableView>
       <VBox alignment="TOP_CENTER" layoutX="7.2" layoutY="52.0" prefHeight="101.0" prefWidth="1288.0" AnchorPane.leftAnchor="7.2" AnchorPane.rightAnchor="7.2000000000000455">

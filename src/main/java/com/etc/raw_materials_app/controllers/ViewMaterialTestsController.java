@@ -51,7 +51,6 @@ public class ViewMaterialTestsController implements Initializable {
     @FXML private TableColumn<MaterialTest, String> supplier_column;
     @FXML private TableColumn<MaterialTest, String> supplier_country_column;
     @FXML private TableColumn<MaterialTest, String> material_column;
-    @FXML private TableColumn<MaterialTest, String> material_description_column;
     @FXML private TableColumn<MaterialTest, String> po_no_column;
     @FXML private TableColumn<MaterialTest, String> oracle_sample_column;
     @FXML private TableColumn<MaterialTest, String> item_code_column;
@@ -61,7 +60,6 @@ public class ViewMaterialTestsController implements Initializable {
     @FXML private TableColumn<MaterialTest, String> receipt_column;
     @FXML private TableColumn<MaterialTest, String> spqr_column;
     @FXML private TableColumn<MaterialTest, String> notes_column;
-    @FXML private TableColumn<MaterialTest, String> comment_column;
     @FXML private TableColumn<MaterialTest, String> files_column;
     @FXML private TableColumn<MaterialTest, String> results_column;
     @FXML private TableColumn<MaterialTest, LocalDateTime> creation_date_column;
@@ -270,7 +268,6 @@ public class ViewMaterialTestsController implements Initializable {
             supplier_code_column.setCellValueFactory(new PropertyValueFactory<>("supplierCode"));
             supplier_country_column.setCellValueFactory(new PropertyValueFactory<>("countryName"));
             material_column.setCellValueFactory(new PropertyValueFactory<>("materialName"));
-            material_description_column.setCellValueFactory(new PropertyValueFactory<>("materialDesName"));
             po_no_column.setCellValueFactory(new PropertyValueFactory<>("poNo"));
             oracle_sample_column.setCellValueFactory(new PropertyValueFactory<>("oracleSample"));
             item_code_column.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -280,7 +277,6 @@ public class ViewMaterialTestsController implements Initializable {
             receipt_column.setCellValueFactory(new PropertyValueFactory<>("receipt"));
             spqr_column.setCellValueFactory(new PropertyValueFactory<>("spqr"));
             notes_column.setCellValueFactory(new PropertyValueFactory<>("notes"));
-            comment_column.setCellValueFactory(new PropertyValueFactory<>("comment"));
 
             creation_date_column.setCellValueFactory(cd -> new SimpleObjectProperty<>(cd.getValue().getCreationDate()));
             creation_date_column.setCellFactory(col -> new TableCell<>() {
@@ -346,7 +342,6 @@ public class ViewMaterialTestsController implements Initializable {
                                         selected.getMaterialTestId(),
                                         selected.getSupplierName(),
                                         selected.getMaterialName(),
-                                        selected.getMaterialDesName(),
                                         selected.getPoNo(),
                                         selected.getOracleSample(),
                                         selected.getItemCode(),
@@ -466,8 +461,6 @@ public class ViewMaterialTestsController implements Initializable {
             rejected_quantity_column.setStyle(columnStyle);
             receipt_column.setStyle(columnStyle);
             total_quantity_column.setStyle(columnStyle);
-            material_description_column.setStyle(columnStyle);
-            comment_column.setStyle(columnStyle);
             item_code_column.setStyle(columnStyle);
             item_code_column.setStyle(columnStyle);
             no_column.setStyle(columnStyle);
@@ -510,7 +503,6 @@ public class ViewMaterialTestsController implements Initializable {
                     details.append("Supplier Code: ").append(selectedRow.getSupplierCode() != null ? selectedRow.getSupplierCode() : "-").append("\n");
                     details.append("Country: ").append(selectedRow.getCountryName() != null ? selectedRow.getCountryName() : "-").append("\n");
                     details.append("Material: ").append(selectedRow.getMaterialName() != null ? selectedRow.getMaterialName() : "-").append("\n");
-                    details.append("Material Description: ").append(selectedRow.getMaterialDesName() != null ? selectedRow.getMaterialDesName() : "-").append("\n");
                     details.append("PO No: ").append(selectedRow.getPoNo() != null ? selectedRow.getPoNo() : "-").append("\n");
                     details.append("Receipt: ").append(selectedRow.getReceipt() != null ? selectedRow.getReceipt() : "-").append("\n");
                     details.append("Oracle Sample: ").append(selectedRow.getOracleSample() != null ? selectedRow.getOracleSample() : "-").append("\n");

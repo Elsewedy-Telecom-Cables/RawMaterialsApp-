@@ -13,8 +13,6 @@ public class MaterialTest {
     private String countryName;
     private int materialId;
     private String materialName;
-    private int materialDescId;
-    private String materialDesName;
     private int userId;
     private String userFullName;
     private String poNo;
@@ -109,22 +107,6 @@ public class MaterialTest {
 
     public void setMaterialName(String materialName) {
         this.materialName = materialName;
-    }
-
-    public int getMaterialDescId() {
-        return materialDescId;
-    }
-
-    public void setMaterialDescId(int materialDescId) {
-        this.materialDescId = materialDescId;
-    }
-
-    public String getMaterialDesName() {
-        return materialDesName;
-    }
-
-    public void setMaterialDesName(String materialDesName) {
-        this.materialDesName = materialDesName;
     }
 
     public int getUserId() {
@@ -239,7 +221,6 @@ public class MaterialTest {
                 ", supplierName='" + supplierName + '\'' +
                 ", countryName='" + countryName + '\'' +
                 ", materialName='" + materialName + '\'' +
-                ", materialDesName='" + materialDesName + '\'' +
                 ", userFullName='" + userFullName + '\'' +
                 '}';
     }

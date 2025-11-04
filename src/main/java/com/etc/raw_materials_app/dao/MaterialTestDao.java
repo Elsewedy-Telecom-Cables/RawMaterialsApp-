@@ -24,10 +24,10 @@ public class MaterialTestDao {
         String sql = """
                 INSERT INTO material_testing.dbo.material_tests
                 	( section_id, supplier_id, country_id,
-                	 material_id, material_des_id, user_id, po_no, receipt,
+                	 material_id, user_id, po_no, receipt,
                 	  total_quantity, quantity_accepted, quantity_rejected, creation_date
                 , oracle_sample, spqr, notes, comment)
-                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
+                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );
                 """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)){
@@ -35,18 +35,17 @@ public class MaterialTestDao {
             ps.setInt(2, materialTest.getSupplierId());
             ps.setInt(3, materialTest.getCountryId());
             ps.setInt(4, materialTest.getMaterialId());
-            ps.setInt(5, materialTest.getMaterialDescId());
-            ps.setInt(6, materialTest.getUserId());
-            ps.setString(7,  toNullable(materialTest.getPoNo()));
-            ps.setString(8,  toNullable(materialTest.getReceipt()));
-            ps.setString(9,  toNullable(materialTest.getTotalQuantity()));
-            ps.setString(10, toNullable(materialTest.getQuantityAccepted()));
-            ps.setString(11, toNullable(materialTest.getQuantityRejected()));
-            ps.setObject(12, materialTest.getCreationDate());
-            ps.setString(13, toNullable(materialTest.getOracleSample()));
-            ps.setString(14, toNullable(materialTest.getSpqr()));
-            ps.setString(15, toNullable(materialTest.getNotes()));
-            ps.setString(16, toNullable(materialTest.getComment()));
+            ps.setInt(5, materialTest.getUserId());
+            ps.setString(6,  toNullable(materialTest.getPoNo()));
+            ps.setString(7,  toNullable(materialTest.getReceipt()));
+            ps.setString(8,  toNullable(materialTest.getTotalQuantity()));
+            ps.setString(9, toNullable(materialTest.getQuantityAccepted()));
+            ps.setString(10, toNullable(materialTest.getQuantityRejected()));
+            ps.setObject(11, materialTest.getCreationDate());
+            ps.setString(12, toNullable(materialTest.getOracleSample()));
+            ps.setString(13, toNullable(materialTest.getSpqr()));
+            ps.setString(14, toNullable(materialTest.getNotes()));
+            ps.setString(15, toNullable(materialTest.getComment()));
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e){
@@ -61,7 +60,7 @@ public class MaterialTestDao {
             UPDATE material_testing.dbo.material_tests
             SET section_id = ?,
                 supplier_id = ?,country_id = ?,material_id = ?,
-                material_des_id = ?,user_id = ?,po_no = ?,
+                user_id = ?,po_no = ?,
                 receipt = ?,total_quantity = ?,quantity_accepted = ?,
                 quantity_rejected = ?,oracle_sample = ?,
                 spqr = ?,notes = ?,comment = ?
@@ -73,18 +72,17 @@ public class MaterialTestDao {
             ps.setInt(2, materialTest.getSupplierId());
             ps.setInt(3, materialTest.getCountryId());
             ps.setInt(4, materialTest.getMaterialId());
-            ps.setInt(5, materialTest.getMaterialDescId());
-            ps.setInt(6, materialTest.getUserId());
-            ps.setString(7,  toNullable(materialTest.getPoNo()));
-            ps.setString(8,  toNullable(materialTest.getReceipt()));
-            ps.setString(9,  toNullable(materialTest.getTotalQuantity()));
-            ps.setString(10, toNullable(materialTest.getQuantityAccepted()));
-            ps.setString(11, toNullable(materialTest.getQuantityRejected()));
-            ps.setString(12, toNullable(materialTest.getOracleSample()));
-            ps.setString(13, toNullable(materialTest.getSpqr()));
-            ps.setString(14, toNullable(materialTest.getNotes()));
-            ps.setString(15, toNullable(materialTest.getComment()));
-            ps.setInt(16, materialTest.getMaterialTestId());
+            ps.setInt(5, materialTest.getUserId());
+            ps.setString(6,  toNullable(materialTest.getPoNo()));
+            ps.setString(7,  toNullable(materialTest.getReceipt()));
+            ps.setString(8,  toNullable(materialTest.getTotalQuantity()));
+            ps.setString(9, toNullable(materialTest.getQuantityAccepted()));
+            ps.setString(10, toNullable(materialTest.getQuantityRejected()));
+            ps.setString(11, toNullable(materialTest.getOracleSample()));
+            ps.setString(12, toNullable(materialTest.getSpqr()));
+            ps.setString(13, toNullable(materialTest.getNotes()));
+            ps.setString(14, toNullable(materialTest.getComment()));
+            ps.setInt(15, materialTest.getMaterialTestId());
             return ps.executeUpdate() > 0;
 
         }catch (SQLException e){
@@ -113,15 +111,12 @@ public class MaterialTestDao {
         SELECT
             mt.*,
             se.section_name, su.supplier_name, su.supplier_code,
-            co.country_name, ma.material_name,ma.item_code, mad.material_des_name,
-            us.full_name
+            co.country_name, ma.material_name, ma.item_code, us.full_name
         FROM material_testing.dbo.material_tests mt
         LEFT JOIN material_testing.dbo.sections se ON mt.section_id = se.section_id
         LEFT JOIN material_testing.dbo.suppliers su ON mt.supplier_id = su.supplier_id
         LEFT JOIN material_testing.dbo.countries co ON mt.country_id = co.country_id
         LEFT JOIN material_testing.dbo.materials ma ON mt.material_id = ma.material_id
-        LEFT JOIN material_testing.dbo.material_descriptions mad
-            ON mt.material_des_id = mad.material_des_id
         LEFT JOIN material_testing.dbo.users us ON mt.user_id = us.user_id
         WHERE mt.material_test_id = ?
         ORDER BY mt.creation_date DESC
@@ -138,7 +133,6 @@ public class MaterialTestDao {
                     mt.setSupplierId(rs.getInt("supplier_id"));
                     mt.setCountryId(rs.getInt("country_id"));
                     mt.setMaterialId(rs.getInt("material_id"));
-                    mt.setMaterialDescId(rs.getInt("material_des_id"));
                     mt.setUserId(rs.getInt("user_id"));
                     mt.setPoNo(rs.getString("po_no"));
                     mt.setReceipt(rs.getString("receipt"));
@@ -158,7 +152,6 @@ public class MaterialTestDao {
                     mt.setCountryName(rs.getString("country_name"));
                     mt.setMaterialName(rs.getString("material_name"));
                     mt.setItemCode(rs.getString("item_code"));
-                    mt.setMaterialDesName(rs.getString("material_des_name"));
                     mt.setUserFullName(rs.getString("full_name"));
                }
             }
@@ -177,15 +170,12 @@ public class MaterialTestDao {
         SELECT
             mt.*,
             se.section_name, su.supplier_name, su.supplier_code,
-            co.country_name, ma.material_name,ma.item_code, mad.material_des_name,
-            us.full_name
+            co.country_name, ma.material_name,ma.item_code, us.full_name
         FROM material_testing.dbo.material_tests mt
         LEFT JOIN material_testing.dbo.sections se ON mt.section_id = se.section_id
         LEFT JOIN material_testing.dbo.suppliers su ON mt.supplier_id = su.supplier_id
         LEFT JOIN material_testing.dbo.countries co ON mt.country_id = co.country_id
         LEFT JOIN material_testing.dbo.materials ma ON mt.material_id = ma.material_id
-        LEFT JOIN material_testing.dbo.material_descriptions mad
-            ON mt.material_des_id = mad.material_des_id
         LEFT JOIN material_testing.dbo.users us ON mt.user_id = us.user_id
         ORDER BY mt.creation_date DESC
         """;
@@ -201,7 +191,6 @@ public class MaterialTestDao {
                 mt.setSupplierId(rs.getInt("supplier_id"));
                 mt.setCountryId(rs.getInt("country_id"));
                 mt.setMaterialId(rs.getInt("material_id"));
-                mt.setMaterialDescId(rs.getInt("material_des_id"));
                 mt.setUserId(rs.getInt("user_id"));
                 mt.setPoNo(rs.getString("po_no"));
                 mt.setReceipt(rs.getString("receipt"));
@@ -221,7 +210,6 @@ public class MaterialTestDao {
                 mt.setCountryName(rs.getString("country_name"));
                 mt.setMaterialName(rs.getString("material_name"));
                 mt.setItemCode(rs.getString("item_code"));
-                mt.setMaterialDesName(rs.getString("material_des_name"));
                 mt.setUserFullName(rs.getString("full_name"));
                 list.add(mt);
             }

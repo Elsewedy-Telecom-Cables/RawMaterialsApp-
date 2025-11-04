@@ -58,20 +58,6 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
-                  <Label text="Material">
-                     <font>
-                        <Font name="Montserrat Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
-               <children>
-                  <ComboBox fx:id="material_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
-               <children>
                   <Label text="Material Description">
                      <font>
                         <Font name="Montserrat Bold" size="16.0" />
@@ -81,7 +67,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
                <children>
-                  <ComboBox fx:id="material_description_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
+                  <ComboBox fx:id="material_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">

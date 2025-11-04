@@ -31,6 +31,14 @@ CREATE  TABLE material_testing.dbo.materials (
 );
 GO
 
+CREATE  TABLE material_testing.dbo.samples (
+                                               sample_id            int    IDENTITY ( 1 , 1 )  NOT NULL,
+                                               sample_name          nvarchar(100)      NOT NULL,
+                                               CONSTRAINT pk_Tbl PRIMARY KEY  ( sample_id ) ,
+                                               CONSTRAINT unq_samples UNIQUE ( sample_name )
+);
+GO
+
 CREATE  TABLE material_testing.dbo.sections (
                                                 section_id           int    IDENTITY  NOT NULL,
                                                 section_name         varchar(100)      NOT NULL,
@@ -70,14 +78,6 @@ CREATE  TABLE material_testing.dbo.users (
 );
 GO
 
-CREATE  TABLE material_testing.dbo.material_descriptions (
-                                                             material_des_id      int    IDENTITY  NOT NULL,
-                                                             material_des_name    nvarchar(150)      NOT NULL,
-                                                             material_id          int      NOT NULL,
-                                                             CONSTRAINT pk_material_description PRIMARY KEY CLUSTERED ( material_des_id  asc )
-);
-GO
-
 CREATE  TABLE material_testing.dbo.supplier_country (
                                                         supplier_id          int      NOT NULL,
                                                         country_id           int      NOT NULL,
@@ -91,7 +91,6 @@ CREATE  TABLE material_testing.dbo.material_tests (
                                                       supplier_id          int      NOT NULL,
                                                       country_id           int      NOT NULL,
                                                       material_id          int      NOT NULL,
-                                                      material_des_id      int      NOT NULL,
                                                       user_id              int      NOT NULL,
                                                       po_no                nvarchar(150)      NULL,
                                                       receipt              nvarchar(150)      NULL,
@@ -110,6 +109,7 @@ GO
 CREATE  TABLE material_testing.dbo.test_results (
                                                     test_result_id       int    IDENTITY  NOT NULL,
                                                     material_test_id     int      NOT NULL,
+                                                    sample_id            int      NULL,
                                                     test_name_id         int      NOT NULL,
                                                     user_id              int      NOT NULL,
                                                     requirement          nvarchar(150)      NULL,
@@ -141,12 +141,6 @@ GO
 ALTER TABLE material_testing.dbo.files ADD CONSTRAINT fk_files_users FOREIGN KEY ( user_id ) REFERENCES material_testing.dbo.users( user_id );
 GO
 
-ALTER TABLE material_testing.dbo.material_descriptions ADD CONSTRAINT fk_material_description_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
-GO
-
-ALTER TABLE material_testing.dbo.material_tests ADD CONSTRAINT fk_material_test_material_description FOREIGN KEY ( material_des_id ) REFERENCES material_testing.dbo.material_descriptions( material_des_id );
-GO
-
 ALTER TABLE material_testing.dbo.material_tests ADD CONSTRAINT fk_material_test_materials FOREIGN KEY ( material_id ) REFERENCES material_testing.dbo.materials( material_id );
 GO
 
@@ -172,4 +166,7 @@ ALTER TABLE material_testing.dbo.test_results ADD CONSTRAINT fk_material_test_re
 GO
 
 ALTER TABLE material_testing.dbo.test_results ADD CONSTRAINT fk_material_test_report_results_users FOREIGN KEY ( user_id ) REFERENCES material_testing.dbo.users( user_id );
+GO
+
+ALTER TABLE material_testing.dbo.test_results ADD CONSTRAINT fk_test_results_samples FOREIGN KEY ( sample_id ) REFERENCES material_testing.dbo.samples( sample_id );
 GO

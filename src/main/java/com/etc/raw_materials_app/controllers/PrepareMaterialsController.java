@@ -2,13 +2,11 @@
 package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.MaterialDao;
-import com.etc.raw_materials_app.dao.MaterialDescriptionDao;
+import com.etc.raw_materials_app.dao.SampleDao;
 import com.etc.raw_materials_app.dao.MaterialDocumentDao;
+import com.etc.raw_materials_app.dao.SampleDao;
 import com.etc.raw_materials_app.logging.Logging;
-import com.etc.raw_materials_app.models.Material;
-import com.etc.raw_materials_app.models.MaterialDescription;
-import com.etc.raw_materials_app.models.MaterialDocument;
-import com.etc.raw_materials_app.models.UserContext;
+import com.etc.raw_materials_app.models.*;
 import com.etc.raw_materials_app.services.UserService;
 import com.etc.raw_materials_app.services.WindowUtils;
 import javafx.application.Platform;
@@ -34,29 +32,27 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class PrepareMaterialsController implements Initializable {
 
-    @FXML private TextField filter_material_description_textF;
+    @FXML private TextField filter_sample_textF;
     @FXML private TextField filter_material_document_textF;
     @FXML private TextField filter_material_textF;
     @FXML private TextField update_material_name_textF;
     @FXML private ImageView logo_ImageView;
-    @FXML private ComboBox<Material> material_comb_des;
     @FXML private TableColumn<Material,String> material_delete_colm;
-    @FXML private TableColumn<MaterialDescription,String> material_description_delete_colm;
-    @FXML private TableColumn<MaterialDescription,String> material_description_id_colm;
-    @FXML private TableColumn<MaterialDescription,String> material_description_name_colm;
-    @FXML private TextField material_description_name_textF;
+    @FXML private TableColumn<Sample,String> sample_name_colm;
+    @FXML private TableColumn<Sample,String> sample_id_colm;
+    @FXML private TableColumn<Sample,String> sample_delete_colm;
+    @FXML private TextField sample_name_textF;
     @FXML private TableColumn<MaterialDocument,String> material_document_delete_colm;
     @FXML private TableColumn<MaterialDocument,String> material_document_id_colm;
     @FXML private TableColumn<MaterialDocument,String> material_document_name_colm;
     @FXML private TextField material_document_name_textF;
     @FXML private TableView<MaterialDocument> material_document_table_view;
-    @FXML private TableView<MaterialDescription> material_description_table_view;
+    @FXML private TableView<Sample> sample_table_view;
     @FXML private TableColumn<Material,String> material_id_colm;
     @FXML private TableColumn<Material,String> material_name_colm;
-    @FXML private TableColumn<MaterialDescription,String> material_name_in_description_tbl;
     @FXML private TextField material_name_textF;
     @FXML private TableView<Material> material_table_view;
-    @FXML private TextField update_material_description_name_textF;
+    @FXML private TextField update_sample_name_textF;
     @FXML private TextField update_material_document_name_textF;
     @FXML private TextField item_code_textF ;
     @FXML private TextField update_item_code_textF ;
@@ -65,32 +61,30 @@ public class PrepareMaterialsController implements Initializable {
 
 
     ObservableList<Material> materialList;
-    ObservableList<MaterialDescription> materialDescriptionList;
+    ObservableList<Sample> sampleList;
     ObservableList<MaterialDocument> materialDocumentList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadMaterialsData();
-        loadMaterialDescriptionData();
+        loadSamples();
         loadMaterialDocumentData();
 
         // Initialize ObservableLists
         materialList = MaterialDao.getAllMaterials();
-        materialDescriptionList = MaterialDescriptionDao.getAllMaterialDescriptions();
+        sampleList = SampleDao.getAllSamples();
         materialDocumentList = MaterialDocumentDao.getAllMaterialDocuments();
 
         // Set items to TableViews
         material_table_view.setItems(materialList);
-        material_description_table_view.setItems(materialDescriptionList);
+        sample_table_view.setItems(sampleList);
         material_document_table_view.setItems(materialDocumentList);
 
         // Call Tables Listener
         setupMaterialTableListener();
-        setupMaterialDescriptionTableListener();
+        setupSampleTableListener();
         setupMaterialDocumentTableListener();
 
-        // Set ComboBox items
-        material_comb_des.setItems(MaterialDao.getAllMaterials());
 
     }
 
@@ -161,19 +155,16 @@ public class PrepareMaterialsController implements Initializable {
         material_table_view.setItems(materialList);
     }
 
-    // Load materials Description Data
-    private void loadMaterialDescriptionData() {
-        material_description_name_colm.setCellValueFactory(new PropertyValueFactory<>("materialDescriptionName"));
-        material_description_id_colm.setCellValueFactory(new PropertyValueFactory<>("materialDescriptionId"));
-        material_name_in_description_tbl.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getMaterial().getMaterialName())
-        );
+    // Load Samples Data
+    private void loadSamples() {
+        sample_id_colm.setCellValueFactory(new PropertyValueFactory<>("sampleId"));
+        sample_name_colm.setCellValueFactory(new PropertyValueFactory<>("sampleName"));
+
         String style = "-fx-alignment: CENTER;-fx-font-size:12 px;-fx-font-weight:bold;";
-        material_description_name_colm.setStyle(style);
-        material_description_id_colm.setStyle(style);
-        material_name_in_description_tbl.setStyle(style);
-        Callback<TableColumn<MaterialDescription, String>, TableCell<MaterialDescription, String>> cellFactory = param -> {
-            final TableCell<MaterialDescription, String> cell = new TableCell<MaterialDescription, String>() {
+        sample_id_colm.setStyle(style);
+        sample_name_colm.setStyle(style);
+        Callback<TableColumn<Sample, String>, TableCell<Sample, String>> cellFactory = param -> {
+            final TableCell<Sample, String> cell = new TableCell<Sample, String>() {
                 @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -185,12 +176,12 @@ public class PrepareMaterialsController implements Initializable {
                         deleteIcon.setCursor(Cursor.HAND);
                         deleteIcon.setIconSize(13);
                         deleteIcon.setFill(javafx.scene.paint.Color.RED);
-                        Tooltip.install(deleteIcon, new Tooltip("Delete Material Description"));
+                        Tooltip.install(deleteIcon, new Tooltip("Delete Sample"));
 
                         deleteIcon.setOnMouseClicked(event -> {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setHeaderText("Are you sure you want to delete this Material Description?");
-                            alert.setContentText("Delete Material Description confirmation");
+                            alert.setHeaderText("Are you sure you want to delete this Sample?");
+                            alert.setContentText("Delete Sample confirmation");
                             alert.getButtonTypes().addAll(ButtonType.CANCEL);
 
                             Button cancelButton = (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL);
@@ -202,13 +193,13 @@ public class PrepareMaterialsController implements Initializable {
                                 if (response == ButtonType.OK) {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
-                                            MaterialDescription materialDescription = material_description_table_view.getSelectionModel().getSelectedItem();
-                                            MaterialDescriptionDao.deleteMaterialDescription(materialDescription.getMaterialDescriptionId());
-                                            materialDescriptionList = MaterialDescriptionDao.getAllMaterialDescriptions();
-                                            material_description_table_view.setItems(materialDescriptionList);
-                                            WindowUtils.ALERT("Success", "Material Description deleted successfully", WindowUtils.ALERT_INFORMATION);
+                                            Sample sample = sample_table_view.getSelectionModel().getSelectedItem();
+                                            SampleDao.deleteSample(sample.getSampleId());
+                                            sampleList = SampleDao.getAllSamples();
+                                            sample_table_view.setItems(sampleList);
+                                            WindowUtils.ALERT("Success", "Sample deleted successfully", WindowUtils.ALERT_INFORMATION);
                                         } catch (Exception ex) {
-                                            Logging.logException("ERROR", getClass().getName(), "delete Material Description", ex);
+                                            Logging.logException("ERROR", getClass().getName(), "delete Sample", ex);
                                         }
                                     } else {
                                         WindowUtils.ALERT("ERROR", "Password not correct", WindowUtils.ALERT_WARNING);
@@ -227,8 +218,8 @@ public class PrepareMaterialsController implements Initializable {
             };
             return cell;
         };
-        material_description_delete_colm.setCellFactory(cellFactory);
-        material_description_table_view.setItems(materialDescriptionList);
+        sample_delete_colm.setCellFactory(cellFactory);
+        sample_table_view.setItems(sampleList);
     }
 
     // Load material Document Data
@@ -323,29 +314,26 @@ public class PrepareMaterialsController implements Initializable {
         material_table_view.setItems(sortedData);
     }
 
-    // Filter material descriptions
+    // Filter Samples
     @FXML
-    void filter_material_description(KeyEvent event) {
-        FilteredList<MaterialDescription> filteredData = new FilteredList<>(materialDescriptionList, p -> true);
-        filter_material_description_textF.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(materialDescription -> {
+    void filter_sample(KeyEvent event) {
+        FilteredList<Sample> filteredData = new FilteredList<>(sampleList, p -> true);
+        filter_sample_textF.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(sample -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (materialDescription.getMaterialDescriptionName().toLowerCase().contains(lowerCaseFilter)) {
+                if (sample.getSampleName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                if (materialDescription.getMaterial().getMaterialName().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                }
-                String id = materialDescription.getMaterialDescriptionId() + "";
+                String id = sample.getSampleId() + "";
                 return id.contains(lowerCaseFilter);
             });
         });
-        SortedList<MaterialDescription> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(material_description_table_view.comparatorProperty());
-        material_description_table_view.setItems(sortedData);
+        SortedList<Sample> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(sample_table_view.comparatorProperty());
+        sample_table_view.setItems(sortedData);
     }
 
     // Filter material documents
@@ -400,7 +388,7 @@ public class PrepareMaterialsController implements Initializable {
             filter_material_textF.clear();
             materialList = MaterialDao.getAllMaterials();
             material_table_view.setItems(materialList);
-            material_comb_des.setItems(MaterialDao.getAllMaterials());
+
         } else {
             String err = MaterialDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
@@ -411,40 +399,38 @@ public class PrepareMaterialsController implements Initializable {
         }
     }
 
-    // Add material description
     @FXML
-    void add_material_description(ActionEvent event) {
-        String materialDescriptionName = material_description_name_textF.getText().trim();
-        if (materialDescriptionName.isEmpty()) {
-            WindowUtils.ALERT("ERROR", "material_description_name_empty", WindowUtils.ALERT_ERROR);
+    void add_sample(ActionEvent event) {
+        String sampleName = sample_name_textF.getText().trim();
+
+        if (sampleName.isEmpty()) {
+            WindowUtils.ALERT("ERROR", "sample_no_empty", WindowUtils.ALERT_ERROR);
             return;
         }
-        Material selectedMaterial = material_comb_des.getSelectionModel().getSelectedItem();
-        if (selectedMaterial == null) {
-            WindowUtils.ALERT("ERROR", "Material is Empty", WindowUtils.ALERT_ERROR);
-            return;
-        }
-        MaterialDescription materialDescription = new MaterialDescription();
-        materialDescription.setMaterialDescriptionName(materialDescriptionName);
-        materialDescription.setMaterial(selectedMaterial);
-        boolean success = MaterialDescriptionDao.insertMaterialDescription(materialDescription);
+
+        Sample sample = new Sample();
+        sample.setSampleName(sampleName);
+
+        boolean success = SampleDao.insertSample(sample);
+
         if (success) {
-            WindowUtils.ALERT("Success", "material description added successfully", WindowUtils.ALERT_INFORMATION);
-            material_description_name_textF.clear();
-            update_material_description_name_textF.clear();
-            filter_material_description_textF.clear();
-            material_comb_des.getSelectionModel().clearSelection();
-            materialDescriptionList = MaterialDescriptionDao.getAllMaterialDescriptions();
-            material_description_table_view.setItems(materialDescriptionList);
+            WindowUtils.ALERT("Success", "Sample added successfully", WindowUtils.ALERT_INFORMATION);
+            sample_name_textF.clear();
+            update_sample_name_textF.clear();
+            filter_sample_textF.clear();
+
+            sampleList = SampleDao.getAllSamples();
+            sample_table_view.setItems(sampleList);
         } else {
-            String err = MaterialDescriptionDao.lastErrorMessage;
+            String err = SampleDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
-                WindowUtils.ALERT("Duplicate", "material description name already exists", WindowUtils.ALERT_ERROR);
+                WindowUtils.ALERT("Duplicate", "sample name already exists", WindowUtils.ALERT_ERROR);
             } else {
-                WindowUtils.ALERT("database_error", "add_material_description_failed", WindowUtils.ALERT_ERROR);
+                WindowUtils.ALERT("database_error", "sample_name_add_failed", WindowUtils.ALERT_ERROR);
             }
         }
     }
+
 
     // Add material document
     @FXML
@@ -485,15 +471,14 @@ public class PrepareMaterialsController implements Initializable {
         material_name_textF.clear();
     }
 
-    // Clear material description
+    // Clear Sample
     @FXML
-    void clear_material_description(ActionEvent event) {
-        filter_material_description_textF.clear();
-        update_material_description_name_textF.clear();
-        material_description_name_textF.clear();
-        material_description_table_view.getSelectionModel().clearSelection();
-        material_comb_des.getSelectionModel().clearSelection();
-        material_comb_des.setValue(null);
+    void clear_sample(ActionEvent event) {
+        filter_sample_textF.clear();
+        update_sample_name_textF.clear();
+        sample_name_textF.clear();
+        sample_table_view.getSelectionModel().clearSelection();
+
     }
 
     // Clear material document
@@ -538,7 +523,7 @@ public class PrepareMaterialsController implements Initializable {
                 filter_material_textF.clear();
                 materialList = MaterialDao.getAllMaterials();
                 material_table_view.setItems(materialList);
-                material_comb_des.setItems(MaterialDao.getAllMaterials());
+
             } else {
                 String err = MaterialDao.lastErrorMessage;
                 if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
@@ -552,49 +537,43 @@ public class PrepareMaterialsController implements Initializable {
         }
     }
 
-    // Update material description
+    // Update Sample
     @FXML
-    void update_material_description(ActionEvent event) {
+    void update_sample(ActionEvent event) {
         try {
-            MaterialDescription selectedMaterialDescription = material_description_table_view.getSelectionModel().getSelectedItem();
-            if (selectedMaterialDescription == null) {
-                WindowUtils.ALERT("ERROR", "No material description selected", WindowUtils.ALERT_ERROR);
+            Sample sample = sample_table_view.getSelectionModel().getSelectedItem();
+            if (sample == null) {
+                WindowUtils.ALERT("ERROR", "No Sample selected", WindowUtils.ALERT_ERROR);
                 return;
             }
-            String materialDescriptionName = update_material_description_name_textF.getText().trim();
-            if (materialDescriptionName.isEmpty()) {
-                WindowUtils.ALERT("ERROR", "material_description_name_empty", WindowUtils.ALERT_ERROR);
-                return;
-            }
-
-            Material selectedMaterial = material_comb_des.getSelectionModel().getSelectedItem();
-            if (selectedMaterial == null) {
-                WindowUtils.ALERT("ERROR", "Material is Empty", WindowUtils.ALERT_ERROR);
+            String sampleName = update_sample_name_textF.getText().trim();
+            if (sampleName.isEmpty()) {
+                WindowUtils.ALERT("ERROR", "sample_no_empty", WindowUtils.ALERT_ERROR);
                 return;
             }
 
-            selectedMaterialDescription.setMaterialDescriptionName(materialDescriptionName);
-            selectedMaterialDescription.setMaterial(selectedMaterial);
-            boolean success = MaterialDescriptionDao.updateMaterialDescription(selectedMaterialDescription);
+
+            sample.setSampleName(sampleName);
+
+            boolean success = SampleDao.updateSample(sample);
             if (success) {
-                WindowUtils.ALERT("Success", "material description updated successfully", WindowUtils.ALERT_INFORMATION);
-                update_material_description_name_textF.clear();
-                material_description_name_textF.clear();
-                filter_material_description_textF.clear();
-                material_comb_des.getSelectionModel().clearSelection();
-                material_comb_des.setValue(null);
-                materialDescriptionList = MaterialDescriptionDao.getAllMaterialDescriptions();
-                material_description_table_view.setItems(materialDescriptionList);
+                WindowUtils.ALERT("Success", "Sample updated successfully", WindowUtils.ALERT_INFORMATION);
+                update_sample_name_textF.clear();
+                sample_name_textF.clear();
+                filter_sample_textF.clear();
+
+                sampleList = SampleDao.getAllSamples();
+                sample_table_view.setItems(sampleList);
             } else {
-                String err = MaterialDescriptionDao.lastErrorMessage;
+                String err = SampleDao.lastErrorMessage;
                 if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
-                    WindowUtils.ALERT("Duplicate", "material description name already exists", WindowUtils.ALERT_ERROR);
+                    WindowUtils.ALERT("Duplicate", "Sample name already exists", WindowUtils.ALERT_ERROR);
                 } else {
-                    WindowUtils.ALERT("ERROR", "material_description_updated_failed", WindowUtils.ALERT_ERROR);
+                    WindowUtils.ALERT("ERROR", "Sample_updated_failed", WindowUtils.ALERT_ERROR);
                 }
             }
         } catch (Exception ex) {
-            Logging.logException("ERROR", getClass().getName(), "update material description", ex);
+            Logging.logException("ERROR", getClass().getName(), "update Sample", ex);
         }
     }
 
@@ -645,13 +624,13 @@ public class PrepareMaterialsController implements Initializable {
         });
     }
 
-    // Setup material Description Table Listener
-    private void setupMaterialDescriptionTableListener() {
-        material_description_table_view.setOnMouseClicked(event -> {
-            MaterialDescription selectedMaterialDescription = material_description_table_view.getSelectionModel().getSelectedItem();
-            if (selectedMaterialDescription != null) {
-                update_material_description_name_textF.setText(selectedMaterialDescription.getMaterialDescriptionName());
-                material_comb_des.getSelectionModel().select(selectedMaterialDescription.getMaterial());
+    // Setup Sample Table Listener
+    private void setupSampleTableListener() {
+        sample_table_view.setOnMouseClicked(event -> {
+            Sample sample = sample_table_view.getSelectionModel().getSelectedItem();
+            if (sample != null) {
+                update_sample_name_textF.setText(sample.getSampleName());
+
             }
         });
     }

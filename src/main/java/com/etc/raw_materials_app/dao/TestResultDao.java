@@ -15,8 +15,8 @@ public class TestResultDao {
     public static Integer insertTestResult(TestResult testResult) {
         String sql = """
         INSERT INTO material_testing.dbo.test_results
-            (material_test_id, test_name_id, user_id, requirement, actual, creation_date, test_situation)
-        VALUES (?, ?, ?, ?, ?, ?, ?);
+            (material_test_id, test_name_id, sample_id, user_id, requirement, actual, creation_date, test_situation)
+        VALUES (?, ?,?, ?, ?, ?, ?, ?);
         """;
 
         try (Connection con = DbConnect.getConnect();
@@ -24,11 +24,12 @@ public class TestResultDao {
 
             ps.setInt(1, testResult.getMaterialTestId());  // Fix: Use direct getMaterialTestId() instead of getMaterialTest().getMaterialTestId()
             ps.setInt(2, testResult.getTestNameId());
-            ps.setInt(3, testResult.getUserId());
-            ps.setString(4, testResult.getRequirement());
-            ps.setString(5, testResult.getActual());
-            ps.setObject(6, testResult.getCreationDate());
-            ps.setObject(7, testResult.getTestSituation());
+            ps.setInt(3, testResult.getSampleId());
+            ps.setInt(4, testResult.getUserId());
+            ps.setString(5, testResult.getRequirement());
+            ps.setString(6, testResult.getActual());
+            ps.setObject(7, testResult.getCreationDate());
+            ps.setObject(8, testResult.getTestSituation());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
@@ -54,19 +55,19 @@ public class TestResultDao {
     public static ObservableList<TestResult> getAllTestResults() {
         ObservableList<TestResult> list = FXCollections.observableArrayList();
         String sql = """
-            SELECT tr.test_result_id, tr.material_test_id, tr.test_name_id, tr.user_id,
+            SELECT tr.test_result_id, tr.material_test_id, tr.sample_id, tr.test_name_id, tr.user_id,
                    tr.requirement, tr.actual, tr.creation_date, tr.test_situation,
                    tn.test_name, u.full_name,
-                   s.supplier_name, m.material_name,m.item_code, md.material_des_name,
-                   mt.po_no, mt.oracle_sample
+                   s.supplier_name, m.material_name,m.item_code,
+                   mt.po_no, mt.oracle_sample, sa.sample_name
             FROM material_testing.dbo.test_results tr
             LEFT JOIN material_testing.dbo.test_names tn ON tr.test_name_id = tn.test_name_id
             LEFT JOIN material_testing.dbo.users u ON tr.user_id = u.user_id
             LEFT JOIN material_testing.dbo.material_tests mt ON tr.material_test_id = mt.material_test_id
             LEFT JOIN material_testing.dbo.suppliers s ON mt.supplier_id = s.supplier_id
             LEFT JOIN material_testing.dbo.materials m ON mt.material_id = m.material_id
-            LEFT JOIN material_testing.dbo.material_descriptions md ON mt.material_des_id = md.material_des_id
-            ORDER BY tr.test_result_id ASC
+            LEFT JOIN material_testing.dbo.samples sa ON tr.sample_id = sa.sample_id
+            ORDER BY tr.sample_id , creation_date ASC
         """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -76,6 +77,7 @@ public class TestResultDao {
                 tr.setTestResultId(rs.getInt("test_result_id"));
                 tr.setMaterialTestId(rs.getInt("material_test_id"));
                 tr.setTestNameId(rs.getInt("test_name_id"));
+                tr.setSampleId(rs.getInt("sample_id"));
                 tr.setUserId(rs.getInt("user_id"));
                 tr.setRequirement(rs.getString("requirement"));
                 tr.setActual(rs.getString("actual"));
@@ -84,13 +86,15 @@ public class TestResultDao {
                 tr.setTestSituation(rs.getObject("test_situation") != null ? rs.getInt("test_situation") : null);
                 tr.setTestName(rs.getString("test_name"));
                 tr.setUserFullName(rs.getString("full_name"));
+                tr.setSampleName(rs.getString("sample_name"));
                 MaterialTest mt = new MaterialTest();
                 mt.setSupplierName(rs.getString("supplier_name"));
                 mt.setMaterialName(rs.getString("material_name"));
-                mt.setMaterialDesName(rs.getString("material_des_name"));
                 mt.setItemCode(rs.getString("item_code"));
                 mt.setPoNo(rs.getString("po_no"));
                 mt.setOracleSample(rs.getString("oracle_sample"));
+
+
                 tr.setMaterialTest(mt);
                 list.add(tr);
             }
@@ -105,18 +109,19 @@ public class TestResultDao {
         TestResult tr = null;
         String sql = """
             SELECT tr.test_result_id, tr.material_test_id, tr.test_name_id, tr.user_id,
-                   tr.requirement, tr.actual, tr.creation_date, tr.test_situation,
+                   tr.requirement, tr.actual, tr.creation_date, tr.test_situation, tr.sample_id
                    tn.test_name, u.full_name,
-                   s.supplier_name, m.material_name,m.item_code md.material_des_name,
-                   mt.po_no, mt.oracle_sample
+                   s.supplier_name, m.material_name,m.item_code,
+                   mt.po_no, mt.oracle_sample ,sa.sample_name
             FROM material_testing.dbo.test_results tr
             LEFT JOIN material_testing.dbo.test_names tn ON tr.test_name_id = tn.test_name_id
             LEFT JOIN material_testing.dbo.users u ON tr.user_id = u.user_id
             LEFT JOIN material_testing.dbo.material_tests mt ON tr.material_test_id = mt.material_test_id
             LEFT JOIN material_testing.dbo.suppliers s ON mt.supplier_id = s.supplier_id
             LEFT JOIN material_testing.dbo.materials m ON mt.material_id = m.material_id
-            LEFT JOIN material_testing.dbo.material_descriptions md ON mt.material_des_id = md.material_des_id
+            LEFT JOIN material_testing.dbo.samples sa ON tr.sample_id = sa.sample_id
             WHERE tr.test_result_id = ?
+            ORDER BY tr.sample_id , creation_date ASC
         """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -127,6 +132,8 @@ public class TestResultDao {
                     tr.setTestResultId(rs.getInt("test_result_id"));
                     tr.setMaterialTestId(rs.getInt("material_test_id"));
                     tr.setTestNameId(rs.getInt("test_name_id"));
+                    tr.setSampleId(rs.getInt("sample_id"));
+                    tr.setSampleName(rs.getString("sample_name"));
                     tr.setUserId(rs.getInt("user_id"));
                     tr.setRequirement(rs.getString("requirement"));
                     tr.setActual(rs.getString("actual"));
@@ -138,7 +145,6 @@ public class TestResultDao {
                     MaterialTest mt = new MaterialTest();
                     mt.setSupplierName(rs.getString("supplier_name"));
                     mt.setMaterialName(rs.getString("material_name"));
-                    mt.setMaterialDesName(rs.getString("material_des_name"));
                     mt.setItemCode(rs.getString("item_code"));
                     mt.setPoNo(rs.getString("po_no"));
                     mt.setOracleSample(rs.getString("oracle_sample"));
@@ -155,18 +161,19 @@ public class TestResultDao {
     public static boolean updateTestResult(TestResult tr) {
         String sql = """
         UPDATE material_testing.dbo.test_results
-        SET material_test_id=?, test_name_id=?, user_id=?, requirement=?, actual=?, test_situation=?
+        SET material_test_id=?, test_name_id=?, sample_id=?, user_id=?, requirement=?, actual=?, test_situation=?
         WHERE test_result_id=?
     """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, tr.getMaterialTestId());  // Fix: Use direct getMaterialTestId()
             ps.setInt(2, tr.getTestNameId());
-            ps.setInt(3, tr.getUserId());
-            ps.setString(4, tr.getRequirement());
-            ps.setString(5, tr.getActual());
-            ps.setObject(6, tr.getTestSituation());
-            ps.setInt(7, tr.getTestResultId());
+            ps.setInt(3, tr.getSampleId());
+            ps.setInt(4, tr.getUserId());
+            ps.setString(5, tr.getRequirement());
+            ps.setString(6, tr.getActual());
+            ps.setObject(7, tr.getTestSituation());
+            ps.setInt(8, tr.getTestResultId());
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             lastErrorMessage = e.getMessage();

@@ -124,31 +124,7 @@ public class WindowUtils {
     }
 
 
-    public static void OPEN_EDIT_MATERIAL_TEST_PAGE(int materialTestId, Runnable onClose) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/AddMaterialTest.fxml"));
-            Parent parent = fxmlLoader.load();
 
-            AddMaterialTestController controller = fxmlLoader.getController();
-            controller.setMaterialTestData(materialTestId, true);
-            controller.setSaveButton();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(parent));
-            stage.setTitle("Update Material Test");
-            stage.initModality(Modality.NONE);
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setResizable(false);
-
-            if (onClose != null) {
-                stage.setOnHiding(event -> onClose.run());
-            }
-
-            stage.show();
-        } catch (Exception ex) {
-            logException(ERROR, WindowUtils.class.getName(), "OPEN_EDIT_MATERIAL_TEST_PAGE", ex);
-        }
-    }
 
     public static void OPEN_WINDOW(String fxmlPath, Runnable onCloseAction) {
         try {
@@ -210,43 +186,46 @@ public class WindowUtils {
         }
     }
 
-    public interface StageAware {
-        void setStage(Stage stage);
-        // Open a non-resizable window and return the Stage
-        public static Stage OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction, Object controllerData) {
-            try {
-                FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
-                Parent root = loader.load(); // Load the FXML page
 
-                Scene scene = new Scene(root);
-                scene.setFill(Color.TRANSPARENT);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.getIcons().add(new Image(WindowUtils.class.getResourceAsStream(iconImagePath)));
-
-                // Set the controller's stage if it implements StageAware
-                Object controller = loader.getController();
-                if (controller instanceof StageAware) {
-                    ((StageAware) controller).setStage(stage);
-                }
-
-                // Set the provided controller as userData
-                stage.setUserData(controllerData);
-
-                if (onCloseAction != null) {
-                    stage.setOnCloseRequest(event -> onCloseAction.run());
-                }
-
-                stage.show();
-                stage.setResizable(false);
-                return stage; // Return the created Stage
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null; // Return null in case of an error
-            }
-        }
-
-    }
+//    public interface StageAware {
+//        void setStage(Stage stage);
+//
+//
+//        // Open a non-resizable window and return the Stage
+//        public static Stage OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction, Object controllerData) {
+//            try {
+//                FXMLLoader loader = new FXMLLoader(WindowUtils.class.getResource(fxmlPath));
+//                Parent root = loader.load(); // Load the FXML page
+//
+//                Scene scene = new Scene(root);
+//                scene.setFill(Color.TRANSPARENT);
+//                Stage stage = new Stage();
+//                stage.setScene(scene);
+//                stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
+//
+//                // Set the controller's stage if it implements StageAware
+//                Object controller = loader.getController();
+//                if (controller instanceof StageAware) {
+//                    ((StageAware) controller).setStage(stage);
+//                }
+//
+//                // Set the provided controller as userData
+//                stage.setUserData(controllerData);
+//
+//                if (onCloseAction != null) {
+//                    stage.setOnCloseRequest(event -> onCloseAction.run());
+//                }
+//
+//                stage.show();
+//                stage.setResizable(false);
+//                return stage; // Return the created Stage
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                return null; // Return null in case of an error
+//            }
+//        }
+//
+//    }
     // Open a non-resizable window and return the Stage
     public static Stage OPEN_WINDOW_NOT_RESIZABLE_2(String fxmlPath, Runnable onCloseAction, Object controllerData) {
         try {
@@ -259,11 +238,15 @@ public class WindowUtils {
             stage.setScene(scene);
             stage.getIcons().add(new Image(Objects.requireNonNull(WindowUtils.class.getResourceAsStream(iconImagePath))));
 
-            // Set the controller's stage if it implements StageAware
-            Object controller = loader.getController();
-            if (controller instanceof StageAware) {
-                ((StageAware) controller).setStage(stage);
-            }
+//            Object controller = loader.getController();
+//            System.out.println("Loaded controller instance: " + (controller != null ? controller.getClass().getName() : "null"));
+//            System.out.println("controller instanceof StageAware? " + (controller instanceof StageAware));
+//            if (controller instanceof StageAware) {
+//                ((StageAware) controller).setStage(stage);
+//                System.out.println("Stage injected into controller successfully.");
+//            } else {
+//                System.out.println("Controller does not implement StageAware!");
+//            }
 
             // Set the provided controller as userData
             stage.setUserData(controllerData);
@@ -478,6 +461,63 @@ public class WindowUtils {
             logException(ERROR, WindowUtils.class.getName(), "OPEN_ADD_MATERIAL_TESTS_PAGE", ex);
         }
     }
+
+    public static void OPEN_EDIT_MATERIAL_TEST_PAGE(int materialTestId, Runnable onClose) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/AddMaterialTest.fxml"));
+            Parent parent = fxmlLoader.load();
+
+            AddMaterialTestController controller = fxmlLoader.getController();
+            controller.setMaterialTestData(materialTestId, true);
+            controller.setSaveButton();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.setTitle("Update Material Test");
+            stage.initModality(Modality.NONE);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setResizable(false);
+
+            if (controller instanceof StageAware) {
+                ((StageAware) controller).setStage(stage);
+            }
+
+            if (onClose != null) {
+                stage.setOnHiding(event -> onClose.run());
+            }
+
+            stage.show();
+        } catch (Exception ex) {
+            logException(ERROR, WindowUtils.class.getName(), "OPEN_EDIT_MATERIAL_TEST_PAGE", ex);
+        }
+    }
+
+
+//    public static void OPEN_EDIT_MATERIAL_TEST_PAGE(int materialTestId, Runnable onClose) {
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/screens/AddMaterialTest.fxml"));
+//            Parent parent = fxmlLoader.load();
+//
+//            AddMaterialTestController controller = fxmlLoader.getController();
+//            controller.setMaterialTestData(materialTestId, true);
+//            controller.setSaveButton();
+//
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(parent));
+//            stage.setTitle("Update Material Test");
+//            stage.initModality(Modality.NONE);
+//            stage.initStyle(StageStyle.DECORATED);
+//            stage.setResizable(false);
+//
+//            if (onClose != null) {
+//                stage.setOnHiding(event -> onClose.run());
+//            }
+//
+//            stage.show();
+//        } catch (Exception ex) {
+//            logException(ERROR, WindowUtils.class.getName(), "OPEN_EDIT_MATERIAL_TEST_PAGE", ex);
+//        }
+//    }
 
     public static int getUserRoleInt(String role) {
        if (DEF.USER_ROLE_USER_STRING.equals(role)) {

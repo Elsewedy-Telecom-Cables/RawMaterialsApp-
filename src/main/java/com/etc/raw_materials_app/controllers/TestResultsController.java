@@ -1,5 +1,4 @@
 
-
 package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.MaterialTestDao;
@@ -48,11 +47,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.CheckComboBox;
@@ -88,12 +85,13 @@ public class TestResultsController implements Initializable {
     private int materialTestId;
     private String supplierName;
     private String materialName;
-    private String materialDesName;
+    private LocalDateTime materialTestcreationDate;
     private String poNo;
     private String oracleSample;
     private String itemCode;
     private String comment ;
     private Stage stage;
+
 
     private final ObservableList<TestResult> testResultsList = FXCollections.observableArrayList();
     private final List<String> selectedTestNames = new ArrayList<>();
@@ -117,17 +115,15 @@ public class TestResultsController implements Initializable {
 
         sample_comb.setItems(SampleDao.getAllSamples());
 
-
-
         // Load all tests
         ObservableList<TestName> allTestNames = TestNameDao.getAllTestNames();
 
-// Create ControlsFX CheckComboBox
+        // Create ControlsFX CheckComboBox
         CheckComboBox<TestName> checkComboBox = new CheckComboBox<>(allTestNames);
-        checkComboBox.setPrefWidth(350); // زيادة عرض الصندوق
+        checkComboBox.setPrefWidth(350); //
         checkComboBox.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;"); // تكبير النص
 
-// Listener for selection changes
+        // Listener for selection changes
         checkComboBox.getCheckModel().getCheckedItems().addListener((javafx.collections.ListChangeListener<TestName>) c -> {
             selectedTestNames.clear();
             selectedTestNameIds.clear();
@@ -139,7 +135,7 @@ public class TestResultsController implements Initializable {
             updateSelectedLabel();
         });
 
-// Place CheckComboBox in your layout
+       // Place CheckComboBox in your layout
         select_tests_btn.setOnAction(e -> {
             Stage popup = new Stage();
             VBox vbox = new VBox(10, checkComboBox);
@@ -147,7 +143,7 @@ public class TestResultsController implements Initializable {
             javafx.scene.Scene scene = new javafx.scene.Scene(vbox);
 
             // Optional: تكبير النافذة إذا كانت القائمة طويلة
-          //  checkComboBox.setPrefHeight(Math.min(allTestNames.size() * 30, 300));
+           //  checkComboBox.setPrefHeight(Math.min(allTestNames.size() * 30, 300));
 
             popup.setScene(scene);
             popup.setTitle("Select Tests");
@@ -166,11 +162,12 @@ public class TestResultsController implements Initializable {
     }
 
 
-    public void initData(int materialTestId, String supplierName, String materialName,
+    public void initData(int materialTestId, String supplierName, String materialName,LocalDateTime materialTestcreationDate,
                          String poNo, String oracleSample, String itemCode ,String comment) {
         this.materialTestId = materialTestId;
         this.supplierName = supplierName;
         this.materialName = materialName;
+        this.materialTestcreationDate = materialTestcreationDate ;
         this.poNo = poNo;
         this.oracleSample = oracleSample;
         this.itemCode = itemCode;
@@ -463,8 +460,8 @@ public class TestResultsController implements Initializable {
         fileChooser.setTitle("Save Excel File");
         fileChooser.setInitialFileName("Material_Testing_Report_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date()) + ".xlsx");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
-        java.io.File file = fileChooser.showSaveDialog(table_view.getScene().getWindow());
 
+        java.io.File file = fileChooser.showSaveDialog(table_view.getScene().getWindow());
         if (file != null) {
             try (Workbook workbook = new XSSFWorkbook()) {
                 Sheet sheet = workbook.createSheet("Material Testing Report");
@@ -477,6 +474,15 @@ public class TestResultsController implements Initializable {
                 Font boldFont = workbook.createFont();
                 boldFont.setBold(true);
                 centerStyle.setFont(boldFont);
+                // 2
+                CellStyle deptNameStyle = workbook.createCellStyle();
+                deptNameStyle.setAlignment(HorizontalAlignment.CENTER);
+                deptNameStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+                deptNameStyle.setWrapText(true);
+                boldFont = workbook.createFont();
+                boldFont.setBold(true);
+                boldFont.setFontHeightInPoints((short) 15);
+                deptNameStyle.setFont(boldFont);
 
                 CellStyle leftStyle = workbook.createCellStyle();
                 leftStyle.cloneStyleFrom(centerStyle);
@@ -493,7 +499,7 @@ public class TestResultsController implements Initializable {
                 titleStyle.setAlignment(HorizontalAlignment.CENTER);
                 titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
-                // Info style: Blue + borders + left align
+
                 CellStyle infoStyle = workbook.createCellStyle();
                 infoStyle.cloneStyleFrom(leftStyle);
                 infoStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(141, 180, 226), null));
@@ -548,7 +554,7 @@ public class TestResultsController implements Initializable {
                 deptRow.setHeight((short) (30 * 20));
                 Cell deptCell = deptRow.createCell(0);
                 deptCell.setCellValue("Quality Control Department");
-                deptCell.setCellStyle(centerStyle);
+                deptCell.setCellStyle(deptNameStyle);
                 sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 1));
 
                 // === TITLE ===
@@ -558,17 +564,18 @@ public class TestResultsController implements Initializable {
                 titleCell.setCellValue("Material Testing Report");
                 titleCell.setCellStyle(titleStyle);
                 sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 6));
-                // === INFO TABLE: 2 COLUMNS (Label | Value) - NO EMPTY COLUMN ===
-                // AI: Label in column 0 (merged 0-1), Value in column 2
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                // === INFO TABLE ===
                 String[] infoLabels = {
                         "Issue date:",
                         "Receiving Notice Number (P.O. No.):",
                         "Inspection Notice Number (Oracle sample N.O):",
                         "Supplier Name:"
                 };
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String[] infoValues = {
-                        dateFormat.format(new java.util.Date()),
+                        dateFormat.format(Date.from(materialTestcreationDate.atZone(ZoneId.systemDefault()).toInstant())),
                         poNo != null ? poNo : "",
                         oracleSample != null ? oracleSample : "",
                         supplierName != null ? supplierName : ""
@@ -577,78 +584,96 @@ public class TestResultsController implements Initializable {
                 int infoStartRow = 4;
                 for (int i = 0; i < infoLabels.length; i++) {
                     Row row = sheet.createRow(infoStartRow + i);
-                    row.setHeight((short) (25 * 20)); // Fixed height
-
-                    // Label (merged across columns 0 and 1)
+                    row.setHeight((short) (25 * 20));
                     Cell labelCell = row.createCell(0);
                     labelCell.setCellValue(infoLabels[i]);
                     labelCell.setCellStyle(infoStyle);
-
-                    // Dummy cell for merge
                     Cell dummyCell = row.createCell(1);
                     dummyCell.setCellStyle(infoStyle);
-
-                    // Merge label across 0-1
                     sheet.addMergedRegion(new CellRangeAddress(infoStartRow + i, infoStartRow + i, 0, 1));
-
-                    // Value in column 2
                     Cell valueCell = row.createCell(2);
                     valueCell.setCellValue(infoValues[i]);
                     valueCell.setCellStyle(infoStyle);
                 }
 
-
-                // === EMPTY ROW ===
-                sheet.createRow(infoStartRow + infoLabels.length);
-
                 // === MAIN TABLE HEADER ===
                 int headerRowNum = infoStartRow + infoLabels.length + 1;
                 Row headerRow = sheet.createRow(headerRowNum);
                 headerRow.setHeight((short) (headerRow.getHeight() * 2));
+
                 String[] headers = {
-                        "انواع الاختبارات", "Material Description", "Material Code", "Sample no.", "Requirement", "Actual", "Result (Pass/Fail)"
+                        "انواع الاختبارات",
+                        "Material Description",  // تم التعديل
+                        "Material Code",
+                        "Sample no.",
+                        "Requirement",
+                        "Actual",
+                        "Result (Pass/Fail)"
                 };
+
                 for (int i = 0; i < headers.length; i++) {
                     Cell cell = headerRow.createCell(i);
                     cell.setCellValue(headers[i]);
                     cell.setCellStyle(tableHeaderStyle);
                 }
 
-                // === MAIN TABLE DATA ===
-                int firstDataRow = headerRowNum + 1;
-                int rowNum = firstDataRow;
+                // === MAIN TABLE DATA + MERGE LOGIC ===
+                int rowNum = headerRowNum + 1;
                 List<TestResult> results = new ArrayList<>(table_view.getItems());
-                boolean isFirst = true;
 
-                for (TestResult result : results) {
+                // ترتيب حسب Sample No. لضمان التجميع الصحيح
+                results.sort(Comparator.comparing(
+                        r -> r.getSampleName() != null ? r.getSampleName() : "",
+                        Comparator.nullsLast(String::compareTo)
+                ));
+
+                int materialDescCol = 1;
+                int materialCodeCol = 2;
+                int sampleCol = 3;
+
+                String currentSample = null;
+                int sampleStartRow = -1;
+
+                // لتتبع بداية كل مجموعة Material (نفس القيم دائمًا)
+                int groupStartRow = rowNum;
+
+                for (int i = 0; i < results.size(); i++) {
+                    TestResult result = results.get(i);
+                    String sampleName = result.getSampleName() != null ? result.getSampleName() : "";
+
                     Row row = sheet.createRow(rowNum++);
+
+                    // 1. انواع الاختبارات
                     Cell testNameCell = row.createCell(0);
                     testNameCell.setCellValue(result.getTestName());
                     testNameCell.setCellStyle(borderedCenter);
 
-                    if (isFirst) {
-                        Cell descCell = row.createCell(1);
-                        descCell.setCellValue(materialDesName);
-                        descCell.setCellStyle(borderedCenter);
+                    // 2. Material Description (سيُدمج لاحقًا)
+                    Cell materialCell = row.createCell(materialDescCol);
+                    materialCell.setCellValue(materialName); // أو materialDescription
+                    materialCell.setCellStyle(borderedCenter);
 
-                        Cell codeCell = row.createCell(2);
-                        codeCell.setCellValue(itemCode);
-                        codeCell.setCellStyle(borderedCenter);
+                    // 3. Material Code (سيُدمج لاحقًا)
+                    Cell codeCell = row.createCell(materialCodeCol);
+                    codeCell.setCellValue(itemCode);
+                    codeCell.setCellStyle(borderedCenter);
 
-                        Cell sampleCell = row.createCell(3);
-                        sampleCell.setCellValue(result.getSampleName() != null ? result.getSampleName() : "");
-                        sampleCell.setCellStyle(borderedCenter);
-                        isFirst = false;
-                    }
+                    // 4. Sample No.
+                    Cell sampleCell = row.createCell(sampleCol);
+                    sampleCell.setCellValue(sampleName);
+                    sampleCell.setCellStyle(borderedCenter);
 
+                    // 5. Requirement
                     Cell reqCell = row.createCell(4);
                     reqCell.setCellValue(result.getRequirement() != null ? result.getRequirement() : "");
                     reqCell.setCellStyle(borderedCenter);
 
+                    // 6. Actual
                     Cell actualCell = row.createCell(5);
                     actualCell.setCellValue(result.getActual() != null ? result.getActual() : "");
                     actualCell.setCellStyle(borderedCenter);
 
+                    // 7. Result
                     Cell resultCell = row.createCell(6);
                     String resultText = "";
                     CellStyle resultStyle = borderedCenter;
@@ -658,28 +683,47 @@ public class TestResultsController implements Initializable {
                     }
                     resultCell.setCellValue(resultText);
                     resultCell.setCellStyle(resultStyle);
+
+                    // === دمج Sample No. ===
+                    if (!sampleName.equals(currentSample)) {
+                        // دمج المجموعة السابقة
+                        if (currentSample != null && sampleStartRow != -1) {
+                            if (rowNum - 2 >= sampleStartRow) {
+                                sheet.addMergedRegion(new CellRangeAddress(sampleStartRow, rowNum - 2, sampleCol, sampleCol));
+                            }
+                        }
+                        currentSample = sampleName;
+                        sampleStartRow = rowNum - 1;
+                    }
                 }
 
-                int lastDataRow = rowNum - 1;
-                if (!results.isEmpty()) {
-                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 1, 1));
-                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 2, 2));
-                    sheet.addMergedRegion(new CellRangeAddress(firstDataRow, lastDataRow, 3, 3));
+                // دمج آخر مجموعة Sample No.
+                if (currentSample != null && sampleStartRow != -1 && rowNum - 1 > sampleStartRow) {
+                    sheet.addMergedRegion(new CellRangeAddress(sampleStartRow, rowNum - 1, sampleCol, sampleCol));
                 }
 
-                // === COMMENTS: FULL WIDTH, LEFT-ALIGNED, NO BORDERS ===
+                // === دمج Material Description + Material Code (لكل مجموعة Sample) ===
+                // نفترض أن كل Sample لها نفس Material Description و Code
+                int descStart = groupStartRow;
+                int descEnd = rowNum - 1;
+                if (descEnd > descStart) {
+                    sheet.addMergedRegion(new CellRangeAddress(descStart, descEnd, materialDescCol, materialDescCol));
+                    sheet.addMergedRegion(new CellRangeAddress(descStart, descEnd, materialCodeCol, materialCodeCol));
+                }
+
+                // === COMMENTS ===
                 Row commentsRow = sheet.createRow(rowNum++);
-                commentsRow.setHeight((short) (40 * 20)); // Tall row for long text
+                commentsRow.setHeight((short) (40 * 20));
                 Cell commentsCell = commentsRow.createCell(0);
                 commentsCell.setCellValue("Comments: " + (comment != null ? comment : ""));
                 commentsCell.setCellStyle(leftStyle);
-                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 0, 6)); // Full width
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 0, 6));
 
                 // === EMPTY ROWS ===
                 sheet.createRow(rowNum++);
                 sheet.createRow(rowNum++);
 
-                // === FOOTER ===
+                // === FOOTER (Manual) ===
                 Row footerRow = sheet.createRow(rowNum++);
                 Cell testedCell = footerRow.createCell(0);
                 testedCell.setCellValue("Tested by: m.abdelmgged");
@@ -690,6 +734,12 @@ public class TestResultsController implements Initializable {
                 revisedCell.setCellValue("Revised by:");
                 revisedCell.setCellStyle(leftStyle);
                 sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 4, 6));
+
+                // === PAGE FOOTER (Print Footer) - حجم 18 ===
+                HeaderFooter footer = sheet.getFooter();
+                footer.setLeft("&\"Calibri\"&16&B&IQC-FR-20");
+                footer.setCenter("&\"Calibri\"&16&B&IRev.(0)");
+                footer.setRight("&\"Calibri\"&16&B&IIssue date: 01/01/2024");
 
                 // === AUTO-SIZE COLUMNS ===
                 for (int i = 0; i < headers.length; i++) {
@@ -704,11 +754,14 @@ public class TestResultsController implements Initializable {
                     workbook.write(fileOut);
                     WindowUtils.ALERT("Success", "Excel file exported successfully to " + file.getAbsolutePath(), WindowUtils.ALERT_INFORMATION);
                 }
+
             } catch (IOException e) {
                 Logging.logException("ERROR", TestResultsController.class.getName(), "exportToExcel", e);
                 WindowUtils.ALERT("Error", "Failed to export Excel file", WindowUtils.ALERT_ERROR);
             }
         }
     }
+
+
 
 }

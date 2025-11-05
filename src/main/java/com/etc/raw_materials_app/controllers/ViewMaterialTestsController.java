@@ -342,6 +342,7 @@ public class ViewMaterialTestsController implements Initializable {
                                         selected.getMaterialTestId(),
                                         selected.getSupplierName(),
                                         selected.getMaterialName(),
+                                        selected.getCreationDate(),
                                         selected.getPoNo(),
                                         selected.getOracleSample(),
                                         selected.getItemCode(),

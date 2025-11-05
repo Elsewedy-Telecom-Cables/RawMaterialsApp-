@@ -65,17 +65,17 @@
             </VBox>
          </children>
       </HBox>
-      <TableView fx:id="material_tests_table_view" layoutX="7.2" layoutY="180.0" prefHeight="448.0" prefWidth="1288.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="155.0">
+      <TableView fx:id="material_tests_table_view" layoutX="4.0" layoutY="164.0" prefHeight="448.0" prefWidth="1288.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="5.599999999999909" AnchorPane.topAnchor="164.0">
         <columns>
             <TableColumn fx:id="no_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="No" />
             <TableColumn fx:id="id_column" maxWidth="1.7976931348623157E308" minWidth="30.0" prefWidth="30.0" text="ID" />
           <TableColumn fx:id="section_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Section" />
             <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="150.0" text="Supplier" />
             <TableColumn fx:id="supplier_code_column" maxWidth="1.7976931348623157E308" minWidth="65.0" text="Sup Code" />
-            <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="90.0" text="Sup-Country" />
-            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="180.0" text="Material Description" />
+            <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="85.0" text="Sup-Country" />
+            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="175.0" text="Material Description" />
             <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Item Code" />
-            <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="110.0" text="Creation Date" />
+            <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="120.0" text="Creation Date" />
             <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="PO" />
             <TableColumn fx:id="receipt_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="Receipt" />
             <TableColumn fx:id="total_quantity_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="T Quantity" />
@@ -392,5 +392,48 @@
             </HBox>
          </children>
       </VBox>
+      <HBox alignment="CENTER_LEFT" layoutX="4.8" layoutY="611.0" prefHeight="26.0" prefWidth="1450.0" AnchorPane.bottomAnchor="48.6" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="QC-FR-19" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="54.0" text="Rev.(0)" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Issue date : 01/01/2024" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

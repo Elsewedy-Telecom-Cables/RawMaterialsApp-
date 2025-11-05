@@ -3,6 +3,7 @@ package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.*;
 import com.etc.raw_materials_app.models.*;
+import com.etc.raw_materials_app.services.StageAware;
 import com.etc.raw_materials_app.services.WindowUtils;
 import com.etc.raw_materials_app.models.UserContext;
 import com.etc.raw_materials_app.logging.Logging;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddMaterialTestController implements Initializable {
+public class AddMaterialTestController implements Initializable , StageAware {
 
     @FXML private TextField accepted_quantity_textF;
     @FXML private Button clear_btn;
@@ -48,17 +49,13 @@ public class AddMaterialTestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> header_lbl.requestFocus());
-
         clear_btn.setCursor(Cursor.HAND);
         save_btn.setCursor(Cursor.HAND);
-
 
         section_comb.setItems(SectionDao.getAllSections());
         material_comb.setItems(MaterialDao.getAllMaterials());
         supplier_comb.setItems(SupplierDao.getAllSuppliers());
         country_comb.setItems(FXCollections.observableArrayList());
-
-
 
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             updateSupplierCountries(newVal);
@@ -86,30 +83,10 @@ public class AddMaterialTestController implements Initializable {
         }
     }
 
-
     @FXML
     void clear(ActionEvent event) {
         clearHelp();
     }
-
-    private void clearHelp() {
-        po_no_textF.clear();
-        receipt_textF.clear();
-        total_quantity_textF.clear();
-        accepted_quantity_textF.clear();
-        rejected_quantity_textF.clear();
-        oracle_sample_textF.clear();
-        spqr_textF.clear();
-        notes_textF.clear();
-        comment_textF.clear();
-
-        section_comb.getSelectionModel().clearSelection();
-        supplier_comb.getSelectionModel().clearSelection();
-        country_comb.getSelectionModel().clearSelection();
-        material_comb.getSelectionModel().clearSelection();
-
-    }
-
 
     public void setMaterialTestData(int materialTestId, boolean update) {
         try {
@@ -203,7 +180,6 @@ public class AddMaterialTestController implements Initializable {
                     });
                 }
 
-                closeWindow();
             } else {
                 WindowUtils.ALERT("Error", "Failed to save material test.", WindowUtils.ALERT_ERROR);
             }
@@ -257,7 +233,7 @@ public class AddMaterialTestController implements Initializable {
             } else {
                 boolean success = updateMaterialTest();
                 if (success) {
-                    closeWindow();
+                    Platform.runLater(this::closeWindow);
                 }
             }
         } catch (Exception ex) {
@@ -269,11 +245,36 @@ public class AddMaterialTestController implements Initializable {
     public void closeWindow() {
         if (stage != null) {
             stage.close();
+        } else {
+           System.out.println("Stage is null — cannot close window!");
         }
+    }
+
+    private void clearHelp() {
+        po_no_textF.clear();
+        receipt_textF.clear();
+        total_quantity_textF.clear();
+        accepted_quantity_textF.clear();
+        rejected_quantity_textF.clear();
+        oracle_sample_textF.clear();
+        spqr_textF.clear();
+        notes_textF.clear();
+        comment_textF.clear();
+
+        section_comb.getSelectionModel().clearSelection();
+        supplier_comb.getSelectionModel().clearSelection();
+        country_comb.getSelectionModel().clearSelection();
+        material_comb.getSelectionModel().clearSelection();
+
     }
 
     public void setSaveButton() {
         save_btn.setText("Update");
+    }
+
+    @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
 

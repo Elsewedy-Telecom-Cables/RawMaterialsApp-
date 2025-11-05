@@ -82,25 +82,16 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="295.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="345.0">
                <children>
-                  <Button fx:id="addMaterialTest_btn" mnemonicParsing="false" onAction="#openMaterialTest" prefHeight="36.0" prefWidth="242.0" styleClass="button-24" text="Adding Material Test + Files" textFill="WHITE">
+                  <Button fx:id="addMaterialTest_btn" mnemonicParsing="false" onAction="#openMaterialTest" prefHeight="38.0" prefWidth="320.0" styleClass="button-22" text="Adding Material Test - Files - Results" textFill="WHITE">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="195.0">
-               <children>
-                  <Button fx:id="dashboard_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#OpenDashboard" prefHeight="38.0" prefWidth="140.0" styleClass="button-22" text="Dashboard" textFill="WHITE">
-                     <font>
-                        <Font name="Montserrat Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="244.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="245.0">
                <children>
                   <Button fx:id="prepare_materials_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#open_prepare_materials" prefHeight="38.0" prefWidth="203.0" styleClass="button-25" text="Adding Materials Data" textFill="WHITE">
                      <font>
@@ -108,6 +99,9 @@
                      </font>
                   </Button>
                </children>
+               <HBox.margin>
+                  <Insets left="8.0" />
+               </HBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="174.0">
                <children>
@@ -126,7 +120,7 @@
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="73.0" layoutY="161.0" prefHeight="273.0" prefWidth="822.0">
+      <HBox alignment="CENTER" layoutX="71.0" layoutY="166.0" prefHeight="273.0" prefWidth="822.0">
          <children>
             <ImageView fx:id="icon01_view" fitHeight="233.0" fitWidth="266.0" pickOnBounds="true" smooth="false" />
             <ImageView fx:id="icon02_view" fitHeight="193.0" fitWidth="215.0" pickOnBounds="true" />

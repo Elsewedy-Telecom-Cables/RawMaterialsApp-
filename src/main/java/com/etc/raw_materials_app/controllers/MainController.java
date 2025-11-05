@@ -34,7 +34,6 @@ public class MainController implements Initializable {
     @FXML private ImageView icon03_view;
     @FXML private Button prepare_data_btn;
     @FXML private Button addMaterialTest_btn;
-    @FXML private Button dashboard_btn;
     @FXML private Button prepare_materials_btn;
 
 
@@ -107,10 +106,6 @@ public class MainController implements Initializable {
         OPEN_VIEW_MATERIAL_TESTS_PAGE();
     }
 
-    @FXML
-    void OpenDashboard(ActionEvent event) {
-
-    }
 
 
 }

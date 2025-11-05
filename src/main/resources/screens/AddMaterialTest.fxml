@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -70,6 +71,24 @@
                   <ComboBox fx:id="material_comb" prefHeight="38.0" prefWidth="560.0" style="-fx-font-weight: bold; -fx-font-size: 15;" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="306.0">
+               <children>
+                  <Label text="SPQR">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="spqr_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
                   <Label text="Notes">
@@ -90,32 +109,17 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="651.2" layoutY="60.0" prefHeight="185.0" prefWidth="256.0" AnchorPane.leftAnchor="651.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="651.2" layoutY="147.2" prefHeight="99.0" prefWidth="256.0" AnchorPane.leftAnchor="651.0" AnchorPane.rightAnchor="315.0" AnchorPane.topAnchor="147.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
-               <children>
-                  <Label text="Total Quantity">
-                     <font>
-                        <Font name="Montserrat Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
-               <children>
-                  <TextField fx:id="total_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
                   <Label text="Accepted Quantity">
                      <font>
                         <Font name="Montserrat Bold" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
@@ -150,7 +154,7 @@
             </Label>
          </children>
       </HBox>
-      <VBox layoutX="947.2" layoutY="60.0" prefHeight="186.0" prefWidth="255.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="947.2" layoutY="147.2" prefHeight="99.0" prefWidth="255.0" AnchorPane.leftAnchor="947.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
          <children>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
@@ -158,30 +162,15 @@
                      <font>
                         <Font name="Montserrat Bold" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
                <children>
                   <TextField fx:id="rejected_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="306.0">
-               <children>
-                  <Label text="SPQR">
-                     <font>
-                        <Font name="Montserrat Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
-               <children>
-                  <TextField fx:id="spqr_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -260,6 +249,28 @@
                   <TextField fx:id="comment_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="652.0" layoutY="59.0" prefHeight="99.0" prefWidth="550.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
+               <children>
+                  <Label text="Total Quantity">
+                     <font>
+                        <Font name="Montserrat Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
+               <children>
+                  <TextField fx:id="total_quantity_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </TextField>
                </children>

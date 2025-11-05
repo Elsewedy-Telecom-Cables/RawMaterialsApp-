@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="705.0" prefWidth="1484.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.TestResultsController">
    <children>
-      <TableView fx:id="table_view" layoutX="15.2" layoutY="122.4" prefHeight="578.0" prefWidth="1474.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="122.0">
+      <TableView fx:id="table_view" layoutX="15.2" layoutY="122.4" prefHeight="578.0" prefWidth="1474.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="122.0">
         <columns>
           <TableColumn fx:id="test_id_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="40.0" text="ID" />
             <TableColumn fx:id="material_test_id_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="45.0" text="M T ID" />
@@ -113,6 +113,49 @@
                   <ImageView fx:id="excel_image_view" fitHeight="24.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="14.8" layoutY="621.0" prefHeight="26.0" prefWidth="1450.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="QC-FR-20" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="54.0" text="Rev.(0)" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Issue date : 01/01/2024" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </HBox>
          </children>
       </HBox>
    </children>

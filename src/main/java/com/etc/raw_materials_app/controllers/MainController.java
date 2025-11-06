@@ -74,7 +74,7 @@ public class MainController implements Initializable {
         try {
             // Super Admin and Department Manager
             int role = UserContext.getCurrentUser().getRole();
-            if (role == 2) {
+            if (role == 4) {
                 CLOSE(event);
                 OPEN_VIEW_USERS_PAGE();
             } else {

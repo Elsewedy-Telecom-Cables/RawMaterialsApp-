@@ -97,12 +97,12 @@ public class TestResultsController implements Initializable {
     private final List<String> selectedTestNames = new ArrayList<>();
     private final List<Integer> selectedTestNameIds = new ArrayList<>();
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
-    private FilteredList<TestName> filteredTestNames;
-
+    private CheckComboBox<TestName> checkComboBox;
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -119,9 +119,9 @@ public class TestResultsController implements Initializable {
         ObservableList<TestName> allTestNames = TestNameDao.getAllTestNames();
 
         // Create ControlsFX CheckComboBox
-        CheckComboBox<TestName> checkComboBox = new CheckComboBox<>(allTestNames);
+        checkComboBox = new CheckComboBox<>(allTestNames);
         checkComboBox.setPrefWidth(350); //
-        checkComboBox.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;"); // تكبير النص
+        checkComboBox.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
         // Listener for selection changes
         checkComboBox.getCheckModel().getCheckedItems().addListener((javafx.collections.ListChangeListener<TestName>) c -> {
@@ -135,6 +135,11 @@ public class TestResultsController implements Initializable {
             updateSelectedLabel();
         });
 
+        checkComboBox.getCheckModel().clearChecks();
+        selectedTestNames.clear();
+        selectedTestNameIds.clear();
+        updateSelectedLabel();
+
        // Place CheckComboBox in your layout
         select_tests_btn.setOnAction(e -> {
             Stage popup = new Stage();
@@ -142,7 +147,6 @@ public class TestResultsController implements Initializable {
             vbox.setPadding(new javafx.geometry.Insets(10));
             javafx.scene.Scene scene = new javafx.scene.Scene(vbox);
 
-            // Optional: تكبير النافذة إذا كانت القائمة طويلة
            //  checkComboBox.setPrefHeight(Math.min(allTestNames.size() * 30, 300));
 
             popup.setScene(scene);
@@ -151,8 +155,6 @@ public class TestResultsController implements Initializable {
             popup.setAlwaysOnTop(true);
             popup.show();
         });
-
-
 
 
         // Setup table
@@ -238,12 +240,14 @@ public class TestResultsController implements Initializable {
 
     }
 
+
     @FXML
     void clear_selected_result(MouseEvent event) {
+        checkComboBox.getCheckModel().clearChecks();
         selectedTestNames.clear();
         selectedTestNameIds.clear();
         updateSelectedLabel();
-        sample_comb.getSelectionModel().clearSelection();
+        if (sample_comb != null) sample_comb.getSelectionModel().clearSelection();
     }
 
     private void setupTableColumns() {
@@ -603,7 +607,7 @@ public class TestResultsController implements Initializable {
 
                 String[] headers = {
                         "انواع الاختبارات",
-                        "Material Description",  // تم التعديل
+                        "Material Description",
                         "Material Code",
                         "Sample no.",
                         "Requirement",
@@ -684,7 +688,7 @@ public class TestResultsController implements Initializable {
                     resultCell.setCellValue(resultText);
                     resultCell.setCellStyle(resultStyle);
 
-                    // === دمج Sample No. ===
+                    // ===  Sample No. ===
                     if (!sampleName.equals(currentSample)) {
                         // دمج المجموعة السابقة
                         if (currentSample != null && sampleStartRow != -1) {
@@ -697,7 +701,7 @@ public class TestResultsController implements Initializable {
                     }
                 }
 
-                // دمج آخر مجموعة Sample No.
+                // Merge Sample No.
                 if (currentSample != null && sampleStartRow != -1 && rowNum - 1 > sampleStartRow) {
                     sheet.addMergedRegion(new CellRangeAddress(sampleStartRow, rowNum - 1, sampleCol, sampleCol));
                 }
@@ -761,7 +765,6 @@ public class TestResultsController implements Initializable {
             }
         }
     }
-
 
 
 }

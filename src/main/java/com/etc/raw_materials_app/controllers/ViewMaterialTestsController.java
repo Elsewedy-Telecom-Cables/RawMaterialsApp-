@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import org.apache.poi.ss.usermodel.Cell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,12 +27,24 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -80,13 +93,12 @@ public class ViewMaterialTestsController implements Initializable {
     @FXML private TextField filter_item_code_textF;
     @FXML private TableColumn<MaterialTest, String> supplier_code_column;
 
-
-
     @FXML private Label welcome_lbl;
     @FXML private Label date_lbl;
     @FXML private ImageView logo_image_view;
+    @FXML private ImageView excel_image_view;
 
-    private MaterialTest materialTestObj = null;
+
 
     private ObservableList<MaterialTest> materialTestsList;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
@@ -126,6 +138,10 @@ public class ViewMaterialTestsController implements Initializable {
     }
 
     private void initializeComboBoxes() {
+
+        Image img2 = new Image(Objects.requireNonNull(ViewMaterialTestsController.class.getResourceAsStream("/images/excel.png")));
+        excel_image_view.setImage(img2);
+
         section_comb.setItems(SectionDao.getAllSections());
         supplier_comb.setItems(SupplierDao.getAllSuppliers());
         supplier_country_comb.setItems(CountryDao.getAllCountries());
@@ -160,10 +176,11 @@ public class ViewMaterialTestsController implements Initializable {
 
         String itemCode;
         if (filter_item_code_textF.getText() != null && !filter_item_code_textF.getText().trim().isEmpty()) {
-            itemCode = filter_item_code_textF.getText().trim();
+            itemCode = filter_item_code_textF.getText().trim().toLowerCase();
         } else {
             itemCode = null;
         }
+
 
         Integer sectionId = section_comb.getSelectionModel().getSelectedItem() != null
                 ? section_comb.getSelectionModel().getSelectedItem().getSectionId() : null;
@@ -198,7 +215,7 @@ public class ViewMaterialTestsController implements Initializable {
 
         List<MaterialTest> filtered = allTests.stream()
                 .filter(t -> finalTestId == null || t.getMaterialTestId() == finalTestId)
-                .filter(t -> finalItemCode == null || t.getItemCode().equals(finalItemCode))
+                .filter(t -> finalItemCode == null || t.getItemCode().contains(finalItemCode))
                 .filter(t -> finalSectionId == null || t.getSectionId() == finalSectionId)
                 .filter(t -> finalSupplierId == null || t.getSupplierId() == finalSupplierId)
                 .filter(t -> finalCountryId == null || t.getCountryId() == finalCountryId)
@@ -223,7 +240,6 @@ public class ViewMaterialTestsController implements Initializable {
         materialTestsList.setAll(filtered);
         updateMaterialTestCount();
     }
-
 
 
     private void updateSupplierCountries(Supplier supplier) {
@@ -384,7 +400,7 @@ public class ViewMaterialTestsController implements Initializable {
                     editIcon.setOnMouseClicked(event -> {
                         MaterialTest mt = getTableView().getItems().get(getIndex());
                         if (mt != null) {
-                            materialTestObj = mt;   // ليس له دور هنا لكن ربما ساحتاجه فيما بعد
+                           // materialTestObj = mt;
                             WindowUtils.OPEN_EDIT_MATERIAL_TEST_PAGE(mt.getMaterialTestId(), () -> {
                                 materialTestsList.set(getIndex(), MaterialTestDao.getMaterialTestById(mt.getMaterialTestId()));
                                 material_tests_table_view.refresh();
@@ -634,6 +650,13 @@ public class ViewMaterialTestsController implements Initializable {
         filterMaterialTests();
     }
 
+    @FXML
+    void filterItemCode(KeyEvent event) {
+        filterMaterialTests();
+    }
+
+
+
 
     @FXML
     void update(ActionEvent event) {
@@ -664,5 +687,237 @@ public class ViewMaterialTestsController implements Initializable {
     void openAddMaterialTest(ActionEvent event) {
         OPEN_ADD_MATERIAL_TESTS_PAGE(false, this);
     }
-}
+
+    @FXML
+    void exportToExcel(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Excel File");
+        fileChooser.setInitialFileName("Incoming_Material_Record_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date()) + ".xlsx");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
+
+        java.io.File file = fileChooser.showSaveDialog(material_tests_table_view.getScene().getWindow());
+        if (file != null) {
+            try (Workbook workbook = new XSSFWorkbook()) {
+                Sheet sheet = workbook.createSheet("Incoming Material Record");
+
+                // === STYLES ===
+                CellStyle centerStyle = workbook.createCellStyle();
+                centerStyle.setAlignment(HorizontalAlignment.CENTER);
+                centerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+                centerStyle.setWrapText(true);
+                Font boldFont = workbook.createFont();
+                boldFont.setBold(true);
+                centerStyle.setFont(boldFont);
+
+                CellStyle deptNameStyle = workbook.createCellStyle();
+                deptNameStyle.cloneStyleFrom(centerStyle);
+                boldFont = workbook.createFont();
+                boldFont.setBold(true);
+                boldFont.setFontHeightInPoints((short) 15);
+                deptNameStyle.setFont(boldFont);
+
+                CellStyle titleStyle = workbook.createCellStyle();
+                Font titleFont = workbook.createFont();
+                titleFont.setFontName("Calibri");
+                titleFont.setFontHeightInPoints((short) 18);
+                titleFont.setBold(true);
+                titleFont.setUnderline(Font.U_SINGLE);
+                titleStyle.setFont(titleFont);
+                titleStyle.setAlignment(HorizontalAlignment.CENTER);
+                titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+                // لون أزرق سماوي فاتح للهيدر
+                CellStyle tableHeaderStyle = workbook.createCellStyle();
+                tableHeaderStyle.cloneStyleFrom(centerStyle);
+                tableHeaderStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(135, 206, 235), null)); // Sky Blue
+                tableHeaderStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                tableHeaderStyle.setBorderTop(BorderStyle.THIN);
+                tableHeaderStyle.setBorderBottom(BorderStyle.THIN);
+                tableHeaderStyle.setBorderLeft(BorderStyle.THIN);
+                tableHeaderStyle.setBorderRight(BorderStyle.THIN);
+
+                CellStyle borderedCenter = workbook.createCellStyle();
+                borderedCenter.cloneStyleFrom(centerStyle);
+                borderedCenter.setBorderTop(BorderStyle.THIN);
+                borderedCenter.setBorderBottom(BorderStyle.THIN);
+                borderedCenter.setBorderLeft(BorderStyle.THIN);
+                borderedCenter.setBorderRight(BorderStyle.THIN);
+
+                // === LOGO ===
+                Row logoRow = sheet.createRow(0);
+                logoRow.setHeight((short) (60 * 20));
+                sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 1));
+                InputStream logoStream = ViewMaterialTestsController.class.getResourceAsStream("/images/logo_excel.png");
+                if (logoStream != null) {
+                    byte[] bytes = logoStream.readAllBytes();
+                    int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+                    XSSFDrawing drawing = (XSSFDrawing) sheet.createDrawingPatriarch();
+                    XSSFClientAnchor anchor = new XSSFClientAnchor(100 * 1000, 100 * 1000, -100 * 1000, -100 * 1000, (short) 0, 0, (short) 2, 1);
+                    drawing.createPicture(anchor, pictureIdx);
+                    logoStream.close();
+                }
+
+                // === DEPARTMENT ===
+                Row deptRow = sheet.createRow(1);
+                deptRow.setHeight((short) (30 * 20));
+                Cell deptCell = deptRow.createCell(0);
+                deptCell.setCellValue("Quality Control Department");
+                deptCell.setCellStyle(deptNameStyle);
+                sheet.addMergedRegion(new CellRangeAddress(1, 2, 0, 1));
+
+                // === TITLE ===
+                Row titleRow = sheet.createRow(3);
+                titleRow.setHeight((short) (40 * 20));
+                Cell titleCell = titleRow.createCell(0);
+                titleCell.setCellValue("Incoming Material Record");
+                titleCell.setCellStyle(titleStyle);
+                sheet.addMergedRegion(new CellRangeAddress(3, 3, 0, 13));
+
+                // === MAIN TABLE HEADER ===
+                int headerRowNum = 5;
+                Row headerRow = sheet.createRow(headerRowNum);
+                headerRow.setHeight((short) (60 * 20)); // ارتفاع أكبر لاستيعاب سطرين
+
+                // عناوين الهيدر مكتوبة على سطرين باستخدام \n
+                String[] headers = {
+                        "Receiving Date",
+                        "Supplier Name",
+                        "Supplier Country/\nRegion",
+                        "Receiving Notice\nNumber (P.O. No.)",
+                        "Inspection Notice Number\n(Oracle sample N.O)",
+                        "Material\nDescription",
+                        "Item Code",
+                        "Supplier Code",
+                        "Total\nQuantity",
+                        "Accepted\nQuantity",
+                        "Rejected\nQuantity",
+                        "SPQR",
+                        "Tested by",
+                        "Remarks"
+                };
+
+                for (int i = 0; i < headers.length; i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(headers[i]);
+                    cell.setCellStyle(tableHeaderStyle);
+                }
+
+                // === MAIN TABLE DATA ===
+                int rowNum = headerRowNum + 1;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+                for (MaterialTest mt : material_tests_table_view.getItems()) {
+                    Row row = sheet.createRow(rowNum++);
+                    row.setHeight((short) (30 * 20));
+
+                    Cell cell0 = row.createCell(0);
+                    cell0.setCellValue(mt.getCreationDate() != null ? dateFormat.format(Date.from(mt.getCreationDate().atZone(ZoneId.systemDefault()).toInstant())) : "");
+                    cell0.setCellStyle(borderedCenter);
+
+                    Cell cell1 = row.createCell(1);
+                    cell1.setCellValue(mt.getSupplierName() != null ? mt.getSupplierName() : "");
+                    cell1.setCellStyle(borderedCenter);
+
+                    Cell cell2 = row.createCell(2);
+                    cell2.setCellValue(mt.getCountryName() != null ? mt.getCountryName() : "");
+                    cell2.setCellStyle(borderedCenter);
+
+                    Cell cell3 = row.createCell(3);
+                    cell3.setCellValue(mt.getPoNo() != null ? mt.getPoNo() : "");
+                    cell3.setCellStyle(borderedCenter);
+
+                    Cell cell4 = row.createCell(4);
+                    cell4.setCellValue(mt.getOracleSample() != null ? mt.getOracleSample() : "");
+                    cell4.setCellStyle(borderedCenter);
+
+                    Cell cell5 = row.createCell(5);
+                    cell5.setCellValue(mt.getMaterialName() != null ? mt.getMaterialName() : "");
+                    cell5.setCellStyle(borderedCenter);
+
+                    Cell cell6 = row.createCell(6);
+                    cell6.setCellValue(mt.getItemCode() != null ? mt.getItemCode() : "");
+                    cell6.setCellStyle(borderedCenter);
+
+                    Cell cell7 = row.createCell(7);
+                    cell7.setCellValue(mt.getSupplierCode() != null ? mt.getSupplierCode() : "");
+                    cell7.setCellStyle(borderedCenter);
+
+                    Cell cell8 = row.createCell(8);
+                    cell8.setCellValue(mt.getTotalQuantity());
+                    cell8.setCellStyle(borderedCenter);
+
+                    Cell cell9 = row.createCell(9);
+                    cell9.setCellValue(mt.getQuantityAccepted());
+                    cell9.setCellStyle(borderedCenter);
+
+                    Cell cell10 = row.createCell(10);
+                    cell10.setCellValue(mt.getQuantityRejected());
+                    cell10.setCellStyle(borderedCenter);
+
+                    Cell cell11 = row.createCell(11);
+                    cell11.setCellValue(mt.getSpqr() != null ? mt.getSpqr() : "");
+                    cell11.setCellStyle(borderedCenter);
+
+                    Cell cell12 = row.createCell(12);
+                    cell12.setCellValue(mt.getUserFullName() != null ? mt.getUserFullName() : "");
+                    cell12.setCellStyle(borderedCenter);
+
+                    Cell cell13 = row.createCell(13);
+                    cell13.setCellValue(mt.getNotes() != null ? mt.getNotes() : "");
+                    cell13.setCellStyle(borderedCenter);
+                }
+
+                // === EMPTY ROWS ===
+                sheet.createRow(rowNum++);
+                sheet.createRow(rowNum++);
+
+                // === FOOTER (Manual) ===
+                Row footerRow = sheet.createRow(rowNum++);
+                Cell testedCell = footerRow.createCell(0);
+                testedCell.setCellValue("Prepared by: " + UserContext.getCurrentUser().getFullName());
+                testedCell.setCellStyle(centerStyle);
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 0, 4));
+
+                Cell revisedCell = footerRow.createCell(8);
+                revisedCell.setCellValue("Revised by:");
+                revisedCell.setCellStyle(centerStyle);
+                sheet.addMergedRegion(new CellRangeAddress(rowNum - 1, rowNum - 1, 8, 13));
+
+                // === PRINT FOOTER (IQC-FR-19) ===
+                HeaderFooter footer = sheet.getFooter();
+                footer.setLeft("&\"Calibri\"&16&B&IQC-FR-19");
+                footer.setCenter("&\"Calibri\"&16&B&IRev.(0)");
+                footer.setRight("&\"Calibri\"&16&B&IIssue date: 01/01/2024");
+
+                // === AUTO-SIZE + عرض أكبر لأول عمودين (Logo + Dept) ===
+                for (int i = 0; i < headers.length; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+
+                // تكبير عرض العمودين الأوليين فقط (Logo + Dept Name)
+                sheet.setColumnWidth(0, 18 * 256); // أوسع شوية
+                sheet.setColumnWidth(1, 20 * 256);
+
+                // باقي الأعمدة: حد أدنى وأقصى
+                for (int i = 2; i < headers.length; i++) {
+                    int width = sheet.getColumnWidth(i) / 256;
+                    if (width < 12) sheet.setColumnWidth(i, 12 * 256);
+                    if (width > 50) sheet.setColumnWidth(i, 40 * 256);
+                }
+
+                // === WRITE FILE ===
+                try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                    workbook.write(fileOut);
+                    WindowUtils.ALERT("Success", "Excel file exported successfully!\n" + file.getAbsolutePath(), WindowUtils.ALERT_INFORMATION);
+                }
+
+            } catch (IOException e) {
+                Logging.logException("ERROR", ViewMaterialTestsController.class.getName(), "exportToExcel", e);
+                WindowUtils.ALERT("Error", "Failed to export Excel file.\n" + e.getMessage(), WindowUtils.ALERT_ERROR);
+            }
+        }
+    }
+
+
+   }
 

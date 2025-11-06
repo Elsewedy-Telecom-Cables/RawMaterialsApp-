@@ -17,9 +17,9 @@
 
 <AnchorPane prefHeight="686.0" prefWidth="1476.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.etc.raw_materials_app.controllers.ViewMaterialTestsController">
    <children>
-      <HBox alignment="CENTER" layoutX="10.4" layoutY="-7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="1466.0" styleClass="box-samll1" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
+      <HBox alignment="CENTER" layoutX="10.4" layoutY="-7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="1466.0" styleClass="box-samll1" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="260.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="448.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="welcome_lbl" contentDisplay="RIGHT" prefHeight="27.0" prefWidth="289.0">
                      <font>
@@ -39,7 +39,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="488.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="502.0" text="Qulity Control Department">
                      <font>
@@ -54,7 +54,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="TOP_RIGHT" prefHeight="48.0" prefWidth="255.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="438.0" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fx:id="logo_image_view" fitHeight="48.0" fitWidth="234.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" scaleX="1.1" scaleY="1.1" scaleZ="1.1" VBox.vgrow="ALWAYS">
                      <VBox.margin>
@@ -108,9 +108,9 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>
-                              <Insets right="5.0" />
+                              <Insets />
                            </HBox.margin>
                            <children>
                               <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#update" prefHeight="27.0" prefWidth="94.0" styleClass="input-04" text="Update">
@@ -118,12 +118,27 @@
                                     <Font name="Montserrat Bold" size="12.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets right="10.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconColor="#001553" iconLiteral="fas-sync" iconSize="10" />
                                  </graphic>
                               </Button>
+                              <HBox alignment="CENTER" prefHeight="52.0" prefWidth="175.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#exportToExcel" prefHeight="34.0" prefWidth="161.0" style="-fx-background-radius: 5;" styleClass="export-button" text="Export Excel " textFill="#08743b">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Montserrat Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fx:id="excel_image_view" fitHeight="24.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
                      </children>
@@ -200,9 +215,9 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="120.0">
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="97.0" prefWidth="150.0">
                      <children>
-                        <TextField fx:id="filter_item_code_textF" alignment="CENTER" onKeyPressed="#filterMaterialTestId" prefHeight="35.0" prefWidth="110.0" promptText="Item Code" styleClass="input-04">
+                        <TextField fx:id="filter_item_code_textF" alignment="CENTER" onKeyPressed="#filterItemCode" prefHeight="35.0" prefWidth="110.0" promptText="Item Code" styleClass="input-04">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

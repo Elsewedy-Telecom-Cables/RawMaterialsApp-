@@ -521,23 +521,29 @@ public class WindowUtils {
 
     public static int getUserRoleInt(String role) {
        if (DEF.USER_ROLE_USER_STRING.equals(role)) {
-            return 0;
-        } else if (DEF.USER_ROLE_SUPERVISOR_STRING.equals(role)) {
             return 1;
-        } else if (DEF.USER_ROLE_ADMIN_STRING.equals(role)) {
+        } else if (DEF.USER_ROLE_SUPERVISOR_STRING.equals(role)) {
             return 2;
+        } else if (DEF.USER_ROLE_ADMIN_STRING.equals(role)) {
+            return 3;
+        }
+       else if (DEF.USER_ROLE_SUPER_ADMIN_STRING.equals(role)) {
+            return 4;
         }
         return -1;
     }
 
     public static String getUserRoleStr(int roleId) {
-       if (roleId == 0) {
+       if (roleId == 1) {
             return DEF.USER_ROLE_USER_STRING;
-        } else if (roleId == 1) {
-            return DEF.USER_ROLE_SUPERVISOR_STRING;
         } else if (roleId == 2) {
+            return DEF.USER_ROLE_SUPERVISOR_STRING;
+        } else if (roleId == 3) {
             return DEF.USER_ROLE_ADMIN_STRING;
         }
+       else if (roleId == 4) {
+           return DEF.USER_ROLE_SUPER_ADMIN_STRING;
+       }
         return null;
     }
 

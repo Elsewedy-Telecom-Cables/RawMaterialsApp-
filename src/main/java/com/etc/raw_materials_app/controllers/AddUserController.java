@@ -51,7 +51,7 @@ public class AddUserController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> page_title.requestFocus());
 
-        listComboUserRole = FXCollections.observableArrayList(DEF.USER_ROLE_USER_STRING,DEF.USER_ROLE_SUPERVISOR_STRING,DEF.USER_ROLE_ADMIN_STRING);
+        listComboUserRole = FXCollections.observableArrayList(DEF.USER_ROLE_SUPER_ADMIN_STRING,DEF.USER_ROLE_ADMIN_STRING,DEF.USER_ROLE_USER_STRING);
         listComboUserActive = FXCollections.observableArrayList(DEF.USER_ACTIVE_STRING,DEF.USER_NOT_ACTIVE_STRING);
         userRole_ComBox.setItems(listComboUserRole);
         userActive_ComBox.setItems(listComboUserActive);

@@ -251,7 +251,7 @@ import java.sql.SQLException;
 public class FileDao {
     public static String lastErrorMessage = null;
 
-    public static boolean insertFile(File file) {
+    public  boolean insertFile(File file) {
         String sql = """
                 INSERT INTO material_testing.dbo.files
                     (material_test_id, material_doc_id, user_id, creation_date, file_path, comment)
@@ -274,7 +274,7 @@ public class FileDao {
         }
     }
 
-    public static boolean updateFile(File file) {
+    public  boolean updateFile(File file) {
         String sql = """
                         UPDATE material_testing.dbo.files SET
                             material_test_id = ?, material_doc_id = ?, user_id = ?, file_path = ?, comment = ?
@@ -297,7 +297,7 @@ public class FileDao {
 
     }
 
-    public static boolean deleteFile(int fileId) {
+    public  boolean deleteFile(int fileId) {
         String sql = "DELETE FROM material_testing.dbo.files WHERE file_id = ?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -310,7 +310,7 @@ public class FileDao {
         }
     }
 
-    public static ObservableList<File> getAllFiles() {
+    public  ObservableList<File> getAllFiles() {
         ObservableList<File> list = FXCollections.observableArrayList();
         String sql = """
                       SELECT f.* ,
@@ -359,7 +359,7 @@ public class FileDao {
         return list;
     }
 
-    public static File getFileById(int fileId) {
+    public  File getFileById(int fileId) {
         File file = null;
         String sql = """
                       SELECT f.* ,
@@ -408,7 +408,7 @@ public class FileDao {
         return file;
     }
 
-    public static File getFileByFilePath(String filePath) {
+    public  File getFileByFilePath(String filePath) {
         File file = null;
         String sql = """
                       SELECT f.* ,
@@ -458,7 +458,7 @@ public class FileDao {
     }
 
     // Changed to return ObservableList<File> instead of single File, as one MaterialTest can have multiple files
-    public static ObservableList<File> getFilesByMaterialTestId(int materialTestId) {
+    public  ObservableList<File> getFilesByMaterialTestId(int materialTestId) {
         ObservableList<File> list = FXCollections.observableArrayList();
         String sql = """
                       SELECT f.* ,

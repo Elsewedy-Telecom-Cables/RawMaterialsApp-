@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class SectionDao {
 
         // Get all sections
-        public static ObservableList<Section> getAllSections() {
+        public  ObservableList<Section> getAllSections() {
             ObservableList<Section> list = FXCollections.observableArrayList();
             String query = "SELECT section_id, section_name FROM material_testing.dbo.sections ORDER BY section_id asc ";
 
@@ -32,7 +32,7 @@ public class SectionDao {
         }
 
         // Get a single section by ID
-        public static Section getSectionById(int sectionId) {
+        public  Section getSectionById(int sectionId) {
             String query = "SELECT section_id, section_name FROM material_testing.dbo.sections WHERE section_id = ?";
             Section section = null;
 
@@ -55,7 +55,7 @@ public class SectionDao {
         }
 
         // Insert a new section
-        public static int insertSection(Section section) {
+        public  int insertSection(Section section) {
             String query = "INSERT INTO material_testing.dbo.sections (section_name) VALUES (?)";
             int generatedId = -1;
 
@@ -81,7 +81,7 @@ public class SectionDao {
 
 
         // Update an existing section
-        public static boolean updateSection(Section section) {
+        public  boolean updateSection(Section section) {
             String query = "UPDATE material_testing.dbo.sections SET section_name = ? WHERE section_id = ?";
             boolean success = false;
 
@@ -100,7 +100,7 @@ public class SectionDao {
         }
 
         // Delete a section
-        public static boolean deleteSection(int sectionId) {
+        public  boolean deleteSection(int sectionId) {
             String query = "DELETE FROM material_testing.dbo.sections WHERE section_id = ?";
             boolean success = false;
 

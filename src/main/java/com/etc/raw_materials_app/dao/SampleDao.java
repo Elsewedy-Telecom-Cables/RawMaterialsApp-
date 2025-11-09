@@ -8,9 +8,9 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 
 public class SampleDao {
-        public static String lastErrorMessage;
+        public  String lastErrorMessage;
         // Get all samples
-        public static ObservableList<Sample> getAllSamples() {
+        public  ObservableList<Sample> getAllSamples() {
             ObservableList<Sample> list = FXCollections.observableArrayList();
             String query = "SELECT sample_id, sample_name FROM material_testing.dbo.samples ORDER BY sample_id ASC";
 
@@ -32,7 +32,7 @@ public class SampleDao {
         }
 
         // Get a single sample by ID
-        public static Sample getSampleById(int sampleId) {
+        public  Sample getSampleById(int sampleId) {
             String query = "SELECT sample_id, sample_name FROM material_testing.dbo.samples WHERE sample_id = ?";
             Sample sample = null;
 
@@ -56,7 +56,7 @@ public class SampleDao {
         }
 
         // Insert a new sample
-        public static boolean insertSample(Sample sample) {
+        public  boolean insertSample(Sample sample) {
             String query = "INSERT INTO material_testing.dbo.samples (sample_name) VALUES (?)";
 
             try (Connection con = DbConnect.getConnect();
@@ -74,7 +74,7 @@ public class SampleDao {
         }
 
         // Update an existing sample
-        public static boolean updateSample(Sample sample) {
+        public  boolean updateSample(Sample sample) {
             String query = "UPDATE material_testing.dbo.samples SET sample_name = ? WHERE sample_id = ?";
             boolean success = false;
 
@@ -95,7 +95,7 @@ public class SampleDao {
         }
 
         // Delete a sample
-        public static boolean deleteSample(int sampleId) {
+        public  boolean deleteSample(int sampleId) {
             String query = "DELETE FROM material_testing.dbo.samples WHERE sample_id = ?";
             boolean success = false;
 

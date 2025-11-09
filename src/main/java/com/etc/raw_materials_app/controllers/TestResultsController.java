@@ -98,6 +98,10 @@ public class TestResultsController implements Initializable {
     private final List<Integer> selectedTestNameIds = new ArrayList<>();
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
     private CheckComboBox<TestName> checkComboBox;
+    
+    TestResultDao testResultDao = new TestResultDao();
+    SampleDao sampleDao = new SampleDao();
+    TestNameDao testNameDao = new TestNameDao();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -113,10 +117,10 @@ public class TestResultsController implements Initializable {
         // Set cursor for clear icon
         clear_selected_results_icon.setCursor(Cursor.HAND);
 
-        sample_comb.setItems(SampleDao.getAllSamples());
+        sample_comb.setItems(sampleDao.getAllSamples());
 
         // Load all tests
-        ObservableList<TestName> allTestNames = TestNameDao.getAllTestNames();
+        ObservableList<TestName> allTestNames = testNameDao.getAllTestNames();
 
         // Create ControlsFX CheckComboBox
         checkComboBox = new CheckComboBox<>(allTestNames);
@@ -161,6 +165,20 @@ public class TestResultsController implements Initializable {
         table_view.setEditable(true);
         setupTableColumns();
         addTest_btn.setCursor(Cursor.HAND);
+
+        // set permissions
+        int role = UserContext.getCurrentUser().getRole();
+        if (role == 3 || role == 4) {
+            addTest_btn.setVisible(true);
+            delete_column.setVisible(true);
+            select_tests_btn.setVisible(true);
+        } else {
+            addTest_btn.setVisible(false);
+            delete_column.setVisible(false);
+            select_tests_btn.setVisible(false);
+        }
+
+
     }
 
 
@@ -180,7 +198,7 @@ public class TestResultsController implements Initializable {
 
     private void loadTestResults() {
         testResultsList.clear();
-        ObservableList<TestResult> allResults = TestResultDao.getAllTestResults();
+        ObservableList<TestResult> allResults = testResultDao.getAllTestResults();
         for (TestResult tr : allResults) {
             if (tr.getMaterialTestId() == materialTestId) {
                 testResultsList.add(tr);
@@ -382,12 +400,12 @@ public class TestResultsController implements Initializable {
 
                             if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                 try {
-                                    boolean deleted = TestResultDao.deleteTestResult(tr.getTestResultId());
+                                    boolean deleted = testResultDao.deleteTestResult(tr.getTestResultId());
                                     if (deleted) {
                                         getTableView().getItems().remove(tr);
                                         WindowUtils.ALERT("Success", "Test result deleted successfully.", WindowUtils.ALERT_INFORMATION);
                                     } else {
-                                        WindowUtils.ALERT("Error", "Failed to delete: " + TestResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
+                                        WindowUtils.ALERT("Error", "Failed to delete: " + testResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
                                     }
                                 } catch (Exception ex) {
                                     Logging.logException("ERROR", getClass().getName(), "delete test result", ex);
@@ -442,18 +460,18 @@ public class TestResultsController implements Initializable {
         tr.setCreationDate(LocalDateTime.now());
 
         if (tr.getTestResultId() == 0) {
-            Integer newId = TestResultDao.insertTestResult(tr);
+            Integer newId = testResultDao.insertTestResult(tr);
             if (newId != null) {
                 tr.setTestResultId(newId);
                 int index = testResultsList.indexOf(tr);
                 testResultsList.set(index, tr);
                 table_view.refresh();
             } else {
-                WindowUtils.ALERT("Error", "Failed to save: " + TestResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
+                WindowUtils.ALERT("Error", "Failed to save: " + testResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
             }
         } else {
-            if (!TestResultDao.updateTestResult(tr)) {
-                WindowUtils.ALERT("Error", "Failed to update: " + TestResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
+            if (!testResultDao.updateTestResult(tr)) {
+                WindowUtils.ALERT("Error", "Failed to update: " + testResultDao.lastErrorMessage, WindowUtils.ALERT_ERROR);
             }
         }
     }

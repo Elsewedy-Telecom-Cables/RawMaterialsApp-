@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class MaterialDocumentDao {
    public static String lastErrorMessage = null;
     // INSERT
-    public static boolean insertMaterialDocument(MaterialDocument materialDocument) {
+    public  boolean insertMaterialDocument(MaterialDocument materialDocument) {
         String sql = "INSERT INTO material_testing.dbo.material_documents (material_doc_name) VALUES (?)";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -29,7 +29,7 @@ public class MaterialDocumentDao {
     }
 
     // UPDATE
-    public static boolean updateMaterialDocument(MaterialDocument materialDocument) {
+    public  boolean updateMaterialDocument(MaterialDocument materialDocument) {
      String sql = "UPDATE material_testing.dbo.material_documents SET material_doc_name = ? WHERE material_doc_id = ?";
      try (Connection con = DbConnect.getConnect();
      PreparedStatement ps = con.prepareStatement(sql)){
@@ -44,7 +44,7 @@ public class MaterialDocumentDao {
     }
 
    // DELETE
-    public static boolean deleteMaterialDocument(int materialDocumentId) {
+    public  boolean deleteMaterialDocument(int materialDocumentId) {
         String sql = "DELETE FROM material_testing.dbo.material_documents WHERE material_doc_id = ?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -58,7 +58,7 @@ public class MaterialDocumentDao {
     }
 
     // GET ALL MATERIAL DOCUMENTS
-    public static ObservableList<MaterialDocument> getAllMaterialDocuments() {
+    public  ObservableList<MaterialDocument> getAllMaterialDocuments() {
         ObservableList<MaterialDocument> list = FXCollections.observableArrayList();
         String sql = """
                 SELECT md.material_doc_id, md.material_doc_name FROM material_testing.dbo.material_documents md

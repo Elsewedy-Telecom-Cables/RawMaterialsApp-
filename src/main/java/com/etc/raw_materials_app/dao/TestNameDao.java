@@ -11,7 +11,7 @@ import java.sql.*;
 public class TestNameDao {
     public static String lastErrorMessage = null;
     // Get all TestNames
-    public static ObservableList<TestName> getAllTestNames() {
+    public  ObservableList<TestName> getAllTestNames() {
         ObservableList<TestName> list = FXCollections.observableArrayList();
         String query = "SELECT test_name_id, test_name FROM material_testing.dbo.test_names ORDER BY test_name asc ";
 
@@ -34,7 +34,7 @@ public class TestNameDao {
     }
 
     // Get a  Test Name by ID
-    public static Section getTestNameById(int testId) {
+    public  Section getTestNameById(int testId) {
         String query = "SELECT test_name_id, test_name FROM material_testing.dbo.test_names WHERE test_name_id = ?";
         Section section = null;
 
@@ -57,7 +57,7 @@ public class TestNameDao {
     }
 
     // Insert a new Test Name
-    public static int insertTestName(TestName testName ) {
+    public  int insertTestName(TestName testName ) {
         String query = "INSERT INTO material_testing.dbo.test_names (test_name) VALUES (?)";
         int generatedId = 0 ;
 
@@ -85,7 +85,7 @@ public class TestNameDao {
 
 
     // Update an existing Test Name
-    public static boolean updateTestName(TestName testName) {
+    public  boolean updateTestName(TestName testName) {
         String query = "UPDATE material_testing.dbo.test_names SET test_name = ? WHERE test_name_id = ?";
         boolean success = false;
 
@@ -104,7 +104,7 @@ public class TestNameDao {
     }
 
     // Delete a Test Name
-    public static boolean deleteTestName(int testId) {
+    public  boolean deleteTestName(int testId) {
         String query = "DELETE FROM material_testing.dbo.test_names WHERE test_name_id = ?";
         boolean success = false;
 

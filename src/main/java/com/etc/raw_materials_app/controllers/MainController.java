@@ -89,14 +89,41 @@ public class MainController implements Initializable {
 
     @FXML
     void openPrepareData(ActionEvent event) {
-        CLOSE(event);
-        OPEN_PREPARE_DATA_PAGE();
+
+        // set Permissions
+        try {
+            // Super Admin and Department Manager
+            int role = UserContext.getCurrentUser().getRole();
+            if (role == 4|| role == 3) {
+                CLOSE(event);
+                OPEN_PREPARE_DATA_PAGE();
+            } else {
+                WindowUtils.ALERT("Warning", "You are not authorized to access this page.", WindowUtils.ALERT_WARNING);
+                return;
+            }
+        } catch (Exception ex) {
+            Logging.logException("ERROR", this.getClass().getName(), "openPrepareData Permission", ex);
+        }
+
     }
 
     @FXML
     void open_prepare_materials(ActionEvent event){
-        CLOSE(event);
-        OPEN_PREPARE_MATERIALS_PAGE();
+        // set Permissions
+        try {
+            // Super Admin and Department Manager
+            int role = UserContext.getCurrentUser().getRole();
+            if (role == 4|| role == 3) {
+                CLOSE(event);
+                OPEN_PREPARE_MATERIALS_PAGE();
+            } else {
+                WindowUtils.ALERT("Warning", "You are not authorized to access this page.", WindowUtils.ALERT_WARNING);
+                return;
+            }
+        } catch (Exception ex) {
+            Logging.logException("ERROR", this.getClass().getName(), "openPrepareData Permission", ex);
+        }
+
     }
 
 

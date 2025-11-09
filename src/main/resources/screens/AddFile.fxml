@@ -19,14 +19,14 @@
           <TableColumn fx:id="file_id_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="material_test_id_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="M T ID" />
           <TableColumn fx:id="supplier_name_column" maxWidth="1.7976931348623157E308" minWidth="215.0" prefWidth="215.0" text="Supplier Name" />
-            <TableColumn fx:id="material_name_column" maxWidth="1.7976931348623157E308" minWidth="215.0" prefWidth="215.0" text="Material Name" />
-            <TableColumn fx:id="material_document_name_column" maxWidth="1.7976931348623157E308" minWidth="215.0" prefWidth="225.0" text="Material Document" />
+            <TableColumn fx:id="material_name_column" maxWidth="1.7976931348623157E308" minWidth="215.0" prefWidth="290.0" text="Material Name" />
+            <TableColumn fx:id="material_document_name_column" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="170.0" text="Material Document" />
             <TableColumn fx:id="upload_file_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="Upload" />
             <TableColumn fx:id="file_creation_date_column" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Creation Date" />
             <TableColumn fx:id="comment_column" maxWidth="1.7976931348623157E308" minWidth="220.0" prefWidth="220.0" text="Comment" />
             <TableColumn fx:id="open_file_column" maxWidth="1.7976931348623157E308" minWidth="190.0" prefWidth="190.0" text="Open File" />
             <TableColumn fx:id="download_file_column" maxWidth="1.7976931348623157E308" minWidth="70.0" prefWidth="70.0" text="Download" />
-            <TableColumn fx:id="delete_file_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="Delete" />
+            <TableColumn fx:id="delete_file_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="DEL" />
         </columns>
       </TableView>
       <HBox alignment="CENTER" layoutX="660.0" layoutY="0.8" prefHeight="34.0" prefWidth="222.0" styleClass="title-box" AnchorPane.topAnchor="0.8">

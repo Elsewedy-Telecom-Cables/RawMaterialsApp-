@@ -12,7 +12,7 @@ import java.sql.*;
 public class TestResultDao {
     public static String lastErrorMessage;
 
-    public static Integer insertTestResult(TestResult testResult) {
+    public  Integer insertTestResult(TestResult testResult) {
         String sql = """
         INSERT INTO material_testing.dbo.test_results
             (material_test_id, test_name_id, sample_id, user_id, requirement, actual, creation_date, test_situation)
@@ -52,7 +52,7 @@ public class TestResultDao {
     }
 
 
-    public static ObservableList<TestResult> getAllTestResults() {
+    public  ObservableList<TestResult> getAllTestResults() {
         ObservableList<TestResult> list = FXCollections.observableArrayList();
         String sql = """
             SELECT tr.test_result_id, tr.material_test_id, tr.sample_id, tr.test_name_id, tr.user_id,
@@ -105,7 +105,7 @@ public class TestResultDao {
         return list;
     }
 
-    public static TestResult getTestResultById(int id) {
+    public  TestResult getTestResultById(int id) {
         TestResult tr = null;
         String sql = """
             SELECT tr.test_result_id, tr.material_test_id, tr.test_name_id, tr.user_id,
@@ -158,7 +158,7 @@ public class TestResultDao {
         return tr;
     }
 
-    public static boolean updateTestResult(TestResult tr) {
+    public  boolean updateTestResult(TestResult tr) {
         String sql = """
         UPDATE material_testing.dbo.test_results
         SET material_test_id=?, test_name_id=?, sample_id=?, user_id=?, requirement=?, actual=?, test_situation=?
@@ -182,7 +182,7 @@ public class TestResultDao {
     }
 
 
-    public static boolean deleteTestResult(int id) {
+    public  boolean deleteTestResult(int id) {
         String sql = "DELETE FROM material_testing.dbo.test_results WHERE test_result_id=?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {

@@ -2,7 +2,6 @@
 package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.MaterialDao;
-import com.etc.raw_materials_app.dao.SampleDao;
 import com.etc.raw_materials_app.dao.MaterialDocumentDao;
 import com.etc.raw_materials_app.dao.SampleDao;
 import com.etc.raw_materials_app.logging.Logging;
@@ -59,10 +58,14 @@ public class PrepareMaterialsController implements Initializable {
     @FXML private TableColumn<Material,String> item_code_colm;
 
 
-
     ObservableList<Material> materialList;
     ObservableList<Sample> sampleList;
     ObservableList<MaterialDocument> materialDocumentList;
+
+    // Dao instances
+    private MaterialDao materialDao = new MaterialDao();
+    private SampleDao sampleDao = new SampleDao();
+    private MaterialDocumentDao materialDocumentDao = new MaterialDocumentDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,9 +74,9 @@ public class PrepareMaterialsController implements Initializable {
         loadMaterialDocumentData();
 
         // Initialize ObservableLists
-        materialList = MaterialDao.getAllMaterials();
-        sampleList = SampleDao.getAllSamples();
-        materialDocumentList = MaterialDocumentDao.getAllMaterialDocuments();
+        materialList = materialDao.getAllMaterials();
+        sampleList = sampleDao.getAllSamples();
+        materialDocumentList = materialDocumentDao.getAllMaterialDocuments();
 
         // Set items to TableViews
         material_table_view.setItems(materialList);
@@ -93,8 +96,8 @@ public class PrepareMaterialsController implements Initializable {
         material_name_colm.setCellValueFactory(new PropertyValueFactory<>("materialName"));
         item_code_colm.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         material_id_colm.setCellValueFactory(new PropertyValueFactory<>("materialId"));
-        material_name_colm.setStyle("-fx-alignment: CENTER;-fx-font-size:12 px;-fx-font-weight:bold;");
-        item_code_colm.setStyle("-fx-alignment: CENTER;-fx-font-size:12 px;-fx-font-weight:bold;");
+        material_name_colm.setStyle("-fx-alignment: CENTER;-fx-font-size:11 px;-fx-font-weight:bold;");
+        item_code_colm.setStyle("-fx-alignment: CENTER;-fx-font-size:11 px;-fx-font-weight:bold;");
         material_id_colm.setStyle("-fx-alignment: CENTER;-fx-font-size:12 px;-fx-font-weight:bold;");
         Callback<TableColumn<Material, String>, TableCell<Material, String>> cellFactory = param -> {
             final TableCell<Material, String> cell = new TableCell<Material, String>() {
@@ -127,8 +130,8 @@ public class PrepareMaterialsController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             Material material = material_table_view.getSelectionModel().getSelectedItem();
-                                            MaterialDao.deleteMaterial(material.getMaterialId());
-                                            materialList = MaterialDao.getAllMaterials();
+                                            materialDao.deleteMaterial(material.getMaterialId());
+                                            materialList = materialDao.getAllMaterials();
                                             material_table_view.setItems(materialList);
                                             WindowUtils.ALERT("Success", "material deleted successfully", WindowUtils.ALERT_INFORMATION);
                                         } catch (Exception ex) {
@@ -194,8 +197,8 @@ public class PrepareMaterialsController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             Sample sample = sample_table_view.getSelectionModel().getSelectedItem();
-                                            SampleDao.deleteSample(sample.getSampleId());
-                                            sampleList = SampleDao.getAllSamples();
+                                            sampleDao.deleteSample(sample.getSampleId());
+                                            sampleList = sampleDao.getAllSamples();
                                             sample_table_view.setItems(sampleList);
                                             WindowUtils.ALERT("Success", "Sample deleted successfully", WindowUtils.ALERT_INFORMATION);
                                         } catch (Exception ex) {
@@ -261,8 +264,8 @@ public class PrepareMaterialsController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             MaterialDocument materialDocument = material_document_table_view.getSelectionModel().getSelectedItem();
-                                            MaterialDocumentDao.deleteMaterialDocument(materialDocument.getMaterialDocumentId());
-                                            materialDocumentList = MaterialDocumentDao.getAllMaterialDocuments();
+                                            materialDocumentDao.deleteMaterialDocument(materialDocument.getMaterialDocumentId());
+                                            materialDocumentList = materialDocumentDao.getAllMaterialDocuments();
                                             material_document_table_view.setItems(materialDocumentList);
                                             WindowUtils.ALERT("Success", "Material Document deleted successfully", WindowUtils.ALERT_INFORMATION);
                                         } catch (Exception ex) {
@@ -377,7 +380,7 @@ public class PrepareMaterialsController implements Initializable {
         material.setMaterialName(materialName);
         material.setItemCode(itemCode);
 
-        boolean success = MaterialDao.insertMaterial(material);
+        boolean success = materialDao.insertMaterial(material);
 
         if (success) {
             WindowUtils.ALERT("Success", "material added successfully", WindowUtils.ALERT_INFORMATION);
@@ -386,11 +389,11 @@ public class PrepareMaterialsController implements Initializable {
             update_material_name_textF.clear();
             update_item_code_textF.clear();
             filter_material_textF.clear();
-            materialList = MaterialDao.getAllMaterials();
+            materialList = materialDao.getAllMaterials();
             material_table_view.setItems(materialList);
 
         } else {
-            String err = MaterialDao.lastErrorMessage;
+            String err = materialDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "material name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -411,7 +414,7 @@ public class PrepareMaterialsController implements Initializable {
         Sample sample = new Sample();
         sample.setSampleName(sampleName);
 
-        boolean success = SampleDao.insertSample(sample);
+        boolean success = sampleDao.insertSample(sample);
 
         if (success) {
             WindowUtils.ALERT("Success", "Sample added successfully", WindowUtils.ALERT_INFORMATION);
@@ -419,10 +422,10 @@ public class PrepareMaterialsController implements Initializable {
             update_sample_name_textF.clear();
             filter_sample_textF.clear();
 
-            sampleList = SampleDao.getAllSamples();
+            sampleList = sampleDao.getAllSamples();
             sample_table_view.setItems(sampleList);
         } else {
-            String err = SampleDao.lastErrorMessage;
+            String err = sampleDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "sample name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -443,16 +446,16 @@ public class PrepareMaterialsController implements Initializable {
 
         MaterialDocument materialDocument = new MaterialDocument();
         materialDocument.setMaterialDocumentName(materialDocumentName);
-        boolean success = MaterialDocumentDao.insertMaterialDocument(materialDocument);
+        boolean success = materialDocumentDao.insertMaterialDocument(materialDocument);
         if (success) {
             WindowUtils.ALERT("Success", "material document added successfully", WindowUtils.ALERT_INFORMATION);
             material_document_name_textF.clear();
             update_material_document_name_textF.clear();
             filter_material_document_textF.clear();
-            materialDocumentList = MaterialDocumentDao.getAllMaterialDocuments();
+            materialDocumentList = materialDocumentDao.getAllMaterialDocuments();
             material_document_table_view.setItems(materialDocumentList);
         } else {
-            String err = MaterialDocumentDao.lastErrorMessage;
+            String err = materialDocumentDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "material document name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -513,7 +516,7 @@ public class PrepareMaterialsController implements Initializable {
 
             selectedMaterial.setMaterialName(materialName);
             selectedMaterial.setItemCode(itemCode);
-            boolean success = MaterialDao.updateMaterial(selectedMaterial);
+            boolean success = materialDao.updateMaterial(selectedMaterial);
             if (success) {
                 WindowUtils.ALERT("Success", "material updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_material_name_textF.clear();
@@ -521,11 +524,11 @@ public class PrepareMaterialsController implements Initializable {
                 material_name_textF.clear();
                 item_code_textF.clear();
                 filter_material_textF.clear();
-                materialList = MaterialDao.getAllMaterials();
+                materialList = materialDao.getAllMaterials();
                 material_table_view.setItems(materialList);
 
             } else {
-                String err = MaterialDao.lastErrorMessage;
+                String err = materialDao.lastErrorMessage;
                 if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                     WindowUtils.ALERT("Duplicate", "material name already exists", WindowUtils.ALERT_ERROR);
                 } else {
@@ -555,17 +558,17 @@ public class PrepareMaterialsController implements Initializable {
 
             sample.setSampleName(sampleName);
 
-            boolean success = SampleDao.updateSample(sample);
+            boolean success = sampleDao.updateSample(sample);
             if (success) {
                 WindowUtils.ALERT("Success", "Sample updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_sample_name_textF.clear();
                 sample_name_textF.clear();
                 filter_sample_textF.clear();
 
-                sampleList = SampleDao.getAllSamples();
+                sampleList = sampleDao.getAllSamples();
                 sample_table_view.setItems(sampleList);
             } else {
-                String err = SampleDao.lastErrorMessage;
+                String err = sampleDao.lastErrorMessage;
                 if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                     WindowUtils.ALERT("Duplicate", "Sample name already exists", WindowUtils.ALERT_ERROR);
                 } else {
@@ -596,16 +599,16 @@ public class PrepareMaterialsController implements Initializable {
 
             selectedMaterialDocument.setMaterialDocumentName(materialDocumentName);
 
-            boolean success = MaterialDocumentDao.updateMaterialDocument(selectedMaterialDocument);
+            boolean success = materialDocumentDao.updateMaterialDocument(selectedMaterialDocument);
             if (success) {
                 WindowUtils.ALERT("Success", "material document updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_material_document_name_textF.clear();
                 material_document_name_textF.clear();
                 filter_material_document_textF.clear();
-                materialDocumentList = MaterialDocumentDao.getAllMaterialDocuments();
+                materialDocumentList = materialDocumentDao.getAllMaterialDocuments();
                 material_document_table_view.setItems(materialDocumentList);
             } else {
-                String err = MaterialDocumentDao.lastErrorMessage;
+                String err = materialDocumentDao.lastErrorMessage;
                     WindowUtils.ALERT("ERROR", "material_document_updated_failed", WindowUtils.ALERT_ERROR);
             }
         } catch (Exception ex) {

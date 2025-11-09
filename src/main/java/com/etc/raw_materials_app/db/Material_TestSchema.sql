@@ -26,16 +26,15 @@ CREATE  TABLE material_testing.dbo.materials (
                                                  material_id          int    IDENTITY  NOT NULL,
                                                  material_name        nvarchar(150)      NOT NULL,
                                                  item_code            nvarchar(150)      NULL,
-                                                 CONSTRAINT pk_materials PRIMARY KEY CLUSTERED ( material_id  asc ) ,
-                                                 CONSTRAINT unq_materials UNIQUE ( material_name  asc )
+                                                 CONSTRAINT pk_materials PRIMARY KEY CLUSTERED ( material_id  asc )
 );
 GO
 
 CREATE  TABLE material_testing.dbo.samples (
-                                               sample_id            int    IDENTITY ( 1 , 1 )  NOT NULL,
+                                               sample_id            int    IDENTITY  NOT NULL,
                                                sample_name          nvarchar(100)      NOT NULL,
-                                               CONSTRAINT pk_Tbl PRIMARY KEY  ( sample_id ) ,
-                                               CONSTRAINT unq_samples UNIQUE ( sample_name )
+                                               CONSTRAINT pk_Tbl PRIMARY KEY CLUSTERED ( sample_id  asc ) ,
+                                               CONSTRAINT unq_samples UNIQUE ( sample_name  asc )
 );
 GO
 
@@ -49,10 +48,10 @@ GO
 
 CREATE  TABLE material_testing.dbo.suppliers (
                                                  supplier_id          int    IDENTITY  NOT NULL,
-                                                 supplier_name        varchar(120)      NOT NULL,
+                                                 supplier_name        nvarchar(150)      NOT NULL,
                                                  supplier_code        varchar(100)      NULL,
                                                  CONSTRAINT pk_suppliers PRIMARY KEY CLUSTERED ( supplier_id  asc ) ,
-                                                 CONSTRAINT unq_suppliers UNIQUE ( supplier_name  asc )
+                                                 CONSTRAINT unq_suppliers UNIQUE ( supplier_name )
 );
 GO
 
@@ -109,13 +108,13 @@ GO
 CREATE  TABLE material_testing.dbo.test_results (
                                                     test_result_id       int    IDENTITY  NOT NULL,
                                                     material_test_id     int      NOT NULL,
-                                                    sample_id            int      NULL,
                                                     test_name_id         int      NOT NULL,
                                                     user_id              int      NOT NULL,
                                                     requirement          nvarchar(150)      NULL,
                                                     actual               nvarchar(150)      NULL,
                                                     creation_date        datetime2      NOT NULL,
                                                     test_situation       int      NULL,
+                                                    sample_id            int      NULL,
                                                     CONSTRAINT pk_material_test_report_results PRIMARY KEY CLUSTERED ( test_result_id  asc )
 );
 GO

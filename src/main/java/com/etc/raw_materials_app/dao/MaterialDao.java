@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class MaterialDao {
     public static String lastErrorMessage = null;
     // Get all Materials
-    public static ObservableList<Material> getAllMaterials() {
+    public  ObservableList<Material> getAllMaterials() {
         ObservableList<Material> list = FXCollections.observableArrayList();
         String query = "SELECT Material_id, Material_name, item_code FROM material_testing.dbo.Materials ORDER BY Material_id ASC";
 
@@ -39,7 +39,7 @@ public class MaterialDao {
     }
 
     // Insert
-    public static boolean insertMaterial(Material m) {
+    public  boolean insertMaterial(Material m) {
         String query = "INSERT INTO material_testing.dbo.Materials (Material_name,item_code) VALUES (?,?)";
 
         try (Connection con = DbConnect.getConnect();
@@ -58,7 +58,7 @@ public class MaterialDao {
     }
 
     // Update
-    public static boolean updateMaterial(Material m) {
+    public  boolean updateMaterial(Material m) {
         String query = "UPDATE material_testing.dbo.Materials SET Material_name = ?, item_code = ? WHERE Material_id = ?";
 
         try (Connection con = DbConnect.getConnect();
@@ -78,7 +78,7 @@ public class MaterialDao {
     }
 
     // Delete
-    public static boolean deleteMaterial(int materialId) {
+    public  boolean deleteMaterial(int materialId) {
         String query = "DELETE FROM material_testing.dbo.Materials WHERE Material_id = ?";
 
         try (Connection con = DbConnect.getConnect();
@@ -95,7 +95,7 @@ public class MaterialDao {
     }
 
     // Get by ID
-    public static Material getMaterialById(int id) {
+    public  Material getMaterialById(int id) {
         String query = "SELECT Material_id, Material_name, item_code FROM material_testing.dbo.Materials WHERE Material_id = ?";
         Material m = null;
 

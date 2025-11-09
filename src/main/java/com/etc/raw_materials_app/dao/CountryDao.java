@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class CountryDao {
     public static String lastErrorMessage = null;
     // INSERT
-    public static boolean insertCountry(Country country) {
+    public  boolean insertCountry(Country country) {
         String sql = "INSERT INTO material_testing.dbo.countries (country_name) VALUES (?)";
         try (Connection conn = DbConnect.getConnect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -30,7 +30,7 @@ public class CountryDao {
     }
 
     // UPDATE
-    public static boolean updateCountry(Country country) {
+    public  boolean updateCountry(Country country) {
         String sql = "UPDATE material_testing.dbo.countries SET country_name = ? WHERE country_id = ?";
         try (Connection conn = DbConnect.getConnect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -47,7 +47,7 @@ public class CountryDao {
     }
 
     // DELETE
-    public static boolean deleteCountry(int countryId) {
+    public  boolean deleteCountry(int countryId) {
         String sql = "DELETE FROM material_testing.dbo.countries WHERE country_id = ?";
         try (Connection conn = DbConnect.getConnect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -62,7 +62,7 @@ public class CountryDao {
     }
 
     // GET ALL
-    public static ObservableList<Country> getAllCountries() {
+    public  ObservableList<Country> getAllCountries() {
         ObservableList<Country> countries = FXCollections.observableArrayList();
         String sql = "SELECT country_id, country_name FROM material_testing.dbo.countries ORDER BY country_name";
         try (Connection conn = DbConnect.getConnect();
@@ -84,7 +84,7 @@ public class CountryDao {
     }
 
     // GET BY ID
-    public static Country getCountryById(int countryId) {
+    public  Country getCountryById(int countryId) {
         String sql = "SELECT country_id, country_name FROM material_testing.dbo.countries WHERE country_id = ?";
         try (Connection conn = DbConnect.getConnect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

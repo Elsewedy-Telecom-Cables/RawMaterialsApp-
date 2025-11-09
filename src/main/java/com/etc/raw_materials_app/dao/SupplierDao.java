@@ -12,7 +12,7 @@ public class SupplierDao {
     public static String lastErrorMessage = null;
 
     // Get all suppliers
-    public static ObservableList<Supplier> getAllSuppliers() {
+    public  ObservableList<Supplier> getAllSuppliers() {
         ObservableList<Supplier> list = FXCollections.observableArrayList();
         String query = "SELECT supplier_id, supplier_name , supplier_code FROM material_testing.dbo.suppliers ORDER BY supplier_id ASC";
 
@@ -36,7 +36,7 @@ public class SupplierDao {
     }
 
     // Insert supplier
-    public static boolean insertSupplier(Supplier supplier) {
+    public  boolean insertSupplier(Supplier supplier) {
         String query = "INSERT INTO material_testing.dbo.suppliers (supplier_name,supplier_code) VALUES (?,?)";
 
         try (Connection con = DbConnect.getConnect();
@@ -55,7 +55,7 @@ public class SupplierDao {
     }
 
     // Update supplier
-    public static boolean updateSupplier(Supplier supplier) {
+    public  boolean updateSupplier(Supplier supplier) {
         String query = "UPDATE material_testing.dbo.suppliers SET supplier_name = ? , supplier_code = ? WHERE supplier_id = ?";
 
         try (Connection con = DbConnect.getConnect();
@@ -73,7 +73,7 @@ public class SupplierDao {
         return false;
     }
 
-    public static boolean canDeleteSupplier(int supplierId) {
+    public  boolean canDeleteSupplier(int supplierId) {
         String[] tablesToCheck = {
                 "material_testing.dbo.material_tests",
                 "material_testing.dbo.supplier_country"
@@ -99,7 +99,7 @@ public class SupplierDao {
     }
 
     // Delete supplier
-    public static boolean deleteSupplier(int supplierId) {
+    public  boolean deleteSupplier(int supplierId) {
         if (!canDeleteSupplier(supplierId)) {
             System.out.println("Supplier ID " + supplierId + " is referenced in other tables.");
             return false;
@@ -120,7 +120,7 @@ public class SupplierDao {
     }
 
     // Get supplier by ID
-    public static Supplier getSupplierById(int supplierId) {
+    public  Supplier getSupplierById(int supplierId) {
         String query = "SELECT supplier_id, supplier_name , supplier_code FROM material_testing.dbo.suppliers WHERE supplier_id = ?";
         Supplier supplier = null;
 

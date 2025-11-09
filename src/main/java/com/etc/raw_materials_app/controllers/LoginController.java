@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.etc.raw_materials_app.services.WindowUtils.*;
@@ -41,11 +42,12 @@ public class LoginController implements Initializable {
     private PasswordField password_passF;
     @FXML
     private Button sign_in_btn;
+    private final UserDao userDao = new UserDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> password_passF.requestFocus());
-        Image logoImg = new Image(LoginController.class.getResourceAsStream("/images/company_logo.png"));
+        Image logoImg = new Image(Objects.requireNonNull(LoginController.class.getResourceAsStream("/images/company_logo.png")));
         logo_image_view.setImage(logoImg);
         sign_in_btn.setCursor((Cursor.HAND));
         user_name_txtF.setText(LoggingSetting.getCurrentUsername());
@@ -63,7 +65,7 @@ public class LoginController implements Initializable {
             return;
         }
 
-        User user = UserDao.getUserByUsername(username);
+        User user = userDao.getUserByUsername(username);
 
         if (user == null) {
             WindowUtils.ALERT("ERROR", "Error in user name", WindowUtils.ALERT_WARNING);

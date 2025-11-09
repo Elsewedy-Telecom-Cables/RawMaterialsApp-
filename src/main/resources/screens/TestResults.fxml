@@ -21,17 +21,17 @@
             <TableColumn fx:id="material_test_id_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="45.0" text="M T ID" />
             <TableColumn fx:id="sample_no_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="90.0" text="Sample No" />
           <TableColumn fx:id="supplier_name_column" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="130.0" text="Supplier Name" />
-            <TableColumn fx:id="material_name_column" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="180.0" text="Material Description" />
+            <TableColumn fx:id="material_name_column" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="185.0" text="Material Description" />
             <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="65.0" prefWidth="65.0" text="PO NO" />
             <TableColumn fx:id="oracle_sample_column" maxWidth="1.7976931348623157E308" minWidth="100.0" text="Oracle Sample" />
-            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="95.0" text="Item Code" />
+            <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="100.0" text="Item Code" />
             <TableColumn fx:id="test_name_column" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="145.0" text="Test Name" />
             <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="135.0" prefWidth="135.0" text="Creation Date" />
             <TableColumn fx:id="requirement_column" maxWidth="1.7976931348623157E308" minWidth="90.0" text="Requirement" />
             <TableColumn fx:id="actual_column" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="Actual" />
             <TableColumn fx:id="test_situation_column" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="140.0" text="Test Situation" />
-            <TableColumn fx:id="user_full_name_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="110.0" text="Added By" />
-            <TableColumn fx:id="delete_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Delete" />
+            <TableColumn fx:id="user_full_name_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="115.0" text="Added By" />
+            <TableColumn fx:id="delete_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="DEL" />
         </columns>
       </TableView>
       <HBox alignment="CENTER" layoutX="647.0" layoutY="0.8" prefHeight="34.0" prefWidth="241.0" styleClass="title-box" AnchorPane.topAnchor="0.8">

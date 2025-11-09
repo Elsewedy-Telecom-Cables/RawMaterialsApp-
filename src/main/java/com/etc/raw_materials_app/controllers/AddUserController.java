@@ -47,6 +47,8 @@ public class AddUserController implements Initializable {
     boolean update = false;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+    private final UserDao userDao = new UserDao();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> page_title.requestFocus());
@@ -60,7 +62,7 @@ public class AddUserController implements Initializable {
     public void setUserData(int emp_id, boolean update) {
         try {
             this.update = update;
-            User us = UserDao.getUserByEmpId(emp_id);
+            User us = userDao.getUserByEmpId(emp_id);
             emp_id_txtF.setText(us.getEmpCode() + "");
             emp_id_txtF.setEditable(false);
             user_name_txtF.setText(us.getUserName());
@@ -150,7 +152,7 @@ public class AddUserController implements Initializable {
             us.setCreationDate(creationDate);
 
             // 6. Save to DB
-            if (!UserDao.insertUser(us)) {
+            if (!userDao.insertUser(us)) {
                 WindowUtils.ALERT("Error", "User could not be added", ALERT_INFORMATION);
                 return false ;
             }
@@ -229,7 +231,7 @@ public class AddUserController implements Initializable {
             us.setActive(activeInt);
 
             // 5. Update in DB
-            boolean success = UserDao.updateUser(us);
+            boolean success = userDao.updateUser(us);
             if (!success) {
                 WindowUtils.ALERT("Error", "User could not be updated", ALERT_INFORMATION);
             }

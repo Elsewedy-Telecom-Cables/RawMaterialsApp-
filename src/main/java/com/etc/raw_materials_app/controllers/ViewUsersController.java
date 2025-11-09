@@ -77,7 +77,7 @@ public class ViewUsersController implements Initializable {
 
     ObservableList<User> listUsers;
 
-
+   private final UserDao userDao = new UserDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,9 +93,9 @@ public class ViewUsersController implements Initializable {
     private void loadData() {
         Platform.runLater(() -> {
             // Fetch data
-            listUsers = UserDao.getUsers();
+            listUsers = userDao.getUsers();
             if (listUsers == null) {
-                Logging.logMessage(Logging.WARN, getClass().getName(), "loadData", "UserDao.getUsers() returned null, using empty list");
+                Logging.logMessage(Logging.WARN, getClass().getName(), "loadData", "userDao.getUsers() returned null, using empty list");
                 listUsers = FXCollections.observableArrayList();
             }
             users_count_textF.setText(String.valueOf(listUsers.size()));
@@ -240,7 +240,7 @@ public class ViewUsersController implements Initializable {
                             if (response == okButton) {
                                 if (UserService.confirmPassword(currentUser.getUserName())) {
                                     try {
-                                        boolean deleted = UserDao.deleteUser(user.getEmpCode());
+                                        boolean deleted = userDao.deleteUser(user.getEmpCode());
                                         if (deleted) {
                                             loadData();
                                             WindowUtils.ALERT("Sucess", "user deleted", WindowUtils.ALERT_INFORMATION);

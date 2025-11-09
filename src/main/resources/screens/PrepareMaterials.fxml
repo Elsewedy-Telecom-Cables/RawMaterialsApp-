@@ -42,9 +42,9 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <VBox prefHeight="693.0" prefWidth="399.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="693.0" prefWidth="240.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="900.0" prefWidth="550.0" styleClass="box">
+                        <VBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="900.0" prefWidth="240.0" styleClass="box">
                            <children>
                               <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="305.0">
                                  <children>
@@ -96,7 +96,7 @@
                                     </Button>
                                     <TextField fx:id="material_document_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add Material document name" styleClass="input" HBox.hgrow="ALWAYS">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="12.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="12.0" right="12.0" />
@@ -125,7 +125,7 @@
                                           <Insets left="12.0" right="12.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="12.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -136,16 +136,16 @@
                                     <Insets top="4.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="200.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
+                              <HBox prefHeight="200.0" prefWidth="240.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <TableView id="table1" fx:id="material_document_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                                        <columns>
-                                          <TableColumn fx:id="material_document_id_colm" maxWidth="1200.0" prefWidth="50.0" text="ID" />
-                                          <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="270.0" text="Material Document" />
-                                          <TableColumn fx:id="material_document_delete_colm" maxWidth="1500.0" prefWidth="50.0" text="delete" />
+                                          <TableColumn fx:id="material_document_id_colm" maxWidth="1200.0" prefWidth="40.0" text="ID" />
+                                          <TableColumn fx:id="material_document_name_colm" maxWidth="1200.0" prefWidth="235.0" text="Material Document" />
+                                          <TableColumn fx:id="material_document_delete_colm" maxWidth="1500.0" prefWidth="50.0" text="DEL" />
                                        </columns>
                                        <HBox.margin>
-                                          <Insets bottom="-5.0" left="8.0" right="8.0" top="4.0" />
+                                          <Insets bottom="-5.0" top="4.0" />
                                        </HBox.margin>
                                     </TableView>
                                  </children>
@@ -154,7 +154,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="384.0" prefWidth="550.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="384.0" prefWidth="240.0" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox alignment="TOP_CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="900.0" prefWidth="530.0" styleClass="box" VBox.vgrow="ALWAYS">
                            <children>
@@ -208,7 +208,7 @@
                                     </Button>
                                     <TextField fx:id="sample_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="add sample no" styleClass="input" HBox.hgrow="ALWAYS">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="12.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="12.0" right="12.0" />
@@ -237,7 +237,7 @@
                                           <Insets left="12.0" right="12.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="12.0" />
                                        </font>
                                     </TextField>
                                  </children>
@@ -252,15 +252,12 @@
                                  <children>
                                     <TableView id="table1" fx:id="sample_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="498.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                                        <columns>
-                                          <TableColumn fx:id="sample_id_colm" maxWidth="1200.0" prefWidth="12.0" text="ID" />
-                                          <TableColumn fx:id="sample_name_colm" maxWidth="1200.0" prefWidth="50.0" text="Sample NO" />
-                                          <TableColumn fx:id="sample_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="delete" />
+                                          <TableColumn fx:id="sample_id_colm" maxWidth="1200.0" prefWidth="40.0" text="ID" />
+                                          <TableColumn fx:id="sample_name_colm" maxWidth="1200.0" prefWidth="225.0" text="Sample NO" />
+                                          <TableColumn fx:id="sample_delete_colm" maxWidth="1500.0" prefWidth="50.0" text="DEL" />
                                        </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
                                        <HBox.margin>
-                                          <Insets bottom="-5.0" left="8.0" right="8.0" top="4.0" />
+                                          <Insets bottom="-5.0" top="4.0" />
                                        </HBox.margin>
                                     </TableView>
                                  </children>
@@ -275,7 +272,7 @@
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="534.0" styleClass="box" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" prefHeight="693.0" prefWidth="700.0" styleClass="box" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="305.0">
                            <children>
@@ -327,7 +324,7 @@
                               </Button>
                               <TextField fx:id="item_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="150.0" promptText="add item code" styleClass="input">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="12.0" />
@@ -335,7 +332,7 @@
                               </TextField>
                               <TextField fx:id="material_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="218.0" promptText="add material name " styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="5.0" right="12.0" />
@@ -361,7 +358,7 @@
                               </Button>
                               <TextField fx:id="update_item_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="150.0" promptText="update item code" styleClass="input">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets left="12.0" />
@@ -372,7 +369,7 @@
                                     <Insets left="5.0" right="12.0" />
                                  </HBox.margin>
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                               </TextField>
                            </children>
@@ -387,16 +384,16 @@
                            <children>
                               <TableView id="table1" fx:id="material_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="179.0" prefWidth="422.0" HBox.hgrow="ALWAYS">
                                  <columns>
-                                    <TableColumn fx:id="material_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
-                                    <TableColumn fx:id="material_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="150.0" text="Material Name" />
-                                    <TableColumn fx:id="item_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="100.0" text="Item Code" />
-                                    <TableColumn fx:id="material_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                    <TableColumn fx:id="material_id_colm" maxWidth="1200.0" prefWidth="15.0" text="ID" />
+                                    <TableColumn fx:id="material_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="180.0" text="Material Name" />
+                                    <TableColumn fx:id="item_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="70.0" text="Item Code" />
+                                    <TableColumn fx:id="material_delete_colm" maxWidth="1500.0" prefWidth="12.0" text="DEL" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="8.0" right="8.0" top="4.0" />
+                                    <Insets bottom="5.0" top="4.0" />
                                  </HBox.margin>
                               </TableView>
                            </children>

@@ -73,7 +73,7 @@
             <TableColumn fx:id="supplier_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="150.0" text="Supplier" />
             <TableColumn fx:id="supplier_code_column" maxWidth="1.7976931348623157E308" minWidth="65.0" text="Sup Code" />
             <TableColumn fx:id="supplier_country_column" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="85.0" text="Sup-Country" />
-            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="175.0" text="Material Description" />
+            <TableColumn fx:id="material_column" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="165.0" text="Material Description" />
             <TableColumn fx:id="item_code_column" maxWidth="1.7976931348623157E308" minWidth="60.0" text="Item Code" />
             <TableColumn fx:id="creation_date_column" maxWidth="1.7976931348623157E308" minWidth="110.0" prefWidth="120.0" text="Creation Date" />
             <TableColumn fx:id="po_no_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="60.0" text="PO" />
@@ -86,7 +86,7 @@
             <TableColumn fx:id="files_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="45.0" text="Files" />
             <TableColumn fx:id="results_column" maxWidth="1.7976931348623157E308" minWidth="40.0" prefWidth="50.0" text="Results" />
             <TableColumn fx:id="edit_column" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="45.0" text="U - D" />
-            <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="95.0" text="Notes" />
+            <TableColumn fx:id="notes_column" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="120.0" text="Notes" />
         </columns>
       </TableView>
       <VBox alignment="TOP_CENTER" layoutX="7.2" layoutY="52.0" prefHeight="101.0" prefWidth="1288.0" AnchorPane.leftAnchor="7.2" AnchorPane.rightAnchor="7.2000000000000455">
@@ -395,7 +395,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="224.0">
                <children>
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openAddMaterialTest" prefHeight="34.0" prefWidth="188.0" style="-fx-background-radius: 10;" styleClass="button-1" text="Add Material Test">
+                  <Button fx:id="AddMaterialTest_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openAddMaterialTest" prefHeight="34.0" prefWidth="188.0" style="-fx-background-radius: 10;" styleClass="button-1" text="Add Material Test">
                      <font>
                         <Font name="Montserrat Bold" size="15.0" />
                      </font>
@@ -423,7 +423,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label prefHeight="26.0" prefWidth="54.0" text="Rev.(0)" HBox.hgrow="ALWAYS">
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="54.0" text="Rev.(0)" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>

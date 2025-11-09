@@ -46,15 +46,23 @@ public class AddMaterialTestController implements Initializable , StageAware {
     private int CURRENT_MATERIAL_TEST_ID = 0;
     private boolean update = false;
 
+    // Dao instances
+    private final SectionDao sectionDao = new SectionDao();
+    private final MaterialDao materialDao = new MaterialDao();
+    private final SupplierDao supplierDao = new SupplierDao();
+    private final CountryDao countryDao = new CountryDao();
+    private final SupplierCountryDao supplierCountryDao = new SupplierCountryDao();
+    private final MaterialTestDao materialTestDao = new MaterialTestDao();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> header_lbl.requestFocus());
         clear_btn.setCursor(Cursor.HAND);
         save_btn.setCursor(Cursor.HAND);
 
-        section_comb.setItems(SectionDao.getAllSections());
-        material_comb.setItems(MaterialDao.getAllMaterials());
-        supplier_comb.setItems(SupplierDao.getAllSuppliers());
+        section_comb.setItems(sectionDao.getAllSections());
+        material_comb.setItems(materialDao.getAllMaterials());
+        supplier_comb.setItems(supplierDao.getAllSuppliers());
         country_comb.setItems(FXCollections.observableArrayList());
 
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -66,7 +74,7 @@ public class AddMaterialTestController implements Initializable , StageAware {
     private void updateSupplierCountries(Supplier supplier) {
         ObservableList<Country> filteredCountries = FXCollections.observableArrayList();
         if (supplier != null) {
-            ObservableList<SupplierCountry> list = SupplierCountryDao.getAllSupplierCountries();
+            ObservableList<SupplierCountry> list = supplierCountryDao.getAllSupplierCountries();
             for (SupplierCountry sc : list) {
                 if (sc.getSupplierId() == supplier.getSupplierId()) {
                     Country c = new Country();
@@ -92,7 +100,7 @@ public class AddMaterialTestController implements Initializable , StageAware {
         try {
             this.update = update;
             CURRENT_MATERIAL_TEST_ID = materialTestId;
-            MaterialTest mt = MaterialTestDao.getMaterialTestById(materialTestId);
+            MaterialTest mt = materialTestDao.getMaterialTestById(materialTestId);
 
             assert mt != null;
             po_no_textF.setText(mt.getPoNo());
@@ -105,13 +113,13 @@ public class AddMaterialTestController implements Initializable , StageAware {
             notes_textF.setText(mt.getNotes());
             comment_textF.setText(mt.getComment());
 
-            section_comb.getSelectionModel().select(SectionDao.getSectionById(mt.getSectionId()));
-            material_comb.getSelectionModel().select(MaterialDao.getMaterialById(mt.getMaterialId()));
+            section_comb.getSelectionModel().select(sectionDao.getSectionById(mt.getSectionId()));
+            material_comb.getSelectionModel().select(materialDao.getMaterialById(mt.getMaterialId()));
 
-            Supplier supplier = SupplierDao.getSupplierById(mt.getSupplierId());
+            Supplier supplier = supplierDao.getSupplierById(mt.getSupplierId());
             supplier_comb.getSelectionModel().select(supplier);
             updateSupplierCountries(supplier);
-            country_comb.getSelectionModel().select(CountryDao.getCountryById(mt.getCountryId()));
+            country_comb.getSelectionModel().select(countryDao.getCountryById(mt.getCountryId()));
 
             clear_btn.setVisible(false);
         } catch (Exception e) {
@@ -167,7 +175,7 @@ public class AddMaterialTestController implements Initializable , StageAware {
             mt.setNotes(notes);
             mt.setComment(comment);
 
-            boolean success = MaterialTestDao.insertMaterialTest(mt);
+            boolean success = materialTestDao.insertMaterialTest(mt);
             if (success) {
                 WindowUtils.ALERT("Success", "Material test saved successfully.", WindowUtils.ALERT_INFORMATION);
                 clearHelp();
@@ -210,7 +218,7 @@ public class AddMaterialTestController implements Initializable , StageAware {
             mt.setNotes(notes_textF.getText());
             mt.setComment(comment_textF.getText());
 
-            boolean success = MaterialTestDao.updateMaterialTest(mt);
+            boolean success = materialTestDao.updateMaterialTest(mt);
             if (success) {
                 WindowUtils.ALERT("Success", "Material test updated successfully.", WindowUtils.ALERT_INFORMATION);
                 clearHelp();

@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.stream.Collectors;
 public class UserDao {
-    public static User checkConfirmPassword(String username, String pass) {
+    public  User checkConfirmPassword(String username, String pass) {
         User user = null;
         String query = "SELECT " +
                 DEF.USERS_ID + ", " +
@@ -46,7 +46,7 @@ public class UserDao {
         return user;
     }
 
-    public static ObservableList<User> getUsers() {
+    public  ObservableList<User> getUsers() {
         ObservableList<User> list = FXCollections.observableArrayList();
         String query = "SELECT " +
                 DEF.USERS_ID + ", " +
@@ -85,7 +85,7 @@ public class UserDao {
         return list;
     }
 
-    public static ObservableList<User> getUsersByRoles(List<Integer> allowedRoles) {
+    public  ObservableList<User> getUsersByRoles(List<Integer> allowedRoles) {
         ObservableList<User> list = FXCollections.observableArrayList();
         if (allowedRoles == null || allowedRoles.isEmpty()) return list;
 
@@ -131,7 +131,7 @@ public class UserDao {
         return list;
     }
 
-    public static ObservableList<String> getAllUsersFullName() {
+    public  ObservableList<String> getAllUsersFullName() {
         ObservableList<String> userFullNames = FXCollections.observableArrayList();
         String query = "SELECT " + DEF.USERS_FULLNAME +
                 " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
@@ -148,7 +148,7 @@ public class UserDao {
         return userFullNames;
     }
 
-    public static User loadUserData(int userId) {
+    public  User loadUserData(int userId) {
         User user = null;
         String query = "SELECT " +
                 DEF.USERS_ID + ", " +
@@ -187,7 +187,7 @@ public class UserDao {
         return user;
     }
 
-    public static boolean insertUser(User us) {
+    public  boolean insertUser(User us) {
         String query = "INSERT INTO " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " (" +
                 DEF.USERS_EMP_ID + ", " +
                 DEF.USERS_USERNAME + ", " +
@@ -220,7 +220,7 @@ public class UserDao {
         return false;
     }
 
-    public static User getUserByEmpId(int emp_id) {
+    public  User getUserByEmpId(int emp_id) {
         User us = new User();
         String query = "SELECT " +
                 DEF.USERS_ID + ", " +
@@ -257,7 +257,7 @@ public class UserDao {
         return us;
     }
 
-    public static User getUserByUsername(String username) {
+    public  User getUserByUsername(String username) {
         User user = null;
         String query = "SELECT " +
                 DEF.USERS_ID + ", " +
@@ -294,7 +294,7 @@ public class UserDao {
         return user;
     }
 
-    public static boolean updateUser(User us) {
+    public  boolean updateUser(User us) {
         String query = "UPDATE " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " SET " +
                 DEF.USERS_PASSWORD + " = ?, " +
                 DEF.USERS_FULLNAME + " = ?, " +
@@ -317,7 +317,7 @@ public class UserDao {
         return false;
     }
 
-    public static boolean deleteUser(int emp_id) {
+    public  boolean deleteUser(int emp_id) {
         String query = "DELETE FROM material_testing.dbo.users WHERE emp_code = ?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {

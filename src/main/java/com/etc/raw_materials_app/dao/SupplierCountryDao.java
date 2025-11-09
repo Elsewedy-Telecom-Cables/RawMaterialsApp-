@@ -13,7 +13,7 @@ import java.sql.*;
 public class SupplierCountryDao {
     public static String lastErrorMessage = null;
     // Get supplier-country by supplier ID and country ID
-    public static SupplierCountry getSupplierCountryById(int supplierId, int countryId) {
+    public  SupplierCountry getSupplierCountryById(int supplierId, int countryId) {
         String query = "SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name " +
                 "FROM material_testing.dbo.supplier_country sc " +
                 "JOIN material_testing.dbo.suppliers s ON sc.supplier_id = s.supplier_id " +
@@ -45,7 +45,7 @@ public class SupplierCountryDao {
     }
 
     // Get all supplier-country mappings
-    public static ObservableList<SupplierCountry> getAllSupplierCountries() {
+    public  ObservableList<SupplierCountry> getAllSupplierCountries() {
         ObservableList<SupplierCountry> list = FXCollections.observableArrayList();
         String query = "SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name " +
                 "FROM material_testing.dbo.supplier_country sc " +
@@ -74,7 +74,7 @@ public class SupplierCountryDao {
     }
 
     // Insert supplier-country mapping
-    public static boolean insertSupplierCountry(SupplierCountry supplierCountry) {
+    public  boolean insertSupplierCountry(SupplierCountry supplierCountry) {
         String query = "INSERT INTO material_testing.dbo.supplier_country (supplier_id, country_id) VALUES (?,?)";
 
         try (Connection con = DbConnect.getConnect();
@@ -93,7 +93,7 @@ public class SupplierCountryDao {
     }
 
     // Delete supplier-country mapping
-    public static boolean deleteSupplierCountry(int supplierId, int countryId) {
+    public  boolean deleteSupplierCountry(int supplierId, int countryId) {
         String query = "DELETE FROM material_testing.dbo.supplier_country WHERE supplier_id = ? AND country_id = ?";
 
         try (Connection con = DbConnect.getConnect();

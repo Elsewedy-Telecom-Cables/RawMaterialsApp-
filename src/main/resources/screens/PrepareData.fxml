@@ -36,7 +36,7 @@
             <VBox alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="400.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
-      <VBox alignment="TOP_CENTER" layoutX="-24.8" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="666.0" prefWidth="530.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="43.0">
+      <VBox alignment="TOP_CENTER" layoutX="-24.8" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="666.0" prefWidth="595.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="43.0">
          <children>
             <HBox alignment="CENTER" prefHeight="400.0" prefWidth="550.0" VBox.vgrow="ALWAYS">
                <children>
@@ -54,7 +54,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="358.0">
+                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="548.0">
                            <VBox.margin>
                               <Insets top="4.0" />
                            </VBox.margin>
@@ -93,7 +93,7 @@
                                     <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="60.0" promptText="add supplier code" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="40.0" promptText="add supplier code" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -101,7 +101,7 @@
                                     <Insets left="12.0" />
                                  </HBox.margin>
                               </TextField>
-                              <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="140.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="160.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -127,7 +127,7 @@
                                     <FontIcon iconLiteral="fas-check" />
                                  </graphic>
                               </Button>
-                              <TextField fx:id="update_supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="60.0" promptText="update supplier code" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="update_supplier_code_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="40.0" promptText="update supplier code" styleClass="input" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
@@ -135,7 +135,7 @@
                                     <Insets left="12.0" />
                                  </HBox.margin>
                               </TextField>
-                              <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="140.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
+                              <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="160.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="8.0" />
                                  </HBox.margin>
@@ -153,18 +153,18 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="88.0" prefWidth="322.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <TableView id="table1" fx:id="supplier_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
+                              <TableView id="table1" fx:id="supplier_table_view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="140.0" prefWidth="315.0" HBox.hgrow="ALWAYS">
                                  <columns>
-                                    <TableColumn fx:id="supplier_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
+                                    <TableColumn fx:id="supplier_id_colm" maxWidth="1200.0" prefWidth="15.0" text="ID" />
                                     <TableColumn fx:id="supplier_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="150.0" text="Supplier Name" />
-                                    <TableColumn fx:id="supplier_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="60.0" text="Supplier Code" />
-                                    <TableColumn fx:id="supplier_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                    <TableColumn fx:id="supplier_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="25.0" text="Sup Code" />
+                                    <TableColumn fx:id="supplier_delete_colm" maxWidth="1500.0" prefWidth="15.0" text="DEL" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <HBox.margin>
-                                    <Insets bottom="-5.0" left="8.0" right="8.0" top="4.0" />
+                                    <Insets bottom="-5.0" top="4.0" />
                                  </HBox.margin>
                               </TableView>
                            </children>
@@ -184,9 +184,9 @@
                   <Insets top="15.0" />
                </VBox.margin>
                <children>
-                  <HBox alignment="CENTER" prefHeight="400.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" prefHeight="400.0" prefWidth="550.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="530.0" styleClass="box">
+                        <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="334.0" prefWidth="592.0" styleClass="box">
                            <children>
                               <HBox alignment="TOP_CENTER" prefHeight="22.0" prefWidth="438.0">
                                  <children>
@@ -287,13 +287,13 @@
                                        <columns>
                                           <TableColumn fx:id="country_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
                                           <TableColumn fx:id="country_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="214.0" text="Country Name" />
-                                          <TableColumn fx:id="country_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                          <TableColumn fx:id="country_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="DEL" />
                                        </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                        <HBox.margin>
-                                          <Insets bottom="-5.0" left="8.0" right="8.0" top="4.0" />
+                                          <Insets bottom="-5.0" top="4.0" />
                                        </HBox.margin>
                                     </TableView>
                                  </children>
@@ -309,9 +309,9 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="472.0" layoutY="43.2" prefHeight="683.0" prefWidth="870.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="552.1999999999999" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
+      <HBox layoutX="472.0" layoutY="43.2" prefHeight="683.0" prefWidth="810.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="43.0">
          <children>
-            <VBox prefHeight="900.0" prefWidth="530.0">
+            <VBox prefHeight="900.0" prefWidth="500.0">
                <children>
                   <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="862.0" prefWidth="530.0" styleClass="box">
                      <children>
@@ -369,17 +369,17 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="120.0" text="Select Supplier" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="140.0" text="Select Supplier" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
                               <ComboBox fx:id="supplier_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="8.0" right="8.0" />
+                                    <Insets right="8.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -389,17 +389,17 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="120.0" text="Select Country" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="140.0" text="Select Country" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
                               <ComboBox fx:id="country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="8.0" right="8.0" />
+                                    <Insets right="8.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -445,13 +445,13 @@
                                  <columns>
                                     <TableColumn fx:id="supplier_name_in_sup_country_colm" maxWidth="1200.0" prefWidth="70.0" text="Supplier" />
                                     <TableColumn fx:id="supplier_cou_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="70.0" text="Supplier Country" />
-                                    <TableColumn fx:id="supplier_cou_delete_colm" maxWidth="1500.0" prefWidth="18.0" text="Delete" />
+                                    <TableColumn fx:id="supplier_cou_delete_colm" maxWidth="1500.0" prefWidth="18.0" text="DEL" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <HBox.margin>
-                                    <Insets bottom="-5.0" left="8.0" right="8.0" top="4.0" />
+                                    <Insets bottom="-5.0" top="4.0" />
                                  </HBox.margin>
                               </TableView>
                            </children>
@@ -460,10 +460,10 @@
                   </VBox>
                </children>
                <HBox.margin>
-                  <Insets right="13.0" />
+                  <Insets right="12.0" />
                </HBox.margin>
             </VBox>
-            <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="338.0" prefWidth="470.0">
+            <VBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="338.0" prefWidth="400.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="500.0" styleClass="box">
                      <children>
@@ -563,13 +563,13 @@
                                  <columns>
                                     <TableColumn fx:id="test_id_colm" maxWidth="1200.0" prefWidth="25.0" text="ID" />
                                     <TableColumn fx:id="test_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="180.0" text="Test Name" />
-                                    <TableColumn fx:id="test_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="Delete" />
+                                    <TableColumn fx:id="test_delete_colm" maxWidth="1500.0" prefWidth="30.0" text="DEL" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="8.0" right="8.0" top="4.0" />
+                                    <Insets bottom="5.0" top="4.0" />
                                  </HBox.margin>
                               </TableView>
                            </children>

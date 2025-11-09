@@ -20,7 +20,7 @@ public class MaterialTestDao {
     }
 
 
-    public static boolean insertMaterialTest(MaterialTest materialTest) {
+    public  boolean insertMaterialTest(MaterialTest materialTest) {
         String sql = """
                 INSERT INTO material_testing.dbo.material_tests
                 	( section_id, supplier_id, country_id,
@@ -55,7 +55,7 @@ public class MaterialTestDao {
         }
     }
 
-    public static boolean updateMaterialTest(MaterialTest materialTest){
+    public  boolean updateMaterialTest(MaterialTest materialTest){
         String sql = """
             UPDATE material_testing.dbo.material_tests
             SET section_id = ?,
@@ -92,7 +92,7 @@ public class MaterialTestDao {
         }
     }
 
-    public static boolean deleteMaterialTest(int materialTestId){
+    public  boolean deleteMaterialTest(int materialTestId){
         String sql = "DELETE FROM material_testing.dbo.material_tests WHERE material_test_id = ?";
         try(Connection con = DbConnect.getConnect();
         PreparedStatement ps = con.prepareStatement(sql)){
@@ -105,7 +105,7 @@ public class MaterialTestDao {
         }
     }
 
-    public static MaterialTest getMaterialTestById(int materialTestId) {
+    public  MaterialTest getMaterialTestById(int materialTestId) {
        // String sql = "SELECT * FROM material_testing.dbo.material_tests WHERE material_test_id = ?";
         String sql = """
         SELECT
@@ -164,7 +164,7 @@ public class MaterialTestDao {
         return mt;
     }
 
-    public static ObservableList<MaterialTest> getAllMaterialTest() {
+    public  ObservableList<MaterialTest> getAllMaterialTest() {
         ObservableList<MaterialTest> list = FXCollections.observableArrayList();
         String sql = """
         SELECT
@@ -222,7 +222,7 @@ public class MaterialTestDao {
     }
 
     // Get the total number of MaterialTestCount
-    public static int getMaterialTestCount() {
+    public  int getMaterialTestCount() {
         String query = "SELECT COUNT(*) AS material_test_count FROM material_testing.dbo.material_tests";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);
@@ -238,7 +238,7 @@ public class MaterialTestDao {
     }
 
     // Get the number of MaterialTestCount by section ID
-    public static int getMaterialTestCountBySection(Integer sectionId) {
+    public  int getMaterialTestCountBySection(Integer sectionId) {
         String query = "SELECT COUNT(*) AS material_test_count FROM material_testing.dbo.material_tests WHERE section_id = ?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {

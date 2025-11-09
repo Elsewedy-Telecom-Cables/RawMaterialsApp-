@@ -97,12 +97,20 @@ public class ViewMaterialTestsController implements Initializable {
     @FXML private Label date_lbl;
     @FXML private ImageView logo_image_view;
     @FXML private ImageView excel_image_view;
-
+    @FXML private Button AddMaterialTest_btn;
 
 
     private ObservableList<MaterialTest> materialTestsList;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
     private static ViewMaterialTestsController instance;
+
+    // Dao instances
+    private final MaterialTestDao materialTestDao = new MaterialTestDao();
+    private final SupplierDao supplierDao = new SupplierDao();
+    private final CountryDao countryDao = new CountryDao();
+    private final SupplierCountryDao supplierCountryDao = new SupplierCountryDao();
+    private final SectionDao sectionDao = new SectionDao();
+    private final MaterialDao materialDao = new MaterialDao();
 
     public static ViewMaterialTestsController getInstance() {
         return instance;
@@ -135,6 +143,15 @@ public class ViewMaterialTestsController implements Initializable {
         copper_material_tests_count_textF.setEditable(false);
         accessories_material_tests_count_textF.setEditable(false);
 
+        // set permissions
+        int role = UserContext.getCurrentUser().getRole();
+        if (role == 3 || role == 4) {
+            AddMaterialTest_btn.setVisible(true);
+            edit_column.setVisible(true);
+        } else {
+            AddMaterialTest_btn.setVisible(false);
+            edit_column.setVisible(false);
+        }
     }
 
     private void initializeComboBoxes() {
@@ -142,10 +159,10 @@ public class ViewMaterialTestsController implements Initializable {
         Image img2 = new Image(Objects.requireNonNull(ViewMaterialTestsController.class.getResourceAsStream("/images/excel.png")));
         excel_image_view.setImage(img2);
 
-        section_comb.setItems(SectionDao.getAllSections());
-        supplier_comb.setItems(SupplierDao.getAllSuppliers());
-        supplier_country_comb.setItems(CountryDao.getAllCountries());
-        material_comb.setItems(MaterialDao.getAllMaterials());
+        section_comb.setItems(sectionDao.getAllSections());
+        supplier_comb.setItems(supplierDao.getAllSuppliers());
+        supplier_country_comb.setItems(countryDao.getAllCountries());
+        material_comb.setItems(materialDao.getAllMaterials());
 
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             updateSupplierCountries(newVal);
@@ -211,7 +228,7 @@ public class ViewMaterialTestsController implements Initializable {
         final LocalDate start = fromDate;
         final LocalDate end = toDate;
 
-        List<MaterialTest> allTests = MaterialTestDao.getAllMaterialTest();
+        List<MaterialTest> allTests = materialTestDao.getAllMaterialTest();
 
         List<MaterialTest> filtered = allTests.stream()
                 .filter(t -> finalTestId == null || t.getMaterialTestId() == finalTestId)
@@ -245,7 +262,7 @@ public class ViewMaterialTestsController implements Initializable {
     private void updateSupplierCountries(Supplier supplier) {
         ObservableList<Country> filteredCountries = FXCollections.observableArrayList();
         if (supplier != null) {
-            ObservableList<SupplierCountry> list = SupplierCountryDao.getAllSupplierCountries();
+            ObservableList<SupplierCountry> list = supplierCountryDao.getAllSupplierCountries();
             for (SupplierCountry sc : list) {
                 if (sc.getSupplierId() == supplier.getSupplierId()) {
                     Country c = new Country();
@@ -265,7 +282,7 @@ public class ViewMaterialTestsController implements Initializable {
 
     void loadData() {
         Platform.runLater(() -> {
-            materialTestsList = MaterialTestDao.getAllMaterialTest();
+            materialTestsList = materialTestDao.getAllMaterialTest();
             material_tests_table_view.setItems(materialTestsList);
 
             // Row numbering
@@ -402,7 +419,7 @@ public class ViewMaterialTestsController implements Initializable {
                         if (mt != null) {
                            // materialTestObj = mt;
                             WindowUtils.OPEN_EDIT_MATERIAL_TEST_PAGE(mt.getMaterialTestId(), () -> {
-                                materialTestsList.set(getIndex(), MaterialTestDao.getMaterialTestById(mt.getMaterialTestId()));
+                                materialTestsList.set(getIndex(), materialTestDao.getMaterialTestById(mt.getMaterialTestId()));
                                 material_tests_table_view.refresh();
                                 updateMaterialTestCount();
                             });
@@ -431,7 +448,7 @@ public class ViewMaterialTestsController implements Initializable {
                                 if (response == okButton) {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
-                                            boolean deleted = MaterialTestDao.deleteMaterialTest(mt.getMaterialTestId());
+                                            boolean deleted = materialTestDao.deleteMaterialTest(mt.getMaterialTestId());
                                             if (deleted) {
                                                 loadData(); // Refresh table
                                                 WindowUtils.ALERT("Success", "Material Test deleted successfully", WindowUtils.ALERT_INFORMATION);
@@ -673,10 +690,10 @@ public class ViewMaterialTestsController implements Initializable {
     }
 
     void updateMaterialTestCount() {
-        int total = MaterialTestDao.getMaterialTestCount();
-        int fo = MaterialTestDao.getMaterialTestCountBySection(1);
-        int cu = MaterialTestDao.getMaterialTestCountBySection(2);
-        int acc = MaterialTestDao.getMaterialTestCountBySection(3);
+        int total = materialTestDao.getMaterialTestCount();
+        int fo = materialTestDao.getMaterialTestCountBySection(1);
+        int cu = materialTestDao.getMaterialTestCountBySection(2);
+        int acc = materialTestDao.getMaterialTestCountBySection(3);
         total_material_tests_count_textF.setText(String.valueOf(total));
         fo_material_tests_count_textF.setText(String.valueOf(fo));
         copper_material_tests_count_textF.setText(String.valueOf(cu));

@@ -1,9 +1,9 @@
 //
 //    package com.etc.raw_materials_app.controllers;
 //
-//    import com.etc.raw_materials_app.dao.CountryDao;
-//    import com.etc.raw_materials_app.dao.TestNameDao;
-//    import com.etc.raw_materials_app.dao.SupplierDao;
+//    import com.etc.raw_materials_app.dao.countryDao;
+//    import com.etc.raw_materials_app.dao.testNameDao;
+//    import com.etc.raw_materials_app.dao.supplierDao;
 //    import com.etc.raw_materials_app.logging.Logging;
 //    import com.etc.raw_materials_app.models.*;
 //    import com.etc.raw_materials_app.services.UserService;
@@ -116,8 +116,8 @@
 //        @Override
 //        public void initialize(URL url, ResourceBundle resourceBundle) {
 //            // Set ComboBox
-//            supplier_comb.setItems(SupplierDao.getAllSuppliers());
-//            country_comb.setItems(CountryDao.getAllCountries());
+//            supplier_comb.setItems(supplierDao.getAllSuppliers());
+//            country_comb.setItems(countryDao.getAllCountries());
 //
 //            // Load Data For All Tables
 //            loadSuppliersData();
@@ -130,9 +130,9 @@
 //            setupCountryTableListener();
 //            setupSupplierCountryTableListener();
 //            //
-//            countryList = CountryDao.getAllCountries();
-//            supplierList = SupplierDao.getAllSuppliers();
-//            testNamesList = TestNameDao.getAllTestNames();
+//            countryList = countryDao.getAllCountries();
+//            supplierList = supplierDao.getAllSuppliers();
+//            testNamesList = testNameDao.getAllTestNames();
 //
 //
 //            // Set items to TableViews
@@ -181,9 +181,9 @@
 //                                        if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
 //                                            try {
 //                                                Supplier supplier = supplier_table_view.getSelectionModel().getSelectedItem();
-//                                                boolean deleted = SupplierDao.deleteSupplier(supplier.getSupplierId());
+//                                                boolean deleted = supplierDao.deleteSupplier(supplier.getSupplierId());
 //                                                if (deleted) {
-//                                                    supplierList = SupplierDao.getAllSuppliers();
+//                                                    supplierList = supplierDao.getAllSuppliers();
 //                                                    supplier_table_view.setItems(supplierList);
 //                                                    WindowUtils.ALERT("Success", "Supplier deleted successfully", WindowUtils.ALERT_INFORMATION);
 //                                                } else {
@@ -263,11 +263,11 @@
 //                                        if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
 //                                            try {
 //                                                Country country = country_table_view.getSelectionModel().getSelectedItem();
-//                                                CountryDao.deleteCountry(country.getCountryId());
+//                                                countryDao.deleteCountry(country.getCountryId());
 //                                                country_name_textF.clear();
 //                                                filter_country_textF.clear();
 //                                                update_country_name_textF.clear();
-//                                                countryList = CountryDao.getAllCountries();
+//                                                countryList = countryDao.getAllCountries();
 //                                                country_table_view.setItems(countryList);
 //                                                WindowUtils.ALERT("Success", "Country deleted successfully", WindowUtils.ALERT_INFORMATION);
 //                                            } catch (Exception ex) {
@@ -307,18 +307,18 @@
 //            Country country = new Country();
 //            country.setCountryName(countryName);
 //
-//            boolean success = CountryDao.insertCountry(country);
+//            boolean success = countryDao.insertCountry(country);
 //
 //            if (success) {
 //                WindowUtils.ALERT("Success", "Country added successfully", WindowUtils.ALERT_INFORMATION);
 //                country_name_textF.clear();
 //                update_country_name_textF.clear();
 //                filter_country_textF.clear();
-//                countryList = CountryDao.getAllCountries();
+//                countryList = countryDao.getAllCountries();
 //                country_table_view.setItems(countryList);
-//                country_comb.setItems(CountryDao.getAllCountries());
+//                country_comb.setItems(countryDao.getAllCountries());
 //            } else {
-//                String err = CountryDao.lastErrorMessage;
+//                String err = countryDao.lastErrorMessage;
 //                if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
 //                    WindowUtils.ALERT("Duplicate", "Country name already exists", WindowUtils.ALERT_ERROR);
 //                } else {
@@ -345,15 +345,15 @@
 //            }
 //
 //            selectedCountry.setCountryName(countryName);
-//            boolean success = CountryDao.updateCountry(selectedCountry);
+//            boolean success = countryDao.updateCountry(selectedCountry);
 //            if (success) {
 //                WindowUtils.ALERT("Success", "Country updated successfully", WindowUtils.ALERT_INFORMATION);
 //                update_country_name_textF.clear();
 //                country_name_textF.clear();
 //                filter_country_textF.clear();
-//                countryList = CountryDao.getAllCountries();
+//                countryList = countryDao.getAllCountries();
 //                country_table_view.setItems(countryList);
-//                country_comb.setItems(CountryDao.getAllCountries());
+//                country_comb.setItems(countryDao.getAllCountries());
 //            } else {
 //                WindowUtils.ALERT("ERR", "country_updated_failed", WindowUtils.ALERT_ERROR);
 //            }
@@ -421,7 +421,7 @@
 //
 //            selectedSupplier.setSupplierName(supplierName);
 //            selectedSupplier.setSupplierCode(supplierCode);
-//            boolean success = SupplierDao.updateSupplier(selectedSupplier);
+//            boolean success = supplierDao.updateSupplier(selectedSupplier);
 //            if (success) {
 //                WindowUtils.ALERT("Success", "Supplier updated successfully", WindowUtils.ALERT_INFORMATION);
 //                update_supplier_name_textF.clear();
@@ -429,9 +429,9 @@
 //                supplier_code_textF.clear();
 //                update_supplier_code_textF.clear();
 //                filter_supplier_textF.clear();
-//                supplierList = SupplierDao.getAllSuppliers();
+//                supplierList = supplierDao.getAllSuppliers();
 //                supplier_table_view.setItems(supplierList);
-//                supplier_comb.setItems(SupplierDao.getAllSuppliers());
+//                supplier_comb.setItems(supplierDao.getAllSuppliers());
 //            } else {
 //                WindowUtils.ALERT("ERROR", "supplier_updated_failed", WindowUtils.ALERT_ERROR);
 //            }
@@ -454,7 +454,7 @@
 //        supplier.setSupplierName(supplierName);
 //        supplier.setSupplierCode(supplierCode);
 //
-//        boolean success = SupplierDao.insertSupplier(supplier);
+//        boolean success = supplierDao.insertSupplier(supplier);
 //        if (success) {
 //            WindowUtils.ALERT("Success", "Supplier added successfully", WindowUtils.ALERT_INFORMATION);
 //            supplier_name_textF.clear();
@@ -462,11 +462,11 @@
 //            supplier_code_textF.clear();
 //            update_supplier_code_textF.clear();
 //            filter_supplier_textF.clear();
-//            supplierList = SupplierDao.getAllSuppliers();
+//            supplierList = supplierDao.getAllSuppliers();
 //            supplier_table_view.setItems(supplierList);
-//            supplier_comb.setItems(SupplierDao.getAllSuppliers());
+//            supplier_comb.setItems(supplierDao.getAllSuppliers());
 //        } else {
-//            String err = SupplierDao.lastErrorMessage;
+//            String err = supplierDao.lastErrorMessage;
 //            if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
 //                WindowUtils.ALERT("Duplicate", "Supplier name already exists", WindowUtils.ALERT_ERROR);
 //            } else {
@@ -567,11 +567,11 @@
 //                                        if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
 //                                            try {
 //                                                TestName testName = test_names_table_view.getSelectionModel().getSelectedItem();
-//                                                TestNameDao.deleteTestName(testName.getTestNameId());
+//                                                testNameDao.deleteTestName(testName.getTestNameId());
 //                                                test_name_textF.clear();
 //                                                filter_test_textF.clear();
 //                                                update_test_name_textF.clear();
-//                                                testNamesList = TestNameDao.getAllTestNames();
+//                                                testNamesList = testNameDao.getAllTestNames();
 //                                                test_names_table_view.setItems(testNamesList);
 //                                                WindowUtils.ALERT("Success", "Test deleted successfully", WindowUtils.ALERT_INFORMATION);
 //                                            } catch (Exception ex) {
@@ -619,17 +619,17 @@
 //            TestName  tn  = new TestName();
 //            tn.setTestName(testName);
 //
-//            int  success = TestNameDao.insertTestName(tn);
+//            int  success = testNameDao.insertTestName(tn);
 //
 //            if (success != 0) {
 //                WindowUtils.ALERT("Success", "Test added successfully", WindowUtils.ALERT_INFORMATION);
 //                test_name_textF.clear();
 //                update_test_name_textF.clear();
 //                filter_test_textF.clear();
-//                testNamesList = TestNameDao.getAllTestNames();
+//                testNamesList = testNameDao.getAllTestNames();
 //                test_names_table_view.setItems(testNamesList);
 //            } else {
-//                String err = TestNameDao.lastErrorMessage;
+//                String err = testNameDao.lastErrorMessage;
 //                if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
 //                    WindowUtils.ALERT("Duplicate", "Test name already exists", WindowUtils.ALERT_ERROR);
 //                } else {
@@ -656,13 +656,13 @@
 //                }
 //
 //                selectTest.setTestName(testName);
-//                boolean success = TestNameDao.updateTestName(selectTest);
+//                boolean success = testNameDao.updateTestName(selectTest);
 //                if (success) {
 //                    WindowUtils.ALERT("Success", "Test updated successfully", WindowUtils.ALERT_INFORMATION);
 //                    update_test_name_textF.clear();
 //                    test_name_textF.clear();
 //                    filter_test_textF.clear();
-//                    testNamesList = TestNameDao.getAllTestNames();
+//                    testNamesList = testNameDao.getAllTestNames();
 //                    test_names_table_view.setItems(testNamesList);
 //                } else {
 //                    WindowUtils.ALERT("ERROR", "test_updated_failed", WindowUtils.ALERT_ERROR);
@@ -743,8 +743,8 @@ package com.etc.raw_materials_app.controllers;
 
 import com.etc.raw_materials_app.dao.CountryDao;
 import com.etc.raw_materials_app.dao.SupplierCountryDao;
-import com.etc.raw_materials_app.dao.TestNameDao;
 import com.etc.raw_materials_app.dao.SupplierDao;
+import com.etc.raw_materials_app.dao.TestNameDao;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.*;
 import com.etc.raw_materials_app.services.UserService;
@@ -852,12 +852,18 @@ public class PrepareDataController implements Initializable {
     ObservableList<Country> countryList;
     ObservableList<TestName> testNamesList;
     ObservableList<SupplierCountry> supplierCountryList;
+    
+    // Dao Instance 
+    SupplierDao supplierDao = new SupplierDao();
+    CountryDao countryDao = new CountryDao();
+    TestNameDao testNameDao = new TestNameDao();
+    SupplierCountryDao suppliercountryDao = new SupplierCountryDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Set ComboBox
-        supplier_comb.setItems(SupplierDao.getAllSuppliers());
-        country_comb.setItems(CountryDao.getAllCountries());
+        supplier_comb.setItems(supplierDao.getAllSuppliers());
+        country_comb.setItems(countryDao.getAllCountries());
 
         // Load Data For All Tables
         loadSuppliersData();
@@ -871,10 +877,10 @@ public class PrepareDataController implements Initializable {
         setupCountryTableListener();
         setupSupplierCountryTableListener();
 
-        countryList = CountryDao.getAllCountries();
-        supplierList = SupplierDao.getAllSuppliers();
-        testNamesList = TestNameDao.getAllTestNames();
-        supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+        countryList = countryDao.getAllCountries();
+        supplierList = supplierDao.getAllSuppliers();
+        testNamesList = testNameDao.getAllTestNames();
+        supplierCountryList = suppliercountryDao.getAllSupplierCountries();
 
         // Set items to TableViews
         country_table_view.setItems(countryList);
@@ -922,11 +928,11 @@ public class PrepareDataController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             Supplier supplier = supplier_table_view.getSelectionModel().getSelectedItem();
-                                            boolean deleted = SupplierDao.deleteSupplier(supplier.getSupplierId());
+                                            boolean deleted = supplierDao.deleteSupplier(supplier.getSupplierId());
                                             if (deleted) {
-                                                supplierList = SupplierDao.getAllSuppliers();
+                                                supplierList = supplierDao.getAllSuppliers();
                                                 supplier_table_view.setItems(supplierList);
-                                                supplier_comb.setItems(SupplierDao.getAllSuppliers());
+                                                supplier_comb.setItems(supplierDao.getAllSuppliers());
                                                 WindowUtils.ALERT("Success", "Supplier deleted successfully", WindowUtils.ALERT_INFORMATION);
                                             } else {
                                                 WindowUtils.ALERT("Warning", "Cannot delete supplier. It may be referenced in other tables or an error occurred.", WindowUtils.ALERT_WARNING);
@@ -1003,13 +1009,13 @@ public class PrepareDataController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             Country country = country_table_view.getSelectionModel().getSelectedItem();
-                                            CountryDao.deleteCountry(country.getCountryId());
+                                            countryDao.deleteCountry(country.getCountryId());
                                             country_name_textF.clear();
                                             filter_country_textF.clear();
                                             update_country_name_textF.clear();
-                                            countryList = CountryDao.getAllCountries();
+                                            countryList = countryDao.getAllCountries();
                                             country_table_view.setItems(countryList);
-                                            country_comb.setItems(CountryDao.getAllCountries());
+                                            country_comb.setItems(countryDao.getAllCountries());
                                             WindowUtils.ALERT("Success", "Country deleted successfully", WindowUtils.ALERT_INFORMATION);
                                         } catch (Exception ex) {
                                             Logging.logException("ERROR", getClass().getName(), "deleteCountry", ex);
@@ -1072,9 +1078,9 @@ public class PrepareDataController implements Initializable {
                                     if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                         try {
                                             SupplierCountry sc = supplier_country_table_view.getSelectionModel().getSelectedItem();
-                                            boolean deleted = SupplierCountryDao.deleteSupplierCountry(sc.getSupplierId(), sc.getCountryId());
+                                            boolean deleted = suppliercountryDao.deleteSupplierCountry(sc.getSupplierId(), sc.getCountryId());
                                             if (deleted) {
-                                                supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+                                                supplierCountryList = suppliercountryDao.getAllSupplierCountries();
                                                 supplier_country_table_view.setItems(supplierCountryList);
                                                 helpSupplierCountry();
                                                 WindowUtils.ALERT("Success", "Supplier-Country mapping deleted successfully", WindowUtils.ALERT_INFORMATION);
@@ -1117,18 +1123,18 @@ public class PrepareDataController implements Initializable {
         Country country = new Country();
         country.setCountryName(countryName);
 
-        boolean success = CountryDao.insertCountry(country);
+        boolean success = countryDao.insertCountry(country);
 
         if (success) {
             WindowUtils.ALERT("Success", "Country added successfully", WindowUtils.ALERT_INFORMATION);
             country_name_textF.clear();
             update_country_name_textF.clear();
             filter_country_textF.clear();
-            countryList = CountryDao.getAllCountries();
+            countryList = countryDao.getAllCountries();
             country_table_view.setItems(countryList);
-            country_comb.setItems(CountryDao.getAllCountries());
+            country_comb.setItems(countryDao.getAllCountries());
         } else {
-            String err = CountryDao.lastErrorMessage;
+            String err = countryDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "Country name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -1154,16 +1160,16 @@ public class PrepareDataController implements Initializable {
             }
 
             selectedCountry.setCountryName(countryName);
-            boolean success = CountryDao.updateCountry(selectedCountry);
+            boolean success = countryDao.updateCountry(selectedCountry);
             if (success) {
                 WindowUtils.ALERT("Success", "Country updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_country_name_textF.clear();
                 country_name_textF.clear();
                 filter_country_textF.clear();
-                countryList = CountryDao.getAllCountries();
+                countryList = countryDao.getAllCountries();
                 country_table_view.setItems(countryList);
-                country_comb.setItems(CountryDao.getAllCountries());
-                supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+                country_comb.setItems(countryDao.getAllCountries());
+                supplierCountryList = suppliercountryDao.getAllSupplierCountries();
                 supplier_country_table_view.setItems(supplierCountryList);
             } else {
                 WindowUtils.ALERT("ERROR", "country_updated_failed", WindowUtils.ALERT_ERROR);
@@ -1232,7 +1238,7 @@ public class PrepareDataController implements Initializable {
 
             selectedSupplier.setSupplierName(supplierName);
             selectedSupplier.setSupplierCode(supplierCode);
-            boolean success = SupplierDao.updateSupplier(selectedSupplier);
+            boolean success = supplierDao.updateSupplier(selectedSupplier);
             if (success) {
                 WindowUtils.ALERT("Success", "Supplier updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_supplier_name_textF.clear();
@@ -1240,10 +1246,10 @@ public class PrepareDataController implements Initializable {
                 supplier_code_textF.clear();
                 update_supplier_code_textF.clear();
                 filter_supplier_textF.clear();
-                supplierList = SupplierDao.getAllSuppliers();
+                supplierList = supplierDao.getAllSuppliers();
                 supplier_table_view.setItems(supplierList);
-                supplier_comb.setItems(SupplierDao.getAllSuppliers());
-                supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+                supplier_comb.setItems(supplierDao.getAllSuppliers());
+                supplierCountryList = suppliercountryDao.getAllSupplierCountries();
                 supplier_country_table_view.setItems(supplierCountryList);
 
             } else {
@@ -1268,7 +1274,7 @@ public class PrepareDataController implements Initializable {
         supplier.setSupplierName(supplierName);
         supplier.setSupplierCode(supplierCode);
 
-        boolean success = SupplierDao.insertSupplier(supplier);
+        boolean success = supplierDao.insertSupplier(supplier);
         if (success) {
             WindowUtils.ALERT("Success", "Supplier added successfully", WindowUtils.ALERT_INFORMATION);
             supplier_name_textF.clear();
@@ -1276,11 +1282,11 @@ public class PrepareDataController implements Initializable {
             supplier_code_textF.clear();
             update_supplier_code_textF.clear();
             filter_supplier_textF.clear();
-            supplierList = SupplierDao.getAllSuppliers();
+            supplierList = supplierDao.getAllSuppliers();
             supplier_table_view.setItems(supplierList);
-            supplier_comb.setItems(SupplierDao.getAllSuppliers());
+            supplier_comb.setItems(supplierDao.getAllSuppliers());
         } else {
-            String err = SupplierDao.lastErrorMessage;
+            String err = supplierDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "Supplier name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -1355,14 +1361,14 @@ public class PrepareDataController implements Initializable {
         supplierCountry.setSupplierName(selectedSupplier.getSupplierName());
         supplierCountry.setCountryName(selectedCountry.getCountryName());
 
-        boolean success = SupplierCountryDao.insertSupplierCountry(supplierCountry);
+        boolean success = suppliercountryDao.insertSupplierCountry(supplierCountry);
         if (success) {
             WindowUtils.ALERT("Success", "Supplier-Country mapping added successfully", WindowUtils.ALERT_INFORMATION);
             helpSupplierCountry();
-            supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+            supplierCountryList = suppliercountryDao.getAllSupplierCountries();
             supplier_country_table_view.setItems(supplierCountryList);
         } else {
-            String err = SupplierCountryDao.lastErrorMessage;
+            String err = suppliercountryDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "Supplier-Country mapping already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -1416,7 +1422,7 @@ public class PrepareDataController implements Initializable {
             }
 
             // Delete the old mapping
-            boolean deleted = SupplierCountryDao.deleteSupplierCountry(selectedSupplierCountry.getSupplierId(), selectedSupplierCountry.getCountryId());
+            boolean deleted = suppliercountryDao.deleteSupplierCountry(selectedSupplierCountry.getSupplierId(), selectedSupplierCountry.getCountryId());
             if (!deleted) {
                 WindowUtils.ALERT("ERROR", "Failed to update supplier-country mapping", WindowUtils.ALERT_ERROR);
                 return;
@@ -1429,11 +1435,11 @@ public class PrepareDataController implements Initializable {
             newSupplierCountry.setSupplierName(selectedSupplier.getSupplierName());
             newSupplierCountry.setCountryName(selectedCountry.getCountryName());
 
-            boolean success = SupplierCountryDao.insertSupplierCountry(newSupplierCountry);
+            boolean success = suppliercountryDao.insertSupplierCountry(newSupplierCountry);
             if (success) {
                 WindowUtils.ALERT("Success", "Supplier-Country mapping updated successfully", WindowUtils.ALERT_INFORMATION);
                 helpSupplierCountry();
-                supplierCountryList = SupplierCountryDao.getAllSupplierCountries();
+                supplierCountryList = suppliercountryDao.getAllSupplierCountries();
                 supplier_country_table_view.setItems(supplierCountryList);
             } else {
                 WindowUtils.ALERT("ERROR", "supplier_country_updated_failed", WindowUtils.ALERT_ERROR);
@@ -1481,11 +1487,11 @@ public class PrepareDataController implements Initializable {
                                             if (UserService.confirmPassword(UserContext.getCurrentUser().getUserName())) {
                                                 try {
                                                     TestName testName = test_names_table_view.getSelectionModel().getSelectedItem();
-                                                    TestNameDao.deleteTestName(testName.getTestNameId());
+                                                    testNameDao.deleteTestName(testName.getTestNameId());
                                                     test_name_textF.clear();
                                                     filter_test_textF.clear();
                                                     update_test_name_textF.clear();
-                                                    testNamesList = TestNameDao.getAllTestNames();
+                                                    testNamesList = testNameDao.getAllTestNames();
                                                     test_names_table_view.setItems(testNamesList);
                                                     WindowUtils.ALERT("Success", "Test deleted successfully", WindowUtils.ALERT_INFORMATION);
                                                 } catch (Exception ex) {
@@ -1534,17 +1540,17 @@ public class PrepareDataController implements Initializable {
         TestName tn = new TestName();
         tn.setTestName(testName);
 
-        int success = TestNameDao.insertTestName(tn);
+        int success = testNameDao.insertTestName(tn);
 
         if (success != 0) {
             WindowUtils.ALERT("Success", "Test added successfully", WindowUtils.ALERT_INFORMATION);
             test_name_textF.clear();
             update_test_name_textF.clear();
             filter_test_textF.clear();
-            testNamesList = TestNameDao.getAllTestNames();
+            testNamesList = testNameDao.getAllTestNames();
             test_names_table_view.setItems(testNamesList);
         } else {
-            String err = TestNameDao.lastErrorMessage;
+            String err = testNameDao.lastErrorMessage;
             if (err != null && (err.toLowerCase().contains("duplicate") || err.contains("UNIQUE"))) {
                 WindowUtils.ALERT("Duplicate", "Test name already exists", WindowUtils.ALERT_ERROR);
             } else {
@@ -1570,13 +1576,13 @@ public class PrepareDataController implements Initializable {
             }
 
             selectTest.setTestName(testName);
-            boolean success = TestNameDao.updateTestName(selectTest);
+            boolean success = testNameDao.updateTestName(selectTest);
             if (success) {
                 WindowUtils.ALERT("Success", "Test updated successfully", WindowUtils.ALERT_INFORMATION);
                 update_test_name_textF.clear();
                 test_name_textF.clear();
                 filter_test_textF.clear();
-                testNamesList = TestNameDao.getAllTestNames();
+                testNamesList = testNameDao.getAllTestNames();
                 test_names_table_view.setItems(testNamesList);
             } else {
                 WindowUtils.ALERT("ERROR", "test_updated_failed", WindowUtils.ALERT_ERROR);

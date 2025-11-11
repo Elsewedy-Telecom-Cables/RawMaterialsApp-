@@ -183,11 +183,11 @@ public class ViewUsersController implements Initializable {
                     manageBtn.setSpacing(12);
 
                     editIcon.setCursor(Cursor.HAND);
-                    editIcon.setIconSize(16);
+                    editIcon.setIconSize(14);
                     editIcon.setFill(Color.GREEN);
 
                     deleteIcon.setCursor(Cursor.HAND);
-                    deleteIcon.setIconSize(16);
+                    deleteIcon.setIconSize(13);
                     deleteIcon.setFill(Color.RED);
 
 

@@ -93,8 +93,7 @@ public class AddFileController implements Initializable {
     private ObservableList<File> fileList = FXCollections.observableArrayList();
     private ObservableList<MaterialDocument> materialDocuments = FXCollections.observableArrayList();
     private List<Integer> uploadedMaterialDocumentIds = new ArrayList<>();
-    //private static final String SERVER_UPLOAD_PATH = "\\\\ETCSVR\\MaterialTestsUpload\\";
-    private static final String SERVER_UPLOAD_PATH = "G:\\ETC_Projects\\Quality\\Raw_Materials\\MaterialTestsUpload";
+    private static final String SERVER_UPLOAD_PATH = "\\\\ETCSVR\\MaterialTestsUpload\\";
 
     private static String selectedDownloadPath = null;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a");
@@ -198,17 +197,7 @@ public class AddFileController implements Initializable {
                 btn.setCursor(Cursor.HAND);
                 btn.setOnAction(event -> uploadFile(getIndex()));
             }
-// Without Show Upload Icon
-//            @Override
-//            protected void updateItem(String item, boolean empty) {
-//                super.updateItem(item, empty);
-//                if (empty || getTableView().getItems().get(getIndex()).getFilePath() != null) {
-//                    setGraphic(null);
-//                } else {
-//                    setGraphic(btn);
-//                }
-//            }
-//        });
+
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
@@ -344,20 +333,36 @@ public class AddFileController implements Initializable {
         }
 
         // Add a new row with fileId=0, based on selected MaterialDocument
-        File newFile = new File();
-        MaterialTest mt = new MaterialTest();  // Assuming MaterialTest has a default constructor
-        mt.setMaterialTestId(materialTestId);  // Set the ID
-        newFile.setMaterialTest(mt);
-        newFile.setMaterialDocumentId(selectedDoc.getMaterialDocumentId());
-        newFile.setMaterialDocumentName(selectedDoc.getMaterialDocumentName());  // Assuming this getter exists; if not, adjust to getMaterialDocName()
-        newFile.setUserId(UserContext.getCurrentUser().getUserId());
-        newFile.setCreationDate(null);  // Will be set on upload
-        newFile.setFilePath(null);  // Will be set on upload
-        newFile.setComment("");
-        newFile.setMaterialName(materialName);  // From previous page
-        newFile.setSupplierName(supplierName);  // From previous page
-        fileList.add(newFile);
-        table_view.refresh();
+//        File newFile = new File();
+//        MaterialTest mt = new MaterialTest();  // Assuming MaterialTest has a default constructor
+//        mt.setMaterialTestId(materialTestId);  // Set the ID
+//        newFile.setMaterialTest(mt);
+//        newFile.setMaterialDocumentId(selectedDoc.getMaterialDocumentId());
+//        newFile.setMaterialDocumentName(selectedDoc.getMaterialDocumentName());  // Assuming this getter exists; if not, adjust to getMaterialDocName()
+//        newFile.setUserId(UserContext.getCurrentUser().getUserId());
+//        newFile.setCreationDate(null);  // Will be set on upload
+//        newFile.setFilePath(null);  // Will be set on upload
+//        newFile.setComment("");
+//        newFile.setMaterialName(materialName);  // From previous page
+//        newFile.setSupplierName(supplierName);  // From previous page
+//        fileList.add(newFile);
+//        table_view.refresh();
+        // أضف 5 صفوف مؤقتة بدل صف واحد
+        for (int i = 1; i <= 5; i++) {
+            File newFile = new File();
+            MaterialTest mt = new MaterialTest();
+            mt.setMaterialTestId(materialTestId);
+            newFile.setMaterialTest(mt);
+            newFile.setMaterialDocumentId(selectedDoc.getMaterialDocumentId());
+            newFile.setMaterialDocumentName(selectedDoc.getMaterialDocumentName());
+            newFile.setUserId(UserContext.getCurrentUser().getUserId());
+            newFile.setCreationDate(null);
+            newFile.setFilePath(null);
+            newFile.setComment("");
+            newFile.setMaterialName(materialName);
+            newFile.setSupplierName(supplierName);
+            fileList.add(newFile);
+        }
     }
 
     public void uploadFile(int rowIndex) {

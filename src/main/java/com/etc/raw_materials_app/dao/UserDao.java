@@ -1,7 +1,338 @@
 
-package com.etc.raw_materials_app.dao;
+//package com.etc.raw_materials_app.dao;
+//
+//import com.etc.raw_materials_app.db.DEF;
+//import com.etc.raw_materials_app.db.DbConnect;
+//import com.etc.raw_materials_app.logging.Logging;
+//import com.etc.raw_materials_app.models.User;
+//import com.etc.raw_materials_app.models.UserContext;
+//import javafx.collections.FXCollections;
+//import javafx.collections.ObservableList;
+//
+//import java.sql.Connection;
+//import java.sql.Date;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.util.List;
+//import java.util.stream.Collectors;
+//public class UserDao {
+//    public  User checkConfirmPassword(String username, String pass) {
+//        User user = null;
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " WHERE " + DEF.USERS_USERNAME + " = ? AND " + DEF.USERS_PASSWORD + " = ?";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setString(1, username);
+//            ps.setString(2, pass);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    user = new User();
+//                    user.setUserId(rs.getInt(DEF.USERS_ID));
+//                    user.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
+//                    user.setUserName(rs.getString(DEF.USERS_USERNAME));
+//                    user.setPassword(rs.getString(DEF.USERS_PASSWORD));
+//                    user.setFullName(rs.getString(DEF.USERS_FULLNAME));
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "checkConfirmPassword", e, "sql", query);
+//        }
+//        return user;
+//    }
+//
+//    public  ObservableList<User> getUsers() {
+//        ObservableList<User> list = FXCollections.observableArrayList();
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_PHONE + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " ORDER BY " + DEF.USERS_ROLE + " DESC";
+//
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query);
+//             ResultSet rs = ps.executeQuery()) {
+//            while (rs.next()) {
+//                list.add(new User(
+//                        rs.getInt(DEF.USERS_ID),
+//                        rs.getInt(DEF.USERS_EMP_ID),
+//                        rs.getString(DEF.USERS_USERNAME),
+//                        rs.getString(DEF.USERS_PASSWORD),
+//                        rs.getString(DEF.USERS_FULLNAME),
+//                        rs.getString(DEF.USERS_PHONE),
+//                        rs.getInt(DEF.USERS_ROLE),
+//                        rs.getInt(DEF.USERS_ACTIVE),
+//                        rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
+//                        //    rs.getString(DEF.USERS_CREATION_DATE)
+//
+//                ));
+//            }
+//        } catch (Exception ex) {
+//            Logging.logException("ERROR", UserDao.class.getName(), "getUsers", ex);
+//        }
+//        return list;
+//    }
+//
+//    public  ObservableList<User> getUsersByRoles(List<Integer> allowedRoles) {
+//        ObservableList<User> list = FXCollections.observableArrayList();
+//        if (allowedRoles == null || allowedRoles.isEmpty()) return list;
+//
+//        String placeholders = allowedRoles.stream()
+//                .map(r -> "?")
+//                .collect(Collectors.joining(","));
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_PHONE + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " WHERE " + DEF.USERS_ROLE + " IN (" + placeholders + ")";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            for (int i = 0; i < allowedRoles.size(); i++) {
+//                ps.setInt(i + 1, allowedRoles.get(i));
+//            }
+//            try (ResultSet rs = ps.executeQuery()) {
+//                while (rs.next()) {
+//                    list.add(new User(
+//                            rs.getInt(DEF.USERS_ID),
+//                            rs.getInt(DEF.USERS_EMP_ID),
+//                            rs.getString(DEF.USERS_USERNAME),
+//                            rs.getString(DEF.USERS_PASSWORD),
+//                            rs.getString(DEF.USERS_FULLNAME),
+//                            rs.getString(DEF.USERS_PHONE),
+//                            rs.getInt(DEF.USERS_ROLE),
+//                            rs.getInt(DEF.USERS_ACTIVE),
+//                            rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
+//
+//                    ));
+//                }
+//            }
+//        } catch (Exception ex) {
+//            Logging.logException("ERROR", UserDao.class.getName(), "getUsersByRoles", ex);
+//        }
+//        return list;
+//    }
+//
+//    public  ObservableList<String> getAllUsersFullName() {
+//        ObservableList<String> userFullNames = FXCollections.observableArrayList();
+//        String query = "SELECT " + DEF.USERS_FULLNAME +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " ORDER BY " + DEF.USERS_FULLNAME + " ASC";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query);
+//             ResultSet rs = ps.executeQuery()) {
+//            while (rs.next()) {
+//                userFullNames.add(rs.getString(DEF.USERS_FULLNAME));
+//            }
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getAllUsersFullName", e, "sql", query);
+//        }
+//        return userFullNames;
+//    }
+//
+//    public  User loadUserData(int userId) {
+//        User user = null;
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_PHONE + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " WHERE " + DEF.USERS_ID + " = ?";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setInt(1, userId);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    user = new User(
+//                            rs.getInt(DEF.USERS_ID),
+//                            rs.getInt(DEF.USERS_EMP_ID),
+//                            rs.getString(DEF.USERS_USERNAME),
+//                            rs.getString(DEF.USERS_PASSWORD),
+//                            rs.getString(DEF.USERS_FULLNAME),
+//                            rs.getString(DEF.USERS_PHONE),
+//                            rs.getInt(DEF.USERS_ROLE),
+//                            rs.getInt(DEF.USERS_ACTIVE),
+//                            rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
+//
+//                    );
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "loadUserData", e, "sql", query);
+//        }
+//        return user;
+//    }
+//
+//    public  boolean insertUser(User us) {
+//        String query = "INSERT INTO " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " (" +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_PHONE + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE + ") " +
+//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setInt(1, us.getEmpCode());
+//            ps.setString(2, us.getUserName());
+//            ps.setString(3, us.getPassword());
+//            ps.setString(4, us.getFullName());
+//            ps.setString(5, us.getPhone());
+//            ps.setInt(6, us.getRole());
+//            ps.setInt(7, us.getActive());
+//            if (us.getCreationDate() != null) {
+//                ps.setDate(8, java.sql.Date.valueOf(us.getCreationDate()));
+//            } else {
+//                ps.setNull(8, java.sql.Types.DATE);
+//            }
+//
+//            return ps.executeUpdate() > 0;
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "insertUser", e, "sql", query);
+//        }
+//        return false;
+//    }
+//
+//    public  User getUserByEmpId(int emp_id) {
+//        User us = new User();
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_PHONE + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " WHERE " + DEF.USERS_EMP_ID + " = ?";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setInt(1, emp_id);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    us.setUserId(rs.getInt(DEF.USERS_ID));
+//                    us.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
+//                    us.setUserName(rs.getString(DEF.USERS_USERNAME));
+//                    us.setPassword(rs.getString(DEF.USERS_PASSWORD));
+//                    us.setFullName(rs.getString(DEF.USERS_FULLNAME));
+//                    us.setPhone(rs.getString(DEF.USERS_PHONE));
+//                    us.setRole(rs.getInt(DEF.USERS_ROLE));
+//                    us.setActive(rs.getInt(DEF.USERS_ACTIVE));
+//                    Date sqlDate = rs.getDate(DEF.USERS_CREATION_DATE);
+//                    us.setCreationDate(sqlDate != null ? sqlDate.toLocalDate() : null);
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getUserByEmpId", e, "sql", query);
+//        }
+//        return us;
+//    }
+//
+//    public  User getUserByUsername(String username) {
+//        User user = null;
+//        String query = "SELECT " +
+//                DEF.USERS_ID + ", " +
+//                DEF.USERS_EMP_ID + ", " +
+//                DEF.USERS_USERNAME + ", " +
+//                DEF.USERS_PASSWORD + ", " +
+//                DEF.USERS_FULLNAME + ", " +
+//                DEF.USERS_ROLE + ", " +
+//                DEF.USERS_ACTIVE + ", " +
+//                DEF.USERS_CREATION_DATE +
+//                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
+//                " WHERE " + DEF.USERS_USERNAME + " = ?";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setString(1, username);
+//            try (ResultSet rs = ps.executeQuery()) {
+//                if (rs.next()) {
+//                    user = new User();
+//                    user.setUserId(rs.getInt(DEF.USERS_ID));
+//                    user.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
+//                    user.setUserName(rs.getString(DEF.USERS_USERNAME));
+//                    user.setPassword(rs.getString(DEF.USERS_PASSWORD));
+//                    user.setFullName(rs.getString(DEF.USERS_FULLNAME));
+//                    user.setRole(rs.getInt(DEF.USERS_ROLE));
+//                    user.setActive(rs.getInt(DEF.USERS_ACTIVE));
+//                    Date sqlDate = rs.getDate(DEF.USERS_CREATION_DATE);
+//                    user.setCreationDate(sqlDate != null ? sqlDate.toLocalDate() : null);
+//                    UserContext.setCurrentUser(user);
+//                }
+//            }
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getUserByUsername", e, "sql", query);
+//        }
+//        return user;
+//    }
+//
+//    public  boolean updateUser(User us) {
+//        String query = "UPDATE " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " SET " +
+//                DEF.USERS_PASSWORD + " = ?, " +
+//                DEF.USERS_FULLNAME + " = ?, " +
+//                DEF.USERS_PHONE + " = ?, " +
+//                DEF.USERS_ROLE + " = ?, " +
+//                DEF.USERS_ACTIVE + " = ? " +
+//                "WHERE " + DEF.USERS_EMP_ID + " = ?";
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setString(1, us.getPassword());
+//            ps.setString(2, us.getFullName());
+//            ps.setString(3, us.getPhone());
+//            ps.setInt(4, us.getRole());
+//            ps.setInt(5, us.getActive());
+//            ps.setInt(6, us.getEmpCode());
+//            return ps.executeUpdate() > 0;
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "updateUser", e, "sql", query);
+//        }
+//        return false;
+//    }
+//
+//    public  boolean deleteUser(int emp_id) {
+//        String query = """
+//        DELETE FROM material_testing.dbo.users WHERE emp_code = ?
+//        """;
+//        try (Connection con = DbConnect.getConnect();
+//             PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setInt(1, emp_id);
+//            return ps.executeUpdate() > 0;
+//        } catch (Exception e) {
+//            Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "deleteUser", e, "sql", query);
+//        }
+//        return false;
+//    }
+//}
 
-import com.etc.raw_materials_app.db.DEF;
+package com.etc.raw_materials_app.dao;
 import com.etc.raw_materials_app.db.DbConnect;
 import com.etc.raw_materials_app.logging.Logging;
 import com.etc.raw_materials_app.models.User;
@@ -15,29 +346,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.etc.raw_materials_app.models.User;
+
 public class UserDao {
-    public  User checkConfirmPassword(String username, String pass) {
+
+    public User checkConfirmPassword(String username, String pass) {
         User user = null;
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " WHERE " + DEF.USERS_USERNAME + " = ? AND " + DEF.USERS_PASSWORD + " = ?";
+        String query = """
+            SELECT user_id, emp_code, user_name, password, full_name
+            FROM material_testing.dbo.users
+            WHERE user_name = ? AND password = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, username);
             ps.setString(2, pass);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     user = new User();
-                    user.setUserId(rs.getInt(DEF.USERS_ID));
-                    user.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
-                    user.setUserName(rs.getString(DEF.USERS_USERNAME));
-                    user.setPassword(rs.getString(DEF.USERS_PASSWORD));
-                    user.setFullName(rs.getString(DEF.USERS_FULLNAME));
+                    user.setUserId(rs.getInt("user_id"));
+                    user.setEmpCode(rs.getInt("emp_code"));
+                    user.setUserName(rs.getString("user_name"));
+                    user.setPassword(rs.getString("password"));
+                    user.setFullName(rs.getString("full_name"));
                 }
             }
         } catch (Exception e) {
@@ -46,37 +379,28 @@ public class UserDao {
         return user;
     }
 
-    public  ObservableList<User> getUsers() {
+    public ObservableList<User> getUsers() {
         ObservableList<User> list = FXCollections.observableArrayList();
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_PHONE + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " ORDER BY " + DEF.USERS_ROLE + " DESC";
-
+        String query = """
+            SELECT user_id, emp_code, user_name, password, full_name, phone, role, active, creation_date
+            FROM material_testing.dbo.users
+            ORDER BY role DESC
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
                 list.add(new User(
-                        rs.getInt(DEF.USERS_ID),
-                        rs.getInt(DEF.USERS_EMP_ID),
-                        rs.getString(DEF.USERS_USERNAME),
-                        rs.getString(DEF.USERS_PASSWORD),
-                        rs.getString(DEF.USERS_FULLNAME),
-                        rs.getString(DEF.USERS_PHONE),
-                        rs.getInt(DEF.USERS_ROLE),
-                        rs.getInt(DEF.USERS_ACTIVE),
+                        rs.getInt("user_id"),
+                        rs.getInt("emp_code"),
+                        rs.getString("user_name"),
+                        rs.getString("password"),
+                        rs.getString("full_name"),
+                        rs.getString("phone"),
+                        rs.getInt("role"),
+                        rs.getInt("active"),
                         rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
-                        //    rs.getString(DEF.USERS_CREATION_DATE)
-
                 ));
             }
         } catch (Exception ex) {
@@ -85,43 +409,33 @@ public class UserDao {
         return list;
     }
 
-    public  ObservableList<User> getUsersByRoles(List<Integer> allowedRoles) {
+    public ObservableList<User> getUsersByRoles(List<Integer> allowedRoles) {
         ObservableList<User> list = FXCollections.observableArrayList();
         if (allowedRoles == null || allowedRoles.isEmpty()) return list;
 
-        String placeholders = allowedRoles.stream()
-                .map(r -> "?")
-                .collect(Collectors.joining(","));
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_PHONE + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " WHERE " + DEF.USERS_ROLE + " IN (" + placeholders + ")";
+        String placeholders = allowedRoles.stream().map(r -> "?").collect(Collectors.joining(","));
+        String query = "SELECT user_id, emp_code, user_name, password, full_name, phone, role, active, creation_date "
+                + "FROM material_testing.dbo.users WHERE role IN (" + placeholders + ")";
+
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             for (int i = 0; i < allowedRoles.size(); i++) {
                 ps.setInt(i + 1, allowedRoles.get(i));
             }
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     list.add(new User(
-                            rs.getInt(DEF.USERS_ID),
-                            rs.getInt(DEF.USERS_EMP_ID),
-                            rs.getString(DEF.USERS_USERNAME),
-                            rs.getString(DEF.USERS_PASSWORD),
-                            rs.getString(DEF.USERS_FULLNAME),
-                            rs.getString(DEF.USERS_PHONE),
-                            rs.getInt(DEF.USERS_ROLE),
-                            rs.getInt(DEF.USERS_ACTIVE),
+                            rs.getInt("user_id"),
+                            rs.getInt("emp_code"),
+                            rs.getString("user_name"),
+                            rs.getString("password"),
+                            rs.getString("full_name"),
+                            rs.getString("phone"),
+                            rs.getInt("role"),
+                            rs.getInt("active"),
                             rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
-
                     ));
                 }
             }
@@ -131,53 +445,48 @@ public class UserDao {
         return list;
     }
 
-    public  ObservableList<String> getAllUsersFullName() {
-        ObservableList<String> userFullNames = FXCollections.observableArrayList();
-        String query = "SELECT " + DEF.USERS_FULLNAME +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " ORDER BY " + DEF.USERS_FULLNAME + " ASC";
+    public ObservableList<String> getAllUsersFullName() {
+        ObservableList<String> names = FXCollections.observableArrayList();
+        String query = """
+            SELECT full_name FROM material_testing.dbo.users ORDER BY full_name ASC
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
-                userFullNames.add(rs.getString(DEF.USERS_FULLNAME));
+                names.add(rs.getString("full_name"));
             }
         } catch (Exception e) {
             Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "getAllUsersFullName", e, "sql", query);
         }
-        return userFullNames;
+        return names;
     }
 
-    public  User loadUserData(int userId) {
+    public User loadUserData(int userId) {
         User user = null;
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_PHONE + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " WHERE " + DEF.USERS_ID + " = ?";
+        String query = """
+            SELECT user_id, emp_code, user_name, password, full_name, phone, role, active, creation_date
+            FROM material_testing.dbo.users
+            WHERE user_id = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setInt(1, userId);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     user = new User(
-                            rs.getInt(DEF.USERS_ID),
-                            rs.getInt(DEF.USERS_EMP_ID),
-                            rs.getString(DEF.USERS_USERNAME),
-                            rs.getString(DEF.USERS_PASSWORD),
-                            rs.getString(DEF.USERS_FULLNAME),
-                            rs.getString(DEF.USERS_PHONE),
-                            rs.getInt(DEF.USERS_ROLE),
-                            rs.getInt(DEF.USERS_ACTIVE),
+                            rs.getInt("user_id"),
+                            rs.getInt("emp_code"),
+                            rs.getString("user_name"),
+                            rs.getString("password"),
+                            rs.getString("full_name"),
+                            rs.getString("phone"),
+                            rs.getInt("role"),
+                            rs.getInt("active"),
                             rs.getDate("creation_date") != null ? rs.getDate("creation_date").toLocalDate() : null
-
                     );
                 }
             }
@@ -187,19 +496,15 @@ public class UserDao {
         return user;
     }
 
-    public  boolean insertUser(User us) {
-        String query = "INSERT INTO " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " (" +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_PHONE + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE + ") " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean insertUser(User us) {
+        String query = """
+            INSERT INTO material_testing.dbo.users
+            (emp_code, user_name, password, full_name, phone, role, active, creation_date)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setInt(1, us.getEmpCode());
             ps.setString(2, us.getUserName());
             ps.setString(3, us.getPassword());
@@ -207,11 +512,11 @@ public class UserDao {
             ps.setString(5, us.getPhone());
             ps.setInt(6, us.getRole());
             ps.setInt(7, us.getActive());
-            if (us.getCreationDate() != null) {
+
+            if (us.getCreationDate() != null)
                 ps.setDate(8, java.sql.Date.valueOf(us.getCreationDate()));
-            } else {
+            else
                 ps.setNull(8, java.sql.Types.DATE);
-            }
 
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
@@ -220,34 +525,30 @@ public class UserDao {
         return false;
     }
 
-    public  User getUserByEmpId(int emp_id) {
-        User us = new User();
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_PHONE + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " WHERE " + DEF.USERS_EMP_ID + " = ?";
+    public User getUserByEmpId(int empId) {
+        User us = null;
+        String query = """
+            SELECT user_id, emp_code, user_name, password, full_name, phone, role, active, creation_date
+            FROM material_testing.dbo.users
+            WHERE emp_code = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, emp_id);
+
+            ps.setInt(1, empId);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    us.setUserId(rs.getInt(DEF.USERS_ID));
-                    us.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
-                    us.setUserName(rs.getString(DEF.USERS_USERNAME));
-                    us.setPassword(rs.getString(DEF.USERS_PASSWORD));
-                    us.setFullName(rs.getString(DEF.USERS_FULLNAME));
-                    us.setPhone(rs.getString(DEF.USERS_PHONE));
-                    us.setRole(rs.getInt(DEF.USERS_ROLE));
-                    us.setActive(rs.getInt(DEF.USERS_ACTIVE));
-                    Date sqlDate = rs.getDate(DEF.USERS_CREATION_DATE);
+                    us = new User();
+                    us.setUserId(rs.getInt("user_id"));
+                    us.setEmpCode(rs.getInt("emp_code"));
+                    us.setUserName(rs.getString("user_name"));
+                    us.setPassword(rs.getString("password"));
+                    us.setFullName(rs.getString("full_name"));
+                    us.setPhone(rs.getString("phone"));
+                    us.setRole(rs.getInt("role"));
+                    us.setActive(rs.getInt("active"));
+                    Date sqlDate = rs.getDate("creation_date");
                     us.setCreationDate(sqlDate != null ? sqlDate.toLocalDate() : null);
                 }
             }
@@ -257,33 +558,29 @@ public class UserDao {
         return us;
     }
 
-    public  User getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         User user = null;
-        String query = "SELECT " +
-                DEF.USERS_ID + ", " +
-                DEF.USERS_EMP_ID + ", " +
-                DEF.USERS_USERNAME + ", " +
-                DEF.USERS_PASSWORD + ", " +
-                DEF.USERS_FULLNAME + ", " +
-                DEF.USERS_ROLE + ", " +
-                DEF.USERS_ACTIVE + ", " +
-                DEF.USERS_CREATION_DATE +
-                " FROM " + DEF.DB_NAME + "." + DEF.USERS_TABLE +
-                " WHERE " + DEF.USERS_USERNAME + " = ?";
+        String query = """
+            SELECT user_id, emp_code, user_name, password, full_name, role, active, creation_date
+            FROM material_testing.dbo.users
+            WHERE user_name = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, username);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     user = new User();
-                    user.setUserId(rs.getInt(DEF.USERS_ID));
-                    user.setEmpCode(rs.getInt(DEF.USERS_EMP_ID));
-                    user.setUserName(rs.getString(DEF.USERS_USERNAME));
-                    user.setPassword(rs.getString(DEF.USERS_PASSWORD));
-                    user.setFullName(rs.getString(DEF.USERS_FULLNAME));
-                    user.setRole(rs.getInt(DEF.USERS_ROLE));
-                    user.setActive(rs.getInt(DEF.USERS_ACTIVE));
-                    Date sqlDate = rs.getDate(DEF.USERS_CREATION_DATE);
+                    user.setUserId(rs.getInt("user_id"));
+                    user.setEmpCode(rs.getInt("emp_code"));
+                    user.setUserName(rs.getString("user_name"));
+                    user.setPassword(rs.getString("password"));
+                    user.setFullName(rs.getString("full_name"));
+                    user.setRole(rs.getInt("role"));
+                    user.setActive(rs.getInt("active"));
+                    Date sqlDate = rs.getDate("creation_date");
                     user.setCreationDate(sqlDate != null ? sqlDate.toLocalDate() : null);
                     UserContext.setCurrentUser(user);
                 }
@@ -294,22 +591,22 @@ public class UserDao {
         return user;
     }
 
-    public  boolean updateUser(User us) {
-        String query = "UPDATE " + DEF.DB_NAME + "." + DEF.USERS_TABLE + " SET " +
-                DEF.USERS_PASSWORD + " = ?, " +
-                DEF.USERS_FULLNAME + " = ?, " +
-                DEF.USERS_PHONE + " = ?, " +
-                DEF.USERS_ROLE + " = ?, " +
-                DEF.USERS_ACTIVE + " = ? " +
-                "WHERE " + DEF.USERS_EMP_ID + " = ?";
+    public boolean updateUser(User us) {
+        String query = """
+            UPDATE material_testing.dbo.users
+            SET password = ?, full_name = ?, phone = ?, role = ?, active = ?
+            WHERE emp_code = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, us.getPassword());
             ps.setString(2, us.getFullName());
             ps.setString(3, us.getPhone());
             ps.setInt(4, us.getRole());
             ps.setInt(5, us.getActive());
             ps.setInt(6, us.getEmpCode());
+
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "updateUser", e, "sql", query);
@@ -317,11 +614,14 @@ public class UserDao {
         return false;
     }
 
-    public  boolean deleteUser(int emp_id) {
-        String query = "DELETE FROM material_testing.dbo.users WHERE emp_code = ?";
+    public boolean deleteUser(int empId) {
+        String query = """
+            DELETE FROM material_testing.dbo.users WHERE emp_code = ?
+        """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, emp_id);
+
+            ps.setInt(1, empId);
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             Logging.logExpWithMessage("ERROR", UserDao.class.getName(), "deleteUser", e, "sql", query);

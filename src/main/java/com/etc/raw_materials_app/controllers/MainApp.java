@@ -15,11 +15,7 @@ public class MainApp extends Application {
 
             Connection connection = DbConnect.getConnect();
             if (connection == null) {
-//                ALERT(
-//                        null,
-//                        APP_BUNDLE().getString("CONNECTION_ERROR"),
-//                        ALERT_ERROR
-//                );
+                System.out.println("Connection failed");
             } else {
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/screens/Login.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
@@ -27,12 +23,11 @@ public class MainApp extends Application {
                 stage.setScene(scene);
                 stage.show();
                 stage.setResizable(false);
-               LoggingSetting.startJarUpdateWatcher();
-               LoggingSetting.initJarWatcher();
+                LoggingSetting.startJarUpdateWatcher();
+                LoggingSetting.initJarWatcher();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Logging.logException("ERROR", this.getClass().getName(), "start", e);
             Logging.logException("ERROR", this.getClass().getName(), "start", e);
         }
     }

@@ -12,7 +12,11 @@ public class SampleDao {
         // Get all samples
         public  ObservableList<Sample> getAllSamples() {
             ObservableList<Sample> list = FXCollections.observableArrayList();
-            String query = "SELECT sample_id, sample_name FROM material_testing.dbo.samples ORDER BY sample_id ASC";
+            String query = """ 
+            SELECT sample_id, sample_name
+            FROM material_testing.dbo.samples
+            ORDER BY sample_name ASC
+            """;
 
             try (Connection con = DbConnect.getConnect();
                  PreparedStatement ps = con.prepareStatement(query);

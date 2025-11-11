@@ -249,6 +249,7 @@ public class TestResultsController implements Initializable {
         }
 
         table_view.refresh();
+        sample_comb.getSelectionModel().clearSelection();
 
         // Reset only
         selectedTestNames.clear();
@@ -710,7 +711,7 @@ public class TestResultsController implements Initializable {
                     if (!sampleName.equals(currentSample)) {
                         // دمج المجموعة السابقة
                         if (currentSample != null && sampleStartRow != -1) {
-                            if (rowNum - 2 >= sampleStartRow) {
+                            if (rowNum - 2 > sampleStartRow) {
                                 sheet.addMergedRegion(new CellRangeAddress(sampleStartRow, rowNum - 2, sampleCol, sampleCol));
                             }
                         }

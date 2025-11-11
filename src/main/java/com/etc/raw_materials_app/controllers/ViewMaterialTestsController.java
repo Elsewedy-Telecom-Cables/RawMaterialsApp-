@@ -137,12 +137,6 @@ public class ViewMaterialTestsController implements Initializable {
         // Add filtering listeners
         addFilterListeners();
 
-        // Set Editable
-        total_material_tests_count_textF.setEditable(false);
-        fo_material_tests_count_textF.setEditable(false);
-        copper_material_tests_count_textF.setEditable(false);
-        accessories_material_tests_count_textF.setEditable(false);
-
         // set permissions
         int role = UserContext.getCurrentUser().getRole();
         if (role == 3 || role == 4) {
@@ -691,13 +685,18 @@ public class ViewMaterialTestsController implements Initializable {
 
     void updateMaterialTestCount() {
         int total = materialTestDao.getMaterialTestCount();
-        int fo = materialTestDao.getMaterialTestCountBySection(1);
-        int cu = materialTestDao.getMaterialTestCountBySection(2);
+        int cu = materialTestDao.getMaterialTestCountBySection(1);
+        int fo = materialTestDao.getMaterialTestCountBySection(2);
         int acc = materialTestDao.getMaterialTestCountBySection(3);
         total_material_tests_count_textF.setText(String.valueOf(total));
         fo_material_tests_count_textF.setText(String.valueOf(fo));
         copper_material_tests_count_textF.setText(String.valueOf(cu));
         accessories_material_tests_count_textF.setText(String.valueOf(acc));
+        // Set Editable
+        total_material_tests_count_textF.setEditable(false);
+        fo_material_tests_count_textF.setEditable(false);
+        copper_material_tests_count_textF.setEditable(false);
+        accessories_material_tests_count_textF.setEditable(false);
     }
 
     @FXML

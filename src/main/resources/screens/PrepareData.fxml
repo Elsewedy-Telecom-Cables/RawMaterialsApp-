@@ -59,12 +59,12 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="clear_supplier_btn" mnemonicParsing="false" onAction="#clear_supplier" prefHeight="28.0" prefWidth="78.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
+                              <Button fx:id="clear_supplier_btn" mnemonicParsing="false" onAction="#clear_supplier" prefHeight="28.0" prefWidth="88.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-eraser" />
@@ -75,19 +75,19 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
                            <children>
-                              <Button fx:id="add_supplier_btn" mnemonicParsing="false" onAction="#add_supplier" prefHeight="28.0" prefWidth="78.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
+                              <Button fx:id="add_supplier_btn" mnemonicParsing="false" onAction="#add_supplier" prefHeight="28.0" prefWidth="88.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-plus" />
@@ -98,7 +98,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                               <TextField fx:id="supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="160.0" promptText="add supplier name" styleClass="input" HBox.hgrow="ALWAYS">
@@ -106,7 +106,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="5.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -116,12 +116,12 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
                            <children>
-                              <Button fx:id="update_supplier_btn" mnemonicParsing="false" onAction="#update_supplier" prefHeight="28.0" prefWidth="78.0" styleClass="box-05" text="Update" HBox.hgrow="ALWAYS">
+                              <Button fx:id="update_supplier_btn" mnemonicParsing="false" onAction="#update_supplier" prefHeight="28.0" prefWidth="88.0" styleClass="box-05" text="Update" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="10.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-check" />
@@ -132,12 +132,12 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                               <TextField fx:id="update_supplier_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="160.0" promptText="update supplier name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="5.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -205,12 +205,12 @@
                                     <Insets top="4.0" />
                                  </VBox.margin>
                                  <children>
-                                    <Button fx:id="clear_country_btn" mnemonicParsing="false" onAction="#clear_country" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Clear " HBox.hgrow="ALWAYS">
+                                    <Button fx:id="clear_country_btn" mnemonicParsing="false" onAction="#clear_country" prefHeight="27.0" prefWidth="88.0" styleClass="box-01" text="Clear " HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="11.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                        <graphic>
                                           <FontIcon iconLiteral="fas-eraser" />
@@ -221,19 +221,19 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="12.0" right="8.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
                                  <children>
-                                    <Button fx:id="add_country_btn" mnemonicParsing="false" onAction="#add_country" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Add   " HBox.hgrow="ALWAYS">
+                                    <Button fx:id="add_country_btn" mnemonicParsing="false" onAction="#add_country" prefHeight="27.0" prefWidth="88.0" styleClass="box-01" text="Add   " HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="Montserrat Bold" size="11.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                        <graphic>
                                           <FontIcon iconLiteral="fas-plus" />
@@ -244,7 +244,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="12.0" right="8.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
@@ -254,12 +254,12 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
                                  <children>
-                                    <Button fx:id="update_country_btn" mnemonicParsing="false" onAction="#update_country" prefHeight="27.0" prefWidth="78.0" styleClass="box-01" text="Update" HBox.hgrow="ALWAYS">
+                                    <Button fx:id="update_country_btn" mnemonicParsing="false" onAction="#update_country" prefHeight="27.0" prefWidth="88.0" styleClass="box-01" text="Update" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="Montserrat Bold" size="10.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets />
                                        </HBox.margin>
                                        <graphic>
                                           <FontIcon iconLiteral="fas-check" />
@@ -267,7 +267,7 @@
                                     </Button>
                                     <TextField fx:id="update_country_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update country name" styleClass="input" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
-                                          <Insets left="12.0" right="8.0" />
+                                          <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
                                           <Font name="System Bold" size="14.0" />
@@ -332,9 +332,9 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
+                              <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="140.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="clear_supplier_cou_btn" mnemonicParsing="false" onAction="#clear_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
+                                    <Button fx:id="clear_supplier_cou_btn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#clear_supplier_country" prefHeight="28.0" prefWidth="88.0" styleClass="box-05" text="Clear " HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="11.0" />
                                        </font>
@@ -347,7 +347,7 @@
                                     </Button>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="370.0" HBox.hgrow="ALWAYS">
@@ -362,14 +362,14 @@
                                     </TextField>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="8.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </HBox>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="140.0" text="Select Supplier" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="150.0" text="Select Supplier" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -379,7 +379,7 @@
                               </Label>
                               <ComboBox fx:id="supplier_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -389,7 +389,7 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="350.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="140.0" text="Select Country" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="150.0" text="Select Country" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -397,9 +397,9 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="370.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
+                              <ComboBox fx:id="country_comb" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="362.0" style="-fx-font-weight: bold; -fx-font-size: 14;" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets right="8.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
@@ -409,18 +409,18 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="350.0">
                            <children>
-                              <Button fx:id="add_supplier_country_btn" mnemonicParsing="false" onAction="#add_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
+                              <Button fx:id="add_supplier_country_btn" mnemonicParsing="false" onAction="#add_supplier_country" prefHeight="28.0" prefWidth="90.0" styleClass="box-05" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="20.0" right="30.0" />
+                                    <Insets left="15.0" right="20.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-plus" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="update_supplier_cou_btn" mnemonicParsing="false" onAction="#update_supplier_country" prefHeight="28.0" prefWidth="85.0" styleClass="box-05" text="Update" HBox.hgrow="ALWAYS">
+                              <Button fx:id="update_supplier_cou_btn" mnemonicParsing="false" onAction="#update_supplier_country" prefHeight="28.0" prefWidth="90.0" styleClass="box-05" text="Update" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="10.0" />
                                  </font>
@@ -481,12 +481,12 @@
                               <Insets top="4.0" />
                            </VBox.margin>
                            <children>
-                              <Button fx:id="clear_test_btn" mnemonicParsing="false" onAction="#clear_test" prefHeight="28.0" prefWidth="78.0" text="Clear " HBox.hgrow="ALWAYS">
+                              <Button fx:id="clear_test_btn" mnemonicParsing="false" onAction="#clear_test" prefHeight="28.0" prefWidth="88.0" text="Clear " HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
+                                    <Font name="System Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-eraser" />
@@ -497,19 +497,19 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="305.0">
                            <children>
-                              <Button fx:id="add_test_btn" mnemonicParsing="false" onAction="#add_test" prefHeight="28.0" prefWidth="78.0" text="Add   " HBox.hgrow="ALWAYS">
+                              <Button fx:id="add_test_btn" mnemonicParsing="false" onAction="#add_test" prefHeight="28.0" prefWidth="88.0" text="Add   " HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font name="Montserrat Bold" size="12.0" />
+                                    <Font name="Montserrat Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-plus" />
@@ -520,7 +520,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="12.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                               </TextField>
                            </children>
@@ -530,12 +530,12 @@
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="457.0">
                            <children>
-                              <Button fx:id="update_test_btn" mnemonicParsing="false" onAction="#update_test" prefHeight="28.0" prefWidth="78.0" styleClass="box-02" text="Update" HBox.hgrow="ALWAYS">
+                              <Button fx:id="update_test_btn" mnemonicParsing="false" onAction="#update_test" prefHeight="28.0" prefWidth="88.0" styleClass="box-02" text="Update" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Montserrat Bold" size="11.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="10.0" />
+                                    <Insets />
                                  </HBox.margin>
                                  <graphic>
                                     <FontIcon iconLiteral="fas-check" />
@@ -543,7 +543,7 @@
                               </Button>
                               <TextField fx:id="update_test_name_textF" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="update test name" styleClass="input" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
-                                    <Insets left="12.0" right="8.0" />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font name="System Bold" size="14.0" />

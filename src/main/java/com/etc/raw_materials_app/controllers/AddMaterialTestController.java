@@ -41,6 +41,8 @@ public class AddMaterialTestController implements Initializable , StageAware {
     @FXML private Button save_btn;
     @FXML private TextField spqr_textF;
     @FXML private TextField total_quantity_textF;
+    @FXML private TextField searchMaterialField;
+    private ObservableList<Material> allMaterials;
 
     private Stage stage;
     private int CURRENT_MATERIAL_TEST_ID = 0;
@@ -61,14 +63,54 @@ public class AddMaterialTestController implements Initializable , StageAware {
         save_btn.setCursor(Cursor.HAND);
 
         section_comb.setItems(sectionDao.getAllSections());
-        material_comb.setItems(materialDao.getAllMaterials());
         supplier_comb.setItems(supplierDao.getAllSuppliers());
         country_comb.setItems(FXCollections.observableArrayList());
 
         supplier_comb.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             updateSupplierCountries(newVal);
         });
+
+        // لتظهر الاسم والكود في القائمة
+        material_comb.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Material item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getItemCode() + " - " + item.getMaterialName());
+                }
+            }
+        });
+        material_comb.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(Material item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getItemCode() + " - " + item.getMaterialName());
+                }
+            }
+        });
+
+        allMaterials = materialDao.getAllMaterials();
+        material_comb.setItems(allMaterials);
+
+        searchMaterialField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == null || newVal.isEmpty()) {
+                material_comb.setItems(allMaterials);
+            } else {
+                String lower = newVal.toLowerCase();
+                ObservableList<Material> filtered = allMaterials.filtered(
+                        m -> m.getItemCode().toLowerCase().contains(lower) || m.getMaterialName().toLowerCase().contains(lower)
+                );
+                material_comb.setItems(filtered);
+            }
+        });
     }
+
+
 
 
     private void updateSupplierCountries(Supplier supplier) {

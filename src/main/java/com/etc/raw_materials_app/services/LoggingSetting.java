@@ -1,61 +1,3 @@
-//package com.etc.raw_materials_app.services;
-//
-//import java.io.*;
-//import java.util.Properties;
-//
-//public class LoggingSetting {
-//
-//    private static final String CONFIG_DIR = "config";
-//    private static final String CONFIG_FILE = CONFIG_DIR + File.separator + "config.properties";
-//    private static final String USERNAME_KEY = "last_username";
-//
-//    // Save last used username to config/config.properties
-//    public static void saveLastUsername(String username) {
-//        try {
-//            File configDir = new File(CONFIG_DIR);
-//            if (!configDir.exists()) {
-//                configDir.mkdirs(); // Create config folder if not exists
-//            }
-//
-//            Properties props = new Properties();
-//            File file = new File(CONFIG_FILE);
-//
-//            // Load existing properties if file exists
-//            if (file.exists()) {
-//                try (InputStream in = new FileInputStream(file)) {
-//                    props.load(in);
-//                }
-//            }
-//
-//            props.setProperty(USERNAME_KEY, username);
-//
-//            try (OutputStream out = new FileOutputStream(file)) {
-//                props.store(out, null);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace(); // Or use your Logging class
-//        }
-//    }
-//
-//    // Read last used username from config/config.properties
-//    public static String getLastUsername() {
-//        File file = new File(CONFIG_FILE);
-//        if (!file.exists()) {
-//            return "";
-//        }
-//
-//        try (InputStream in = new FileInputStream(file)) {
-//            Properties props = new Properties();
-//            props.load(in);
-//            return props.getProperty(USERNAME_KEY, "");
-//        } catch (IOException e) {
-//            e.printStackTrace(); // Or use your Logging class
-//            return "";
-//        }
-//    }
-//
-//}
 
 package com.etc.raw_materials_app.services;
 
@@ -84,7 +26,9 @@ public class  LoggingSetting {
     }
 
     private static File currentJarFile;
+
     private static long jarLastModifiedTime = -1;
+
     public static void startJarUpdateWatcher() {
         ScheduledService<Void> jarCheckService = new ScheduledService<>() {
             @Override
@@ -99,7 +43,7 @@ public class  LoggingSetting {
 
                                 Platform.runLater(() -> {
                                     Alert alert = new Alert(Alert.AlertType.WARNING);
-                                    alert.setTitle("Application Update");
+                                    alert.setTitle("Raw Material Application Update");
                                     alert.setHeaderText("The application has been updated.");
                                     alert.setContentText("يجب اغلاق التطبيق واعادة تشغيلة لوجود تحديث");
                                     alert.showAndWait();

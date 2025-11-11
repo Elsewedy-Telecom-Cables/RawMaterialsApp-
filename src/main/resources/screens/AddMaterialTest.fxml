@@ -59,11 +59,19 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="44.0" prefWidth="306.0">
                <children>
-                  <Label text="Material Description">
+                  <Label prefHeight="22.0" prefWidth="180.0" text="Material Description">
                      <font>
                         <Font name="Montserrat Bold" size="16.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
                   </Label>
+                  <TextField fx:id="searchMaterialField" alignment="CENTER" prefHeight="35.0" prefWidth="366.0" promptText="Search">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </TextField>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
@@ -82,7 +90,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="258.0">
                <children>
-                  <TextField fx:id="spqr_textF" alignment="CENTER" prefHeight="38.0" prefWidth="550.0">
+                  <TextField fx:id="spqr_textF" alignment="CENTER" prefHeight="38.0" prefWidth="560.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

@@ -61,7 +61,9 @@ public class MaterialDocumentDao {
     public  ObservableList<MaterialDocument> getAllMaterialDocuments() {
         ObservableList<MaterialDocument> list = FXCollections.observableArrayList();
         String sql = """
-                SELECT md.material_doc_id, md.material_doc_name FROM material_testing.dbo.material_documents md
+                SELECT md.material_doc_id, md.material_doc_name
+                FROM material_testing.dbo.material_documents md
+                ORDER BY md.material_doc_name
                 """;
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql);

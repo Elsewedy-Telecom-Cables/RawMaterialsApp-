@@ -13,7 +13,11 @@ public class TestNameDao {
     // Get all TestNames
     public  ObservableList<TestName> getAllTestNames() {
         ObservableList<TestName> list = FXCollections.observableArrayList();
-        String query = "SELECT test_name_id, test_name FROM material_testing.dbo.test_names ORDER BY test_name asc ";
+        String query = """
+        SELECT test_name_id, test_name
+        FROM material_testing.dbo.test_names
+        ORDER BY test_name asc
+        """;
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);

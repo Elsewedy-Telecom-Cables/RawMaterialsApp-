@@ -47,11 +47,13 @@ public class SupplierCountryDao {
     // Get all supplier-country mappings
     public  ObservableList<SupplierCountry> getAllSupplierCountries() {
         ObservableList<SupplierCountry> list = FXCollections.observableArrayList();
-        String query = "SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name " +
-                "FROM material_testing.dbo.supplier_country sc " +
-                "JOIN material_testing.dbo.suppliers s ON sc.supplier_id = s.supplier_id " +
-                "JOIN material_testing.dbo.countries c ON sc.country_id = c.country_id " +
-                "ORDER BY sc.supplier_id ASC, sc.country_id ASC";
+        String query = """ 
+                SELECT sc.supplier_id, s.supplier_name, sc.country_id, c.country_name
+                FROM material_testing.dbo.supplier_country sc
+                JOIN material_testing.dbo.suppliers s ON sc.supplier_id = s.supplier_id
+                JOIN material_testing.dbo.countries c ON sc.country_id = c.country_id
+                ORDER BY s.supplier_name ASC, c.country_name ASC
+                """;
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);

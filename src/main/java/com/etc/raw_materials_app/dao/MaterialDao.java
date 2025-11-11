@@ -16,7 +16,9 @@ public class MaterialDao {
     // Get all Materials
     public  ObservableList<Material> getAllMaterials() {
         ObservableList<Material> list = FXCollections.observableArrayList();
-        String query = "SELECT Material_id, Material_name, item_code FROM material_testing.dbo.Materials ORDER BY Material_id ASC";
+        String query = "SELECT Material_id, Material_name, item_code" +
+                " FROM material_testing.dbo.Materials" +
+                " ORDER BY  item_code, Material_name ASC";
 
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(query);

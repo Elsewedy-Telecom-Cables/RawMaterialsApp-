@@ -38,6 +38,6 @@ public class Material {
 
     @Override
     public String toString() {
-        return materialName;
+        return itemCode + " - " + materialName;
     }
 }

@@ -182,7 +182,8 @@ public class TestResultDao {
     }
 
 
-    public  boolean deleteTestResult(int id) {
+    public 
+    boolean deleteTestResult(int id) {
         String sql = "DELETE FROM material_testing.dbo.test_results WHERE test_result_id=?";
         try (Connection con = DbConnect.getConnect();
              PreparedStatement ps = con.prepareStatement(sql)) {

@@ -386,7 +386,7 @@
                                  <columns>
                                     <TableColumn fx:id="material_id_colm" maxWidth="1200.0" prefWidth="38.0" text="ID" />
                                     <TableColumn fx:id="material_name_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="545.0" text="Material Description" />
-                                    <TableColumn fx:id="item_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="155.0" text="Item Code" />
+                                    <TableColumn fx:id="item_code_colm" maxWidth="7000.0" minWidth="30.0" prefWidth="160.0" text="Item Code" />
                                     <TableColumn fx:id="material_delete_colm" maxWidth="1500.0" prefWidth="40.0" text="DEL" />
                                  </columns>
                                  <HBox.margin>

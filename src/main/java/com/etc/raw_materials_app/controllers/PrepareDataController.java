@@ -1269,6 +1269,10 @@ public class PrepareDataController implements Initializable {
             WindowUtils.ALERT("ERROR", "supplier_name_empty", WindowUtils.ALERT_ERROR);
             return;
         }
+        if (supplierCode.isEmpty()) {
+            WindowUtils.ALERT("ERROR", "supplier_code_empty", WindowUtils.ALERT_ERROR);
+            return;
+        }
 
         Supplier supplier = new Supplier();
         supplier.setSupplierName(supplierName);

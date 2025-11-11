@@ -63,9 +63,9 @@ public class PrepareMaterialsController implements Initializable {
     ObservableList<MaterialDocument> materialDocumentList;
 
     // Dao instances
-    private MaterialDao materialDao = new MaterialDao();
-    private SampleDao sampleDao = new SampleDao();
-    private MaterialDocumentDao materialDocumentDao = new MaterialDocumentDao();
+    private final MaterialDao materialDao = new MaterialDao();
+    private final SampleDao sampleDao = new SampleDao();
+    private final  MaterialDocumentDao materialDocumentDao = new MaterialDocumentDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -9,8 +9,8 @@ public class DbConnect {
 
     // Server Connection
     //private static final String HOST = "10.1.212.147";  // Server IP
-   private static final String HOST = "ETCSVR";  // Server NAME
-   // private static final String HOST = "localhost";  // local
+  // private static final String HOST = "ETCSVR";  // Server NAME
+    private static final String HOST = "localhost";  // local
    // private static final String HOST = "SWD100950";  // local
     private static final int PORT = 1433;
     public static final String DB_NAME_CONECCTION = "material_testing";  // DB Name
